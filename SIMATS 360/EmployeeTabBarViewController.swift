@@ -44,7 +44,7 @@ class EmployeeTabBarViewController: UITabBarController {
         let salaryVC: ReportsViewController = ReportsViewController.instantiate()
         salaryVC.tabBarItem.image = UIImage(named: "Reports")
         salaryVC.tabBarItem.title = "Reports"
-        salaryVC.navigationItem.title = "Salary Reports"
+        salaryVC.navigationItem.title = "Reports"
         salaryVC.title = "Salary Reports"
         let salaryNavVC = UINavigationController(rootViewController: salaryVC)
 
