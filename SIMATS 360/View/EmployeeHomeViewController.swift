@@ -16,6 +16,8 @@ class EmployeeHomeViewController: UIViewController {
     @IBOutlet weak var bufferTimeView: UIView!
     @IBOutlet weak var attendanceView: UIView!
     
+    var loginresponse: LoginResponse?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         profileImgView.makeCircular()

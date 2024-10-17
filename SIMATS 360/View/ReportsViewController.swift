@@ -4,12 +4,14 @@
 //
 //  Created by Admin - iMAC on 01/10/24.
 //
+protocol ReportsViewProtocol: AnyObject {
+    func displaySalaryReports(_ reports: SalaryReportModel)
+    func showError(_ message: String) 
+}
 
 import UIKit
 
-class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    
+class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ReportsViewProtocol {
 
     @IBOutlet weak var salaryReportTableView: UITableView! {
         didSet {
@@ -17,6 +19,8 @@ class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewD
             salaryReportTableView.dataSource = self
         }
     }
+    var reportsPresenter: ReportsPresenter?
+    var salaryResponse: SalaryReportModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +31,7 @@ class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         initNavigationBar()
+        reportsPresenter?.fetchSalaryReports(bioId: "587")
     }
     
     func initNavigationBar() {
@@ -58,11 +63,17 @@ class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return self.salaryResponse?.salaryReportData.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = salaryReportTableView.dequeueReusableCell(withIdentifier: "SalaryReportTableViewCell", for: indexPath) as! SalaryReportTableViewCell
+        if let date = self.salaryResponse?.salaryReportData[indexPath.row].period, let formattedDate = Utils.convertDateFormat(inputDate:date ) {
+            cell.monthLabel.text = formattedDate
+        }
+       
+        cell.salaryLabel.text = "\(self.salaryResponse?.salaryReportData[indexPath.row].grossSalaryWithDeduction)"
+        
         return cell
     }
     
@@ -75,6 +86,17 @@ class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    func displaySalaryReports(_ reports: SalaryReportModel) {
+        self.salaryResponse = reports
+        if self.salaryResponse?.salaryReportData.count ?? 0 > 0 {
+            salaryReportTableView.reloadData()
+        }
+    }
+    
+    func showError(_ message: String) {
+        self.showAlert(title: "", message: message)
     }
 
 }

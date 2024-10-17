@@ -11,6 +11,7 @@ import SwiftUI
 class EmployeeTabBarViewController: UITabBarController {
 
     //var menu: SideMenuNavigationController?
+    var loginData: LoginResponse?
     override func viewDidLoad() {
         super.viewDidLoad()
         initViewControllers()
@@ -18,22 +19,22 @@ class EmployeeTabBarViewController: UITabBarController {
        // initSideMenuBar()
         initTabbarApperance()
        //setupTabBar()
-      // initNavigationBar()
+       initNavigationBar()
     }
     
     func initNavigationBar() {
-        navigationController?.navigationBar.updateNavigationBarAppearance(backgroundColor: UIColor(hex: "#F6F8F9"), titleColor: .white)
+        //navigationController?.navigationBar.updateNavigationBarAppearance(backgroundColor: UIColor(hex: "#F6F8F9"), titleColor: .white)
         //navigationItem.title = "Notifications"
         self.navigationController?.navigationBar.isHidden = true
         self.navigationItem.hidesBackButton = true
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-
-
     
     private func initViewControllers() {
         let empVC: EmployeeHomeViewController = EmployeeHomeViewController.instantiate()
         empVC.tabBarItem.image = UIImage(named: "homeIcon")
         empVC.tabBarItem.title = "Home"
+        empVC.loginresponse = self.loginData
         let empNavVC = UINavigationController(rootViewController: empVC)
 
         let notificationVC: NotificationViewController = NotificationViewController.instantiate()
@@ -41,7 +42,7 @@ class EmployeeTabBarViewController: UITabBarController {
         notificationVC.tabBarItem.title = "Notifications"
         let notificationNavVC = UINavigationController(rootViewController: notificationVC)
 
-        let salaryVC: ReportsViewController = ReportsViewController.instantiate()
+        let salaryVC = ReportsRouter.createReportsModule()
         salaryVC.tabBarItem.image = UIImage(named: "Reports")
         salaryVC.tabBarItem.title = "Reports"
         salaryVC.navigationItem.title = "Reports"

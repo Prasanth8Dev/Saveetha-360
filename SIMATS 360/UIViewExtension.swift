@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import NVActivityIndicatorView
 
 @IBDesignable extension UIView {
     @IBInspectable var cornerRadius: CGFloat {
@@ -249,5 +250,66 @@ extension UIViewController {
         }
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+     func showAlertWithCompletion(title: String, message: String, completion: @escaping () -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            completion()
+        }
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+     func showAlertWithOptionsAndCompletion(title: String, message: String,alertAction1: String = "OK", alertAction2: String = "Cancel", completion: @escaping (Bool) -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: alertAction1, style: .default) { _ in
+            completion(true)
+        }
+        let cancelAction = UIAlertAction(title: alertAction2, style: .cancel) { _ in
+            completion(false)
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
+    
+     func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+}
+
+extension UIView {
+    private static var loaderView: UIView?
+    
+    func startLoader() {
+        if UIView.loaderView != nil {
+            return
+        }
+        let loaderView = UIView(frame: self.bounds)
+        //loaderView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        self.addSubview(loaderView)
+        let loader = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 60, height: 60), type: .ballClipRotateMultiple, color: UIColor(hex: "#6EA7F1"))
+        loader.center = loaderView.center
+        loaderView.addSubview(loader)
+        loader.startAnimating()
+        UIView.loaderView = loaderView
+    }
+    
+    func stopLoader() {
+        DispatchQueue.main.async {
+            UIView.loaderView?.removeFromSuperview()
+            UIView.loaderView = nil
+        }
     }
 }

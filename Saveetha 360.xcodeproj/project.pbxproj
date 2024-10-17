@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23283A8B2CBCD3F900E9DB0F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283A8A2CBCD3F900E9DB0F /* LoginViewController.swift */; };
+		23283A8E2CBCD45900E9DB0F /* APIWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283A8D2CBCD45900E9DB0F /* APIWrapper.swift */; };
+		23283A902CBCD4C100E9DB0F /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283A8F2CBCD4C100E9DB0F /* LoginInteractor.swift */; };
+		23283A922CBCD5DE00E9DB0F /* LoginResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283A912CBCD5DE00E9DB0F /* LoginResponseModel.swift */; };
+		23283A962CBCD7A700E9DB0F /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283A952CBCD7A700E9DB0F /* LoginPresenter.swift */; };
+		23283A982CBCD82100E9DB0F /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283A972CBCD82100E9DB0F /* LoginRouter.swift */; };
+		23283A9B2CBCEB3A00E9DB0F /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 23283A9A2CBCEB3A00E9DB0F /* NVActivityIndicatorView */; };
+		23283A9D2CBCEB3A00E9DB0F /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = 23283A9C2CBCEB3A00E9DB0F /* NVActivityIndicatorViewExtended */; };
+		23283AA02CBCEB4B00E9DB0F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 23283A9F2CBCEB4B00E9DB0F /* IQKeyboardManagerSwift */; };
+		23283AA32CBCEB9600E9DB0F /* TextFieldEffects in Frameworks */ = {isa = PBXBuildFile; productRef = 23283AA22CBCEB9600E9DB0F /* TextFieldEffects */; };
+		23283AA52CBD0DA100E9DB0F /* SalaryReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283AA42CBD0DA100E9DB0F /* SalaryReportModel.swift */; };
+		23283AA72CBD0E5700E9DB0F /* ReportsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283AA62CBD0E5700E9DB0F /* ReportsInteractor.swift */; };
+		23283AA92CBD106500E9DB0F /* ReportsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283AA82CBD106500E9DB0F /* ReportsPresenter.swift */; };
+		23283AAB2CBD140200E9DB0F /* ReportsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283AAA2CBD140200E9DB0F /* ReportsRouter.swift */; };
+		23283AAD2CBD21D100E9DB0F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283AAC2CBD21D100E9DB0F /* Utils.swift */; };
+		23283AB02CBD293900E9DB0F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 23283AAF2CBD293900E9DB0F /* Alamofire */; };
+		23283AB22CBD293900E9DB0F /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 23283AB12CBD293900E9DB0F /* AlamofireDynamic */; };
 		5D0296982CABC4770037427C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0296972CABC4770037427C /* AppDelegate.swift */; };
 		5D02969A2CABC4770037427C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0296992CABC4770037427C /* SceneDelegate.swift */; };
 		5D02969F2CABC4770037427C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5D02969E2CABC4770037427C /* Base */; };
@@ -94,6 +111,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23283A8A2CBCD3F900E9DB0F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		23283A8D2CBCD45900E9DB0F /* APIWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWrapper.swift; sourceTree = "<group>"; };
+		23283A8F2CBCD4C100E9DB0F /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		23283A912CBCD5DE00E9DB0F /* LoginResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseModel.swift; sourceTree = "<group>"; };
+		23283A952CBCD7A700E9DB0F /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		23283A972CBCD82100E9DB0F /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		23283AA42CBD0DA100E9DB0F /* SalaryReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryReportModel.swift; sourceTree = "<group>"; };
+		23283AA62CBD0E5700E9DB0F /* ReportsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsInteractor.swift; sourceTree = "<group>"; };
+		23283AA82CBD106500E9DB0F /* ReportsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsPresenter.swift; sourceTree = "<group>"; };
+		23283AAA2CBD140200E9DB0F /* ReportsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsRouter.swift; sourceTree = "<group>"; };
+		23283AAC2CBD21D100E9DB0F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		5D0296942CABC4770037427C /* Saveetha 360.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Saveetha 360.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D0296972CABC4770037427C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D0296992CABC4770037427C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,7 +200,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23283A9D2CBCEB3A00E9DB0F /* NVActivityIndicatorViewExtended in Frameworks */,
+				23283AA02CBCEB4B00E9DB0F /* IQKeyboardManagerSwift in Frameworks */,
+				23283A9B2CBCEB3A00E9DB0F /* NVActivityIndicatorView in Frameworks */,
+				23283AB02CBD293900E9DB0F /* Alamofire in Frameworks */,
+				23283AB22CBD293900E9DB0F /* AlamofireDynamic in Frameworks */,
 				5D8E56782CAFE57100900A04 /* FSCalendar in Frameworks */,
+				23283AA32CBCEB9600E9DB0F /* TextFieldEffects in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +227,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23283A832CBCCF3F00E9DB0F /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				23283A912CBCD5DE00E9DB0F /* LoginResponseModel.swift */,
+				23283AA42CBD0DA100E9DB0F /* SalaryReportModel.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		23283A842CBCD2AF00E9DB0F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				23283A8A2CBCD3F900E9DB0F /* LoginViewController.swift */,
+				5D0296D42CABE8410037427C /* EmployeeHomeViewController.swift */,
+				5D0296D82CABE91E0037427C /* ReportsViewController.swift */,
+				5D0296D62CABE8E60037427C /* NotificationViewController.swift */,
+				5D0296DA2CABE95F0037427C /* ProfileViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		23283A852CBCD2B700E9DB0F /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				23283A8F2CBCD4C100E9DB0F /* LoginInteractor.swift */,
+				23283AA62CBD0E5700E9DB0F /* ReportsInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		23283A862CBCD33800E9DB0F /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				23283A952CBCD7A700E9DB0F /* LoginPresenter.swift */,
+				23283AA82CBD106500E9DB0F /* ReportsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		23283A872CBCD34B00E9DB0F /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				23283A972CBCD82100E9DB0F /* LoginRouter.swift */,
+				23283AAA2CBD140200E9DB0F /* ReportsRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		23283A8C2CBCD44100E9DB0F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				23283A8D2CBCD45900E9DB0F /* APIWrapper.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		5D02968B2CABC4770037427C = {
 			isa = PBXGroup;
 			children = (
@@ -216,26 +306,29 @@
 		5D0296962CABC4770037427C /* SIMATS 360 */ = {
 			isa = PBXGroup;
 			children = (
+				23283A8C2CBCD44100E9DB0F /* Network */,
+				23283A842CBCD2AF00E9DB0F /* View */,
+				23283A852CBCD2B700E9DB0F /* Interactor */,
+				23283A862CBCD33800E9DB0F /* Presenter */,
+				23283A832CBCCF3F00E9DB0F /* Entity */,
+				23283A872CBCD34B00E9DB0F /* Router */,
 				5D0297002CABF21A0037427C /* Fonts */,
 				5D0296972CABC4770037427C /* AppDelegate.swift */,
 				5D0296992CABC4770037427C /* SceneDelegate.swift */,
 				5DA486A92CAE5FA0009E0A56 /* SplashViewController.swift */,
 				5D0296CA2CABE77F0037427C /* EmployeeTabBarViewController.swift */,
-				5D0296D62CABE8E60037427C /* NotificationViewController.swift */,
 				5D2C4E102CAFF8800041E0FB /* AttendanceViewController.swift */,
-				5D0296DA2CABE95F0037427C /* ProfileViewController.swift */,
 				5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */,
 				5DA486A72CAE587B009E0A56 /* NotificationTableViewCell.swift */,
 				5D2C4E0E2CAFEBA80041E0FB /* LeaveApplicationViewController.swift */,
 				5D282BAD2CB65C7200597991 /* DutyViewController.swift */,
 				5D2B58232CB3E9A500976E7A /* BufferTimeTableViewCell.swift */,
 				5D2B58212CB3E8FB00976E7A /* BufferTimeViewController.swift */,
+				23283AAC2CBD21D100E9DB0F /* Utils.swift */,
 				5D282BB12CB6816000597991 /* SwapDutyViewController.swift */,
 				5D282BAF2CB6811D00597991 /* ClaimsViewController.swift */,
 				5D9600CF2CAE9EBA00FA6981 /* SalaryDetailsViewController.swift */,
 				5DA486AB2CAE9306009E0A56 /* SalaryReportTableViewCell.swift */,
-				5D0296D82CABE91E0037427C /* ReportsViewController.swift */,
-				5D0296D42CABE8410037427C /* EmployeeHomeViewController.swift */,
 				5D02969D2CABC4770037427C /* Main.storyboard */,
 				5D0296CD2CABE80E0037427C /* UIColorExtension.swift */,
 				5D0296CF2CABE80E0037427C /* UIImageExtension.swift */,
@@ -328,6 +421,12 @@
 			name = "Saveetha 360";
 			packageProductDependencies = (
 				5D8E56772CAFE57100900A04 /* FSCalendar */,
+				23283A9A2CBCEB3A00E9DB0F /* NVActivityIndicatorView */,
+				23283A9C2CBCEB3A00E9DB0F /* NVActivityIndicatorViewExtended */,
+				23283A9F2CBCEB4B00E9DB0F /* IQKeyboardManagerSwift */,
+				23283AA22CBCEB9600E9DB0F /* TextFieldEffects */,
+				23283AAF2CBD293900E9DB0F /* Alamofire */,
+				23283AB12CBD293900E9DB0F /* AlamofireDynamic */,
 			);
 			productName = "SIMATS 360";
 			productReference = 5D0296942CABC4770037427C /* Saveetha 360.app */;
@@ -403,6 +502,10 @@
 			mainGroup = 5D02968B2CABC4770037427C;
 			packageReferences = (
 				5D8E56762CAFE57100900A04 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				23283A992CBCEB3A00E9DB0F /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+				23283A9E2CBCEB4B00E9DB0F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				23283AA12CBCEB9600E9DB0F /* XCRemoteSwiftPackageReference "TextFieldEffects" */,
+				23283AAE2CBD293900E9DB0F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 5D0296952CABC4770037427C /* Products */;
 			projectDirPath = "";
@@ -491,19 +594,30 @@
 				5D0296A22CABC4770037427C /* SIMATS_360.xcdatamodeld in Sources */,
 				5DA486A82CAE587B009E0A56 /* NotificationTableViewCell.swift in Sources */,
 				5D0296D12CABE80E0037427C /* UIColorExtension.swift in Sources */,
+				23283A982CBCD82100E9DB0F /* LoginRouter.swift in Sources */,
+				23283A922CBCD5DE00E9DB0F /* LoginResponseModel.swift in Sources */,
+				23283AAD2CBD21D100E9DB0F /* Utils.swift in Sources */,
 				5D0296CB2CABE77F0037427C /* EmployeeTabBarViewController.swift in Sources */,
 				5DA486AC2CAE9306009E0A56 /* SalaryReportTableViewCell.swift in Sources */,
 				5DA486AA2CAE5FA0009E0A56 /* SplashViewController.swift in Sources */,
 				5D9600D02CAE9EBA00FA6981 /* SalaryDetailsViewController.swift in Sources */,
 				5D0296D02CABE80E0037427C /* UIViewControllerExtension.swift in Sources */,
+				23283A8B2CBCD3F900E9DB0F /* LoginViewController.swift in Sources */,
 				5D0296D32CABE80E0037427C /* UIImageExtension.swift in Sources */,
 				5D8E56752CAFB84600900A04 /* LeaveBalanceViewController.swift in Sources */,
+				23283A8E2CBCD45900E9DB0F /* APIWrapper.swift in Sources */,
+				23283A962CBCD7A700E9DB0F /* LoginPresenter.swift in Sources */,
+				23283AA52CBD0DA100E9DB0F /* SalaryReportModel.swift in Sources */,
+				23283A902CBCD4C100E9DB0F /* LoginInteractor.swift in Sources */,
 				5D282BB22CB6816000597991 /* SwapDutyViewController.swift in Sources */,
+				23283AA92CBD106500E9DB0F /* ReportsPresenter.swift in Sources */,
 				5D0296DB2CABE95F0037427C /* ProfileViewController.swift in Sources */,
 				5D282BB02CB6811D00597991 /* ClaimsViewController.swift in Sources */,
 				5D0296D92CABE91E0037427C /* ReportsViewController.swift in Sources */,
 				5D0296982CABC4770037427C /* AppDelegate.swift in Sources */,
+				23283AAB2CBD140200E9DB0F /* ReportsRouter.swift in Sources */,
 				5D0296D22CABE80E0037427C /* UIViewExtension.swift in Sources */,
+				23283AA72CBD0E5700E9DB0F /* ReportsInteractor.swift in Sources */,
 				5D0296D52CABE8410037427C /* EmployeeHomeViewController.swift in Sources */,
 				5D02969A2CABC4770037427C /* SceneDelegate.swift in Sources */,
 				5D2C4E112CAFF8800041E0FB /* AttendanceViewController.swift in Sources */,
@@ -855,6 +969,38 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		23283A992CBCEB3A00E9DB0F /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
+		23283A9E2CBCEB4B00E9DB0F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.2.0;
+			};
+		};
+		23283AA12CBCEB9600E9DB0F /* XCRemoteSwiftPackageReference "TextFieldEffects" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/raulriera/TextFieldEffects.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
+		23283AAE2CBD293900E9DB0F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.0;
+			};
+		};
 		5D8E56762CAFE57100900A04 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
@@ -866,6 +1012,36 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		23283A9A2CBCEB3A00E9DB0F /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23283A992CBCEB3A00E9DB0F /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
+		};
+		23283A9C2CBCEB3A00E9DB0F /* NVActivityIndicatorViewExtended */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23283A992CBCEB3A00E9DB0F /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorViewExtended;
+		};
+		23283A9F2CBCEB4B00E9DB0F /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23283A9E2CBCEB4B00E9DB0F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		23283AA22CBCEB9600E9DB0F /* TextFieldEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23283AA12CBCEB9600E9DB0F /* XCRemoteSwiftPackageReference "TextFieldEffects" */;
+			productName = TextFieldEffects;
+		};
+		23283AAF2CBD293900E9DB0F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23283AAE2CBD293900E9DB0F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		23283AB12CBD293900E9DB0F /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23283AAE2CBD293900E9DB0F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
 		5D8E56772CAFE57100900A04 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5D8E56762CAFE57100900A04 /* XCRemoteSwiftPackageReference "FSCalendar" */;

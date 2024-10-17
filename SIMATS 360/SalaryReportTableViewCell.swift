@@ -8,6 +8,9 @@
 import UIKit
 
 class SalaryReportTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var salaryLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
