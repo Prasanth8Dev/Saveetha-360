@@ -554,10 +554,12 @@
                     <navigationItem key="navigationItem" id="rVb-wc-WcC"/>
                     <connections>
                         <outlet property="attendanceView" destination="2B7-ah-ZgE" id="yTT-mo-eF6"/>
+                        <outlet property="bioIdLabel" destination="c8K-9r-VXo" id="WA2-nL-KAv"/>
                         <outlet property="bufferTimeView" destination="5V2-Wa-1Nr" id="juv-np-g1Z"/>
                         <outlet property="dutyView" destination="40M-3Y-gvQ" id="hp4-eT-uTp"/>
                         <outlet property="leavebalanceView" destination="YFf-uC-iNS" id="txq-uw-vfv"/>
                         <outlet property="profileImgView" destination="fsj-QZ-loM" id="LGu-YG-MWB"/>
+                        <outlet property="userNameLabel" destination="hlZ-YE-US7" id="gk1-5A-xUu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -670,7 +672,7 @@
                                                                     <color key="textColor" red="0.49411764705882355" green="0.54117647058823526" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qo2-i0-NYh">
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qo2-i0-NYh">
                                                                     <rect key="frame" x="184" y="52" width="101" height="32"/>
                                                                     <color key="backgroundColor" red="0.92156862745098034" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
@@ -999,7 +1001,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DOJ: 1-10-2008" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNu-dO-6aM">
                                                         <rect key="frame" x="50" y="51" width="283" height="25.333333333333314"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1066,7 +1068,7 @@
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9789859925" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOc-zc-jGC">
                                                         <rect key="frame" x="64" y="16" width="201.5" height="22"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1079,7 +1081,7 @@
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="prasanths.sse@saveetha.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zll-9f-NQf">
                                                         <rect key="frame" x="64" y="65" width="201.5" height="22"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1091,8 +1093,8 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No 5/6/1 Arihant majestic Towers 100 feet Road Koyambedu Chennai 600107" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbZ-L5-gCJ">
-                                                        <rect key="frame" x="64" y="106.5" width="185" height="67"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="64" y="106.5" width="201.5" height="67"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1111,7 +1113,7 @@
                                                     <constraint firstItem="gOc-zc-jGC" firstAttribute="width" secondItem="9RB-Yx-2HX" secondAttribute="width" multiplier="0.7" id="blA-GW-c4N"/>
                                                     <constraint firstItem="Q11-Mg-tDj" firstAttribute="top" secondItem="2yM-2A-VzE" secondAttribute="bottom" constant="25" id="cJf-7A-16S"/>
                                                     <constraint firstItem="gOc-zc-jGC" firstAttribute="centerY" secondItem="CsL-A0-Cky" secondAttribute="centerY" id="dIX-mH-hUd"/>
-                                                    <constraint firstItem="dbZ-L5-gCJ" firstAttribute="width" secondItem="9RB-Yx-2HX" secondAttribute="width" multiplier="0.64279" id="iVy-gw-YwK"/>
+                                                    <constraint firstItem="dbZ-L5-gCJ" firstAttribute="width" secondItem="9RB-Yx-2HX" secondAttribute="width" multiplier="0.7" id="iVy-gw-YwK"/>
                                                     <constraint firstItem="dbZ-L5-gCJ" firstAttribute="height" secondItem="9RB-Yx-2HX" secondAttribute="height" multiplier="0.3" id="nJi-K6-bPr"/>
                                                     <constraint firstItem="Zll-9f-NQf" firstAttribute="leading" secondItem="2yM-2A-VzE" secondAttribute="trailing" constant="25" id="rvU-0y-34e"/>
                                                     <constraint firstItem="Zll-9f-NQf" firstAttribute="height" secondItem="9RB-Yx-2HX" secondAttribute="height" multiplier="0.0992593" id="t5s-EY-hPk"/>
@@ -1170,7 +1172,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addressLabel" destination="dbZ-L5-gCJ" id="l4s-99-fuk"/>
+                        <outlet property="bioIdLabel" destination="pfL-mz-Yex" id="c0g-JT-eYL"/>
+                        <outlet property="designationLabel" destination="e5y-N2-WNT" id="ryx-fk-7lx"/>
+                        <outlet property="dojLabel" destination="sNu-dO-6aM" id="HfV-JT-2xk"/>
+                        <outlet property="internalExperienceLabel" destination="UHu-cK-YPc" id="pFi-80-XNA"/>
+                        <outlet property="mailLabel" destination="Zll-9f-NQf" id="gBg-af-sHD"/>
+                        <outlet property="outsideExpLabel" destination="Scb-tc-XAB" id="MMb-L9-ZUC"/>
+                        <outlet property="phoneLabel" destination="gOc-zc-jGC" id="6pr-Zg-K7C"/>
                         <outlet property="profileImageView" destination="1AK-PO-rlh" id="CZM-hI-hsx"/>
+                        <outlet property="profileImg" destination="1AK-PO-rlh" id="hWM-V2-EdQ"/>
+                        <outlet property="userNameLabel" destination="my3-Gr-wh9" id="r0S-gN-3Od"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gU-JL-A4q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -17,7 +17,6 @@ enum APIError: Error {
 class APIWrapper {
     static let shared = APIWrapper()
 
-    
     func postRequestMethod<T: Decodable>(url: URL, body: [String: Any], responseType: T.Type) -> AnyPublisher<T, Error> {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
@@ -45,11 +44,9 @@ class APIWrapper {
                 }
                 .tryMap { data -> T in
                     do {
-                        // Try to decode the data into the expected type
                         let decodedResponse = try JSONDecoder().decode(T.self, from: data)
                         return decodedResponse
                     } catch {
-                        // Handle decoding error
                         print("Decoding failed with error: \(error)")
                         print("Raw Response Data: \(String(data: data, encoding: .utf8) ?? "Invalid data")")
                         throw APIError.decodingError

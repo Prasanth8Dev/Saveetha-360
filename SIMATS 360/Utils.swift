@@ -25,5 +25,25 @@ class Utils {
                 return nil // Return nil if the input format is invalid
             }
         }
+    
+    static func formatDateString(_ isoDate: String) -> String? {
+        let dateFormatter = DateFormatter()
+        
+        // Set the date format for the input string
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
+        // Convert the ISO string to a Date object
+        guard let date = dateFormatter.date(from: isoDate) else {
+            return nil // Return nil if the conversion fails
+        }
+        
+        // Set the desired output format
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        
+        // Convert the Date object back to the desired string format
+        let formattedDate = dateFormatter.string(from: date)
+        return formattedDate
     }
+    
+}
 

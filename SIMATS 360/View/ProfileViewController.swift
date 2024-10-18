@@ -7,7 +7,48 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+protocol ProfileViewProtocol: AnyObject {
+    func displayProfileData(_ data: ProfileDataModel)
+    func showError(_ message: String)
+}
+
+
+class ProfileViewController: UIViewController, ProfileViewProtocol {
+    
+    var profilePresenter: ProfilePresenterProtocol?
+    
+    
+    @IBOutlet weak var profileImg: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var bioIdLabel: UILabel!
+    @IBOutlet weak var designationLabel: UILabel!
+    @IBOutlet weak var dojLabel: UILabel!
+    @IBOutlet weak var internalExperienceLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var mailLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var outsideExpLabel: UILabel!
+    
+    func displayProfileData(_ data: ProfileDataModel) {
+        
+        if let data = data.data.first {
+            userNameLabel.text = data.employeeName
+            bioIdLabel.text = "ID: \(data.bioID) \(data.campus)"
+            designationLabel.text = "\(data.category)  \(data.designationName)"
+            dojLabel.text = "DOJ:\(Utils.formatDateString(data.doj))"
+            internalExperienceLabel.text = "" //"Saveetha Exp: \()"
+            phoneLabel.text = data.phone
+            mailLabel.text = data.email
+            addressLabel.text = data.address
+            outsideExpLabel.text = ""
+        }
+        
+    }
+    
+    func showError(_ message: String) {
+        self.showAlert(title: "", message: "We are Facing some issue to Load the Profile. Please try again later.")
+    }
+    
 
     @IBOutlet weak var profileImageView: UIImageView!
     override func viewDidLoad() {
@@ -16,8 +57,17 @@ class ProfileViewController: UIViewController {
         profileImageView.makeCircular()
         // Do any additional setup after loading the view.
     }
+    
+    private func fetchProfileData() {
+        if let userData = Constants.profileData.userData.first {
+            profilePresenter?.fetchProfile(bioId: String(userData.bioID), campus: userData.campus)
+        }
+       
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         initNavigationBar()
+        fetchProfileData()
         title = "Profile"
     }
     

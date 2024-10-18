@@ -18,12 +18,21 @@ class EmployeeHomeViewController: UIViewController {
     
     var loginresponse: LoginResponse?
     
+    @IBOutlet weak var userNameLabel: UILabel!
+    
+    @IBOutlet weak var bioIdLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         profileImgView.makeCircular()
         addTapActionForViews()
         initNavigationBar()
       
+    }
+    
+    private func loadProfileData() {
+        if let userData = loginresponse?.userData {
+            //bioIdLabel.text = userData.first?.bioID
+        }
     }
     private func addTapActionForViews() {
         leavebalanceView.addTap {
