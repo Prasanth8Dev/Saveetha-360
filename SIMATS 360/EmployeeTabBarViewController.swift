@@ -31,7 +31,7 @@ class EmployeeTabBarViewController: UITabBarController {
     }
     
     private func initViewControllers() {
-        let empVC: EmployeeHomeViewController = EmployeeHomeViewController.instantiate()
+        let empVC = HomeRouter.createHomeViewController() as! EmployeeHomeViewController
         empVC.tabBarItem.image = UIImage(named: "homeIcon")
         empVC.tabBarItem.title = "Home"
         empVC.loginresponse = self.loginData

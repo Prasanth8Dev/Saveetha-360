@@ -8,7 +8,8 @@
 import UIKit
 
 class BufferTimeTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var currentMonthlabel: UILabel!
+    @IBOutlet weak var lateLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

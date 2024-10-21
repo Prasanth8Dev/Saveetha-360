@@ -7,16 +7,28 @@
 
 import UIKit
 
-class EmployeeHomeViewController: UIViewController {
+protocol EmployeeHomeViewProtocol: AnyObject {
+    func showHomePageData(homeData: HomePageResponse)
+    func showAvailableLeave(leaveData: AvailableLeaveModel)
+    func showError(error: String)
+}
 
-    @IBOutlet weak var profileImgView: UIImageView!
+class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     
+    @IBOutlet weak var dutyLabel: UILabel!
+    @IBOutlet weak var leaveBalance: UILabel!
+    @IBOutlet weak var bufferTime: UILabel!
+    @IBOutlet weak var attendancePercentage: UILabel!
+    @IBOutlet weak var profileImgView: UIImageView!
     @IBOutlet weak var dutyView: UIView!
     @IBOutlet weak var leavebalanceView: UIView!
     @IBOutlet weak var bufferTimeView: UIView!
     @IBOutlet weak var attendanceView: UIView!
     
+    var availableLeaveData: AvailableLeaveModel?
     var loginresponse: LoginResponse?
+    var homePresenter: HomePresenterProtocol?
+    var homePageResponse: HomePageResponse?
     
     @IBOutlet weak var userNameLabel: UILabel!
     
@@ -30,29 +42,57 @@ class EmployeeHomeViewController: UIViewController {
       
     }
     
+    @IBAction func applyLeaveTapped(_ sender: Any) {
+        let leaveApplicationVC: LeaveApplicationViewController = LeaveApplicationViewController.instantiate()
+        self.navigationController?.pushViewController(leaveApplicationVC, animated: true)
+    }
+    
     private func loadProfileData() {
         if let userData = loginresponse?.userData.first {
             bioIdLabel.text = "Bio Id:\(String(userData.bioID))"
             userNameLabel.text = userData.userName
             DispatchQueue.main.async {
                 //guard let `self` = self else {return}
-                self.profileImgView.loadImage(from: userData.profileImageUrl)
+                self.profileImgView.loadImage(from: userData.profileImgURL)
             }
+        }
+    }
+    
+    func showError(error: String) {
+        self.showAlert(title: "", message: error)
+    }
+  
+    func showAvailableLeave(leaveData: AvailableLeaveModel) {
+        if let availableLeave = leaveData.data.first {
+            self.availableLeaveData = leaveData
+            let totalLeaveWithSick = Double(availableLeave.academicLeave) + Double(availableLeave.casualLeave) + availableLeave.sickLeave + Double(availableLeave.earnedLeave)
+            leaveBalance.text = "\(totalLeaveWithSick) Days"
+        }
+    }
+    
+    func showHomePageData(homeData: HomePageResponse) {
+        if let userData = homeData.data.first{
+            self.homePageResponse = homeData
+            attendancePercentage.text = "\(userData.attendancePercentage)% for the current month"
+            bufferTime.text = "\(Int(userData.adjustedBuffTime)) Minutes"
         }
     }
     
     private func addTapActionForViews() {
         leavebalanceView.addTap {
             let leaveBalanceVC: LeaveBalanceViewController = LeaveBalanceViewController.instantiate()
+            leaveBalanceVC.leaveData = self.availableLeaveData
             self.navigationController?.pushViewController(leaveBalanceVC, animated: true)
         }
+        
         attendanceView.addTap {
             let attendanceVC: AttendanceViewController = AttendanceViewController.instantiate()
+            attendanceVC.attendanceResponse = self.homePageResponse
             self.navigationController?.pushViewController(attendanceVC, animated: true)
         }
         
         bufferTimeView.addTap {
-            let bufferTimeVc: BufferTimeViewController = BufferTimeViewController.instantiate()
+            let bufferTimeVc = BufferTimeRouter.createBufferTime()
             self.navigationController?.pushViewController(bufferTimeVc, animated: true)
         }
         
@@ -75,9 +115,43 @@ class EmployeeHomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Hide the navigation bar when this view appears
+     
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        if let userData = Constants.profileData.userData.first {
+            let date = Utils.getCurrentDateInYearMonthFormat()
+            let yearMonth = date.split(separator: ":")
+           
+            let dispatchGroup = DispatchGroup()
+            dispatchGroup.enter()
+            homePresenter?.fetchHomeData(
+                bioId: String(userData.bioID),
+                campus: userData.campus,
+                category: userData.category,
+                year: String(yearMonth[0]),
+                month: String(yearMonth[1])
+            ) {
+               
+                dispatchGroup.leave()
+            }
+
+            dispatchGroup.enter()
+            homePresenter?.fetchAvialableleave(
+                bioId: String(userData.bioID),
+                campus: userData.campus,
+                category: userData.category
+            ) {
+                dispatchGroup.leave()
+            }
+
+     
+            dispatchGroup.notify(queue: .main) {
+      
+                print("Both API calls are completed.")
+            }
+        }
     }
+
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

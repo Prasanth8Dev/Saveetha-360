@@ -14,14 +14,30 @@ class AttendanceViewController: UIViewController {
     @IBOutlet weak var imgTwo: UIImageView!
     @IBOutlet weak var imgOne: UIImageView!
     
+    @IBOutlet weak var attendancePercentage: UILabel!
+    @IBOutlet weak var totalWorkingDays: UILabel!
+    @IBOutlet weak var daysAbsent: UILabel!
+    @IBOutlet weak var daysPresent: UILabel!
+    var attendanceResponse: HomePageResponse?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         imgFour.makeCircular()
         imgThree.makeCircular()
         imgTwo.makeCircular()
         imgOne.makeCircular()
-       initNavigationBar()
+        initNavigationBar()
+        loadAttendanceData()
         // Do any additional setup after loading the view.
+    }
+    
+    private func loadAttendanceData() {
+        if let data = attendanceResponse?.data.first {
+            attendancePercentage.text = "Attendance percentage: \(data.attendancePercentage)"
+            totalWorkingDays.text = "Total Working days: \(data.totalWorkingDays)"
+            daysAbsent.text = "Days Absent: \(data.absentDays)"
+            daysPresent.text = "Days Present: \(data.presentDays)"
+        }
     }
     
     func initNavigationBar() {

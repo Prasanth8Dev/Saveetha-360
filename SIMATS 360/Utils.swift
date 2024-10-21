@@ -52,6 +52,20 @@ class Utils {
         
         return Int(stringValue) ?? 0
     }
-
+    
+    static func getCurrentDateInYearMonthFormat() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy:MM"  // Set the date format to YYYY:MM
+        let currentDate = Date()
+        return dateFormatter.string(from: currentDate)  // Return the formatted date string
+    }
+    
+    
+    static func getCurrentMonth() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"  // "MMMM" gives the full month name
+        let currentDate = Date()
+        return dateFormatter.string(from: currentDate)
+    }
 }
 

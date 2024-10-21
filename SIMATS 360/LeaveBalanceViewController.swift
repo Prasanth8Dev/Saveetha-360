@@ -9,10 +9,29 @@ import UIKit
 
 class LeaveBalanceViewController: UIViewController {
 
+    @IBOutlet weak var earnedleave: UILabel!
+    @IBOutlet weak var academicLeave: UILabel!
+    @IBOutlet weak var sickLeave: UILabel!
+    @IBOutlet weak var casualLeave: UILabel!
+    var leaveData: AvailableLeaveModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadLeaveData()
+    }
+    
+    private func loadLeaveData() {
+        if let leaves = leaveData?.data.first {
+            earnedleave.text = "Available Leaves: \(leaves.earnedLeave)"
+            academicLeave.text = "Available Leaves: \(leaves.academicLeave)"
+            sickLeave.text = "Available Leaves: \(leaves.sickLeave)"
+            casualLeave.text = "Available Leaves: \(leaves.casualLeave)"
+        }
     }
     
     func initNavigationBar() {
@@ -46,14 +65,5 @@ class LeaveBalanceViewController: UIViewController {
         let leaveApplicationVC: LeaveApplicationViewController = LeaveApplicationViewController.instantiate()
         self.navigationController?.pushViewController(leaveApplicationVC, animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

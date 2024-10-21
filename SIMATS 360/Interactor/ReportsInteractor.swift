@@ -21,6 +21,4 @@ class SalaryReportInteractor: SalaryReportInteractorProtocol {
         let param = ["bioId" : bioId]
         return APIWrapper.shared.postRequestMethod(url: url, body: param, responseType: SalaryReportModel.self)
     }
-    
-    
 }

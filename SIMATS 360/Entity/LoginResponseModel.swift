@@ -8,6 +8,8 @@
 import Foundation
 
 
+import Foundation
+
 // MARK: - LoginResponse
 struct LoginResponse: Codable {
     let status: Bool
@@ -19,11 +21,13 @@ struct LoginResponse: Codable {
 struct UserData: Codable {
     let campus, category: String
     let bioID: Int
+    let profileImgURL: String
     let userName: String
-    let profileImageUrl: String
 
     enum CodingKeys: String, CodingKey {
-        case campus, category, userName, profileImageUrl
+        case campus, category
         case bioID = "bioId"
+        case profileImgURL = "profileImgUrl"
+        case userName
     }
 }
