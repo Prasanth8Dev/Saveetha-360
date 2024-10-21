@@ -46,7 +46,7 @@ class EmployeeTabBarViewController: UITabBarController {
         salaryVC.tabBarItem.image = UIImage(named: "Reports")
         salaryVC.tabBarItem.title = "Reports"
         salaryVC.navigationItem.title = "Reports"
-        salaryVC.title = "Salary Reports"
+        salaryVC.title =  "Reports"
         let salaryNavVC = UINavigationController(rootViewController: salaryVC)
 
         let profileVC = ProfileRouter.createProfile()

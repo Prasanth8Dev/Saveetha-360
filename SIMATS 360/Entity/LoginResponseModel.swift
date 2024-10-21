@@ -19,9 +19,11 @@ struct LoginResponse: Codable {
 struct UserData: Codable {
     let campus, category: String
     let bioID: Int
+    let userName: String
+    let profileImageUrl: String
 
     enum CodingKeys: String, CodingKey {
-        case campus, category
+        case campus, category, userName, profileImageUrl
         case bioID = "bioId"
     }
 }

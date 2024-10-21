@@ -44,6 +44,7 @@ class APIWrapper {
                 }
                 .tryMap { data -> T in
                     do {
+                        print("Raw Response Data: \(String(data: data, encoding: .utf8) ?? "Invalid data")")
                         let decodedResponse = try JSONDecoder().decode(T.self, from: data)
                         return decodedResponse
                     } catch {

@@ -22,6 +22,10 @@
 		23283AA92CBD106500E9DB0F /* ReportsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283AA82CBD106500E9DB0F /* ReportsPresenter.swift */; };
 		23283AAB2CBD140200E9DB0F /* ReportsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283AAA2CBD140200E9DB0F /* ReportsRouter.swift */; };
 		23283AAD2CBD21D100E9DB0F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283AAC2CBD21D100E9DB0F /* Utils.swift */; };
+		23788DD82CC24B8D003CBEE1 /* SalaryReportResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23788DD72CC24B8D003CBEE1 /* SalaryReportResponse.swift */; };
+		23788DDC2CC24C13003CBEE1 /* SalaryDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23788DDB2CC24C13003CBEE1 /* SalaryDetailsInteractor.swift */; };
+		23788DDE2CC24D24003CBEE1 /* SalaryDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23788DDD2CC24D24003CBEE1 /* SalaryDetailsPresenter.swift */; };
+		23788DE02CC24EB0003CBEE1 /* SalaryDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23788DDF2CC24EB0003CBEE1 /* SalaryDetailsRouter.swift */; };
 		238D522E2CC1081A00927D4C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238D522D2CC1081A00927D4C /* Constants.swift */; };
 		238D52302CC10F8100927D4C /* ProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238D522F2CC10F8100927D4C /* ProfileDataModel.swift */; };
 		238D52322CC10FC400927D4C /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238D52312CC10FC400927D4C /* ProfileInteractor.swift */; };
@@ -125,6 +129,10 @@
 		23283AA82CBD106500E9DB0F /* ReportsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsPresenter.swift; sourceTree = "<group>"; };
 		23283AAA2CBD140200E9DB0F /* ReportsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsRouter.swift; sourceTree = "<group>"; };
 		23283AAC2CBD21D100E9DB0F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		23788DD72CC24B8D003CBEE1 /* SalaryReportResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryReportResponse.swift; sourceTree = "<group>"; };
+		23788DDB2CC24C13003CBEE1 /* SalaryDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryDetailsInteractor.swift; sourceTree = "<group>"; };
+		23788DDD2CC24D24003CBEE1 /* SalaryDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryDetailsPresenter.swift; sourceTree = "<group>"; };
+		23788DDF2CC24EB0003CBEE1 /* SalaryDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryDetailsRouter.swift; sourceTree = "<group>"; };
 		238D522D2CC1081A00927D4C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		238D522F2CC10F8100927D4C /* ProfileDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataModel.swift; sourceTree = "<group>"; };
 		238D52312CC10FC400927D4C /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
@@ -238,6 +246,7 @@
 			children = (
 				23283A912CBCD5DE00E9DB0F /* LoginResponseModel.swift */,
 				238D522F2CC10F8100927D4C /* ProfileDataModel.swift */,
+				23788DD72CC24B8D003CBEE1 /* SalaryReportResponse.swift */,
 				23283AA42CBD0DA100E9DB0F /* SalaryReportModel.swift */,
 			);
 			path = Entity;
@@ -251,6 +260,7 @@
 				5D0296D82CABE91E0037427C /* ReportsViewController.swift */,
 				5D0296D62CABE8E60037427C /* NotificationViewController.swift */,
 				5D0296DA2CABE95F0037427C /* ProfileViewController.swift */,
+				5D9600CF2CAE9EBA00FA6981 /* SalaryDetailsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -260,6 +270,7 @@
 			children = (
 				23283A8F2CBCD4C100E9DB0F /* LoginInteractor.swift */,
 				23283AA62CBD0E5700E9DB0F /* ReportsInteractor.swift */,
+				23788DDB2CC24C13003CBEE1 /* SalaryDetailsInteractor.swift */,
 				238D52312CC10FC400927D4C /* ProfileInteractor.swift */,
 			);
 			path = Interactor;
@@ -270,6 +281,7 @@
 			children = (
 				23283A952CBCD7A700E9DB0F /* LoginPresenter.swift */,
 				238D52332CC110D200927D4C /* ProfilePresenter.swift */,
+				23788DDD2CC24D24003CBEE1 /* SalaryDetailsPresenter.swift */,
 				23283AA82CBD106500E9DB0F /* ReportsPresenter.swift */,
 			);
 			path = Presenter;
@@ -280,6 +292,7 @@
 			children = (
 				23283A972CBCD82100E9DB0F /* LoginRouter.swift */,
 				23283AAA2CBD140200E9DB0F /* ReportsRouter.swift */,
+				23788DDF2CC24EB0003CBEE1 /* SalaryDetailsRouter.swift */,
 				238D52352CC1157000927D4C /* ProfileRouter.swift */,
 			);
 			path = Router;
@@ -338,7 +351,6 @@
 				5D282BB12CB6816000597991 /* SwapDutyViewController.swift */,
 				238D522D2CC1081A00927D4C /* Constants.swift */,
 				5D282BAF2CB6811D00597991 /* ClaimsViewController.swift */,
-				5D9600CF2CAE9EBA00FA6981 /* SalaryDetailsViewController.swift */,
 				5DA486AB2CAE9306009E0A56 /* SalaryReportTableViewCell.swift */,
 				5D02969D2CABC4770037427C /* Main.storyboard */,
 				5D0296CD2CABE80E0037427C /* UIColorExtension.swift */,
@@ -617,19 +629,23 @@
 				23283A8E2CBCD45900E9DB0F /* APIWrapper.swift in Sources */,
 				23283A962CBCD7A700E9DB0F /* LoginPresenter.swift in Sources */,
 				23283AA52CBD0DA100E9DB0F /* SalaryReportModel.swift in Sources */,
+				23788DE02CC24EB0003CBEE1 /* SalaryDetailsRouter.swift in Sources */,
 				23283A902CBCD4C100E9DB0F /* LoginInteractor.swift in Sources */,
 				238D52362CC1157000927D4C /* ProfileRouter.swift in Sources */,
 				5D282BB22CB6816000597991 /* SwapDutyViewController.swift in Sources */,
 				23283AA92CBD106500E9DB0F /* ReportsPresenter.swift in Sources */,
 				5D0296DB2CABE95F0037427C /* ProfileViewController.swift in Sources */,
 				5D282BB02CB6811D00597991 /* ClaimsViewController.swift in Sources */,
+				23788DD82CC24B8D003CBEE1 /* SalaryReportResponse.swift in Sources */,
 				238D52322CC10FC400927D4C /* ProfileInteractor.swift in Sources */,
 				5D0296D92CABE91E0037427C /* ReportsViewController.swift in Sources */,
 				5D0296982CABC4770037427C /* AppDelegate.swift in Sources */,
 				23283AAB2CBD140200E9DB0F /* ReportsRouter.swift in Sources */,
 				5D0296D22CABE80E0037427C /* UIViewExtension.swift in Sources */,
 				23283AA72CBD0E5700E9DB0F /* ReportsInteractor.swift in Sources */,
+				23788DDE2CC24D24003CBEE1 /* SalaryDetailsPresenter.swift in Sources */,
 				5D0296D52CABE8410037427C /* EmployeeHomeViewController.swift in Sources */,
+				23788DDC2CC24C13003CBEE1 /* SalaryDetailsInteractor.swift in Sources */,
 				5D02969A2CABC4770037427C /* SceneDelegate.swift in Sources */,
 				5D2C4E112CAFF8800041E0FB /* AttendanceViewController.swift in Sources */,
 				238D522E2CC1081A00927D4C /* Constants.swift in Sources */,

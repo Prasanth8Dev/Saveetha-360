@@ -26,14 +26,21 @@ class EmployeeHomeViewController: UIViewController {
         profileImgView.makeCircular()
         addTapActionForViews()
         initNavigationBar()
+        loadProfileData()
       
     }
     
     private func loadProfileData() {
-        if let userData = loginresponse?.userData {
-            //bioIdLabel.text = userData.first?.bioID
+        if let userData = loginresponse?.userData.first {
+            bioIdLabel.text = "Bio Id:\(String(userData.bioID))"
+            userNameLabel.text = userData.userName
+            DispatchQueue.main.async {
+                //guard let `self` = self else {return}
+                self.profileImgView.loadImage(from: userData.profileImageUrl)
+            }
         }
     }
+    
     private func addTapActionForViews() {
         leavebalanceView.addTap {
             let leaveBalanceVC: LeaveBalanceViewController = LeaveBalanceViewController.instantiate()

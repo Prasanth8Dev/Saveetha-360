@@ -45,5 +45,13 @@ class Utils {
         return formattedDate
     }
     
+    static func convertStringToInt(_ stringValue: String?) -> Int {
+        guard let stringValue = stringValue, !stringValue.isEmpty else {
+            return 0
+        }
+        
+        return Int(stringValue) ?? 0
+    }
+
 }
 

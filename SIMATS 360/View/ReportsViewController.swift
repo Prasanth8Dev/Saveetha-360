@@ -13,6 +13,8 @@ import UIKit
 
 class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ReportsViewProtocol {
 
+    @IBOutlet weak var bioIdLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var salaryReportTableView: UITableView! {
         didSet {
             salaryReportTableView.delegate = self
@@ -24,14 +26,20 @@ class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if let userData = Constants.profileData.userData.first {
+            bioIdLabel.text = "Bio Id:\( String(userData.bioID))"
+            userNameLabel.text =  userData.userName
+        }
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         initNavigationBar()
-        reportsPresenter?.fetchSalaryReports(bioId: "587")
+        if let bioId = (Constants.profileData.userData.first?.bioID) {
+            reportsPresenter?.fetchSalaryReports(bioId: String(bioId))
+        }
+
     }
     
     func initNavigationBar() {
@@ -80,7 +88,7 @@ class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         salaryReportTableView.deselectRow(at: indexPath, animated: true)
-        let salaryDetailsVC: SalaryDetailsViewController = SalaryDetailsViewController.instantiate()
+        let salaryDetailsVC = SalaryDetailsRouter.createModule()
         self.navigationController?.pushViewController(salaryDetailsVC, animated: true)
         //self.present(salaryDetailsVC, animated: true)
     }

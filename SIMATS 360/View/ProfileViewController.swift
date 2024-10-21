@@ -31,16 +31,27 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
     
     func displayProfileData(_ data: ProfileDataModel) {
         
-        if let data = data.data.first {
+        if let data = data.data.first, let doj = Utils.formatDateString(data.doj) {
             userNameLabel.text = data.employeeName
-            bioIdLabel.text = "ID: \(data.bioID) \(data.campus)"
+            bioIdLabel.text = "Bio Id: \(data.bioID) \(data.campus)"
             designationLabel.text = "\(data.category)  \(data.designationName)"
-            dojLabel.text = "DOJ:\(Utils.formatDateString(data.doj))"
-            internalExperienceLabel.text = "" //"Saveetha Exp: \()"
+            dojLabel.text = "DOJ: \(doj)"
+         
             phoneLabel.text = data.phone
             mailLabel.text = data.email
             addressLabel.text = data.address
-            outsideExpLabel.text = ""
+            if let internalExperience = data.internalExperience {
+                internalExperienceLabel.text = "Saveetha Exp: \(internalExperience.cleanedValue())"
+            } else {
+                internalExperienceLabel.text = "Saveetha Exp: N/A"
+            }
+            if let externalExperience = data.externalExperience {
+                outsideExpLabel.text = "Outside Exp: \(externalExperience.cleanedValue())"
+            } else  {
+                outsideExpLabel.text = "Outside Exp: N/A"
+            }
+            
+            profileImg.loadImage(from: data.profileImageURL)
         }
         
     }
