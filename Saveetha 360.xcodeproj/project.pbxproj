@@ -92,6 +92,11 @@
 		5D2B58242CB3E9A500976E7A /* BufferTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2B58232CB3E9A500976E7A /* BufferTimeTableViewCell.swift */; };
 		5D2C4E0F2CAFEBA80041E0FB /* LeaveApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2C4E0E2CAFEBA80041E0FB /* LeaveApplicationViewController.swift */; };
 		5D2C4E112CAFF8800041E0FB /* AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2C4E102CAFF8800041E0FB /* AttendanceViewController.swift */; };
+		5D3CE9C82CC75EB300F22BE0 /* LeaveDatailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9C72CC75EB300F22BE0 /* LeaveDatailTableViewCell.swift */; };
+		5D3CE9CA2CC75FDB00F22BE0 /* LeaveBalanceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9C92CC75FDB00F22BE0 /* LeaveBalanceInteractor.swift */; };
+		5D3CE9CC2CC7613B00F22BE0 /* LeaveDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9CB2CC7613B00F22BE0 /* LeaveDetailModel.swift */; };
+		5D3CE9CE2CC761E600F22BE0 /* LeaveDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9CD2CC761E600F22BE0 /* LeaveDetailPresenter.swift */; };
+		5D3CE9D02CC762C100F22BE0 /* LeaveBalanceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9CF2CC762C100F22BE0 /* LeaveBalanceRouter.swift */; };
 		5D8E56752CAFB84600900A04 /* LeaveBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */; };
 		5D8E56782CAFE57100900A04 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 5D8E56772CAFE57100900A04 /* FSCalendar */; };
 		5D92CE262CC61FC50098560F /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D92CE252CC61FC50098560F /* HomeInteractor.swift */; };
@@ -214,6 +219,11 @@
 		5D2B58232CB3E9A500976E7A /* BufferTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferTimeTableViewCell.swift; sourceTree = "<group>"; };
 		5D2C4E0E2CAFEBA80041E0FB /* LeaveApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplicationViewController.swift; sourceTree = "<group>"; };
 		5D2C4E102CAFF8800041E0FB /* AttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceViewController.swift; sourceTree = "<group>"; };
+		5D3CE9C72CC75EB300F22BE0 /* LeaveDatailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveDatailTableViewCell.swift; sourceTree = "<group>"; };
+		5D3CE9C92CC75FDB00F22BE0 /* LeaveBalanceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveBalanceInteractor.swift; sourceTree = "<group>"; };
+		5D3CE9CB2CC7613B00F22BE0 /* LeaveDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveDetailModel.swift; sourceTree = "<group>"; };
+		5D3CE9CD2CC761E600F22BE0 /* LeaveDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveDetailPresenter.swift; sourceTree = "<group>"; };
+		5D3CE9CF2CC762C100F22BE0 /* LeaveBalanceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveBalanceRouter.swift; sourceTree = "<group>"; };
 		5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveBalanceViewController.swift; sourceTree = "<group>"; };
 		5D92CE252CC61FC50098560F /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		5D92CE272CC6203C0098560F /* HomePageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageResponseModel.swift; sourceTree = "<group>"; };
@@ -267,6 +277,7 @@
 				23283A912CBCD5DE00E9DB0F /* LoginResponseModel.swift */,
 				238D522F2CC10F8100927D4C /* ProfileDataModel.swift */,
 				5D92CE272CC6203C0098560F /* HomePageResponseModel.swift */,
+				5D3CE9CB2CC7613B00F22BE0 /* LeaveDetailModel.swift */,
 				23788DD72CC24B8D003CBEE1 /* SalaryReportResponse.swift */,
 				5D92CE302CC652890098560F /* BufferTimeModel.swift */,
 				5D92CE2D2CC62F850098560F /* AvailableLeaveModel.swift */,
@@ -287,6 +298,7 @@
 				5D2B58212CB3E8FB00976E7A /* BufferTimeViewController.swift */,
 				5D0296DA2CABE95F0037427C /* ProfileViewController.swift */,
 				5D9600CF2CAE9EBA00FA6981 /* SalaryDetailsViewController.swift */,
+				5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -296,6 +308,7 @@
 			children = (
 				23283A8F2CBCD4C100E9DB0F /* LoginInteractor.swift */,
 				23283AA62CBD0E5700E9DB0F /* ReportsInteractor.swift */,
+				5D3CE9C92CC75FDB00F22BE0 /* LeaveBalanceInteractor.swift */,
 				5D92CE322CC652EB0098560F /* BufferTimeInteractor.swift */,
 				5D92CE252CC61FC50098560F /* HomeInteractor.swift */,
 				23788DDB2CC24C13003CBEE1 /* SalaryDetailsInteractor.swift */,
@@ -309,6 +322,7 @@
 			children = (
 				23283A952CBCD7A700E9DB0F /* LoginPresenter.swift */,
 				5D92CE292CC623050098560F /* HomePresenter.swift */,
+				5D3CE9CD2CC761E600F22BE0 /* LeaveDetailPresenter.swift */,
 				5D92CE342CC654230098560F /* BufferTimePresenter.swift */,
 				238D52332CC110D200927D4C /* ProfilePresenter.swift */,
 				23788DDD2CC24D24003CBEE1 /* SalaryDetailsPresenter.swift */,
@@ -322,6 +336,7 @@
 			children = (
 				23283A972CBCD82100E9DB0F /* LoginRouter.swift */,
 				23283AAA2CBD140200E9DB0F /* ReportsRouter.swift */,
+				5D3CE9CF2CC762C100F22BE0 /* LeaveBalanceRouter.swift */,
 				5D92CE2B2CC6263E0098560F /* HomeRouter.swift */,
 				5D92CE362CC655DA0098560F /* BufferTimeRouter.swift */,
 				23788DDF2CC24EB0003CBEE1 /* SalaryDetailsRouter.swift */,
@@ -373,7 +388,6 @@
 				5DA486A92CAE5FA0009E0A56 /* SplashViewController.swift */,
 				5D0296CA2CABE77F0037427C /* EmployeeTabBarViewController.swift */,
 				5D2C4E102CAFF8800041E0FB /* AttendanceViewController.swift */,
-				5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */,
 				5DA486A72CAE587B009E0A56 /* NotificationTableViewCell.swift */,
 				5D2C4E0E2CAFEBA80041E0FB /* LeaveApplicationViewController.swift */,
 				5D282BAD2CB65C7200597991 /* DutyViewController.swift */,
@@ -460,6 +474,7 @@
 			isa = PBXGroup;
 			children = (
 				5D2B58232CB3E9A500976E7A /* BufferTimeTableViewCell.swift */,
+				5D3CE9C72CC75EB300F22BE0 /* LeaveDatailTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -671,10 +686,12 @@
 				5D8E56752CAFB84600900A04 /* LeaveBalanceViewController.swift in Sources */,
 				5D92CE332CC652EB0098560F /* BufferTimeInteractor.swift in Sources */,
 				23283A8E2CBCD45900E9DB0F /* APIWrapper.swift in Sources */,
+				5D3CE9C82CC75EB300F22BE0 /* LeaveDatailTableViewCell.swift in Sources */,
 				23283A962CBCD7A700E9DB0F /* LoginPresenter.swift in Sources */,
 				23283AA52CBD0DA100E9DB0F /* SalaryReportModel.swift in Sources */,
 				23788DE02CC24EB0003CBEE1 /* SalaryDetailsRouter.swift in Sources */,
 				5D92CE312CC652890098560F /* BufferTimeModel.swift in Sources */,
+				5D3CE9CC2CC7613B00F22BE0 /* LeaveDetailModel.swift in Sources */,
 				23283A902CBCD4C100E9DB0F /* LoginInteractor.swift in Sources */,
 				238D52362CC1157000927D4C /* ProfileRouter.swift in Sources */,
 				5D282BB22CB6816000597991 /* SwapDutyViewController.swift in Sources */,
@@ -688,8 +705,10 @@
 				5D0296982CABC4770037427C /* AppDelegate.swift in Sources */,
 				23283AAB2CBD140200E9DB0F /* ReportsRouter.swift in Sources */,
 				5D92CE2C2CC6263E0098560F /* HomeRouter.swift in Sources */,
+				5D3CE9CA2CC75FDB00F22BE0 /* LeaveBalanceInteractor.swift in Sources */,
 				5D0296D22CABE80E0037427C /* UIViewExtension.swift in Sources */,
 				23283AA72CBD0E5700E9DB0F /* ReportsInteractor.swift in Sources */,
+				5D3CE9D02CC762C100F22BE0 /* LeaveBalanceRouter.swift in Sources */,
 				5D92CE282CC6203C0098560F /* HomePageResponseModel.swift in Sources */,
 				23788DDE2CC24D24003CBEE1 /* SalaryDetailsPresenter.swift in Sources */,
 				5D0296D52CABE8410037427C /* EmployeeHomeViewController.swift in Sources */,
@@ -698,6 +717,7 @@
 				5D2C4E112CAFF8800041E0FB /* AttendanceViewController.swift in Sources */,
 				238D522E2CC1081A00927D4C /* Constants.swift in Sources */,
 				238D52342CC110D200927D4C /* ProfilePresenter.swift in Sources */,
+				5D3CE9CE2CC761E600F22BE0 /* LeaveDetailPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

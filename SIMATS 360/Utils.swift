@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Utils {
     static func convertDateFormat(inputDate: String) -> String? {
@@ -67,5 +68,43 @@ class Utils {
         let currentDate = Date()
         return dateFormatter.string(from: currentDate)
     }
+    
+    
+    static func getCurrentMonthWithDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM dd"  // "MMMM" gives the full month name
+        let currentDate = Date()
+        return dateFormatter.string(from: currentDate)
+    }
+    
+    
+    static func convertDateToMonthDay(dateString: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        guard let date = dateFormatter.date(from: dateString) else {
+            return nil
+        }
+        dateFormatter.dateFormat = "MMMM dd"
+        
+        return dateFormatter.string(from: date)
+    }
+    
+    static func attributedStringWithColorAndFont(text: String, colorHex: String, font: UIFont, length: Int, fontWeight: UIFont.Weight = .bold, fontSize: CGFloat = 18) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: text)
+        let range = NSRange(location: 0, length: length)
+        
+        // Use the provided font and size directly, without specifying a custom font
+        let font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor(hex: colorHex),
+            .font: font
+        ]
+
+        attributedString.addAttributes(attributes, range: range)
+        return attributedString
+    }
+
+    
 }
 

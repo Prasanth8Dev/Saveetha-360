@@ -31,11 +31,11 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
     
     func displayProfileData(_ data: ProfileDataModel) {
         
-        if let data = data.data.first, let doj = Utils.formatDateString(data.doj) {
+        if let data = data.data.first {
             userNameLabel.text = data.employeeName
             bioIdLabel.text = "Bio Id: \(data.bioID) \(data.campus)"
             designationLabel.text = "\(data.category)  \(data.designationName)"
-            dojLabel.text = "DOJ: \(doj)"
+            dojLabel.text = "DOJ: \(data.doj)"
          
             phoneLabel.text = data.phone
             mailLabel.text = data.email

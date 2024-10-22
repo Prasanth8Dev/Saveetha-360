@@ -76,7 +76,20 @@ class BufferTimingViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = bufferDataTableview.dequeueReusableCell(withIdentifier: "BufferTimeTableViewCell", for: indexPath) as! BufferTimeTableViewCell
-        
+        if let date = self.bufferTimeResponse?.data.first?.gsonData[indexPath.row].date ,let convertedDate = Utils.convertDateToMonthDay(dateString: date) {
+            cell.currentMonthlabel.text = convertedDate
+        }
+        if let earlyTime = self.bufferTimeResponse?.data.first?.gsonData[indexPath.row].early, let exceedTime = self.bufferTimeResponse?.data.first?.gsonData[indexPath.row].exceed,let remainingBufferTime = self.bufferTimeResponse?.data.first?.gsonData[indexPath.row].remainingBuff  {
+            var timing = ""
+            var earlyTiming = ""
+            if  exceedTime > 0 {
+                timing = "Late By \(Int(exceedTime)) minutes"
+            }
+            if earlyTime > 0 {
+                earlyTiming = ", Pre Exit by \(earlyTime) minutes"
+            }
+            cell.lateLabel.text = "\(timing) \(earlyTiming) \n Balance: \(Int(remainingBufferTime)) "
+        }
         
         return cell
     }

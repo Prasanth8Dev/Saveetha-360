@@ -80,7 +80,7 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     
     private func addTapActionForViews() {
         leavebalanceView.addTap {
-            let leaveBalanceVC: LeaveBalanceViewController = LeaveBalanceViewController.instantiate()
+            let leaveBalanceVC = LeaveBalanceRouter.createLeaveBalance() as! LeaveBalanceViewController
             leaveBalanceVC.leaveData = self.availableLeaveData
             self.navigationController?.pushViewController(leaveBalanceVC, animated: true)
         }
