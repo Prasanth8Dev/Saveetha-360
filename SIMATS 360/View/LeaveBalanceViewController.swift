@@ -29,6 +29,7 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
     var leaveData: AvailableLeaveModel?
     var leavePresenter: LeaveDetailPresenter?
     var leaveDetailResponse: LeaveDetailModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
@@ -82,7 +83,6 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
         
         button.addTarget(self, action: #selector(notificationTapped), for: .touchUpInside)
         self.navigationItem.rightBarButtonItems = [notificationButton]
-        
     }
     
    
@@ -90,8 +90,9 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
         print("Right button tapped")
        
     }
+    
     @IBAction func applyLeaveTapped(_ sender: UIButton) {
-        let leaveApplicationVC: LeaveApplicationViewController = LeaveApplicationViewController.instantiate()
+        let leaveApplicationVC = ApplyLeaveRouter.createApplyLeaveRouter() as! LeaveApplicationViewController
         self.navigationController?.pushViewController(leaveApplicationVC, animated: true)
     }
     
@@ -102,18 +103,22 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeaveDatailTableViewCell", for: indexPath) as! LeaveDatailTableViewCell
         if let leaveData = self.leaveDetailResponse?.data.first {
-            cell.leaveTypeLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "Leave Type: \(leaveData.category)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 18), length: 11)
+            cell.leaveTypeLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "Leave Type: \(leaveData.category)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 11)
             
-            cell.fromDateLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "From Date: \(leaveData.startDate)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 18), length: 10)
-            cell.toDateLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "To Date: \(leaveData.endDate)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 18), length: 8)
+            cell.fromDateLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "From Date: \(leaveData.startDate)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 10)
+            cell.toDateLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "To Date: \(leaveData.endDate)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 8)
             if leaveData.leaveType.contains("full") {
-                cell.leaveDurationLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "Leave Duration: Full Day", colorHex: "#000000", font: UIFont.systemFont(ofSize: 18), length: 15)
+                cell.leaveDurationLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "Leave Duration: Full Day", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 15)
             } else if leaveData.leaveType.contains("half") {
-                cell.leaveDurationLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Duration: Half Day", colorHex: "#000000", font: UIFont.systemFont(ofSize: 18), length: 15) 
+                cell.leaveDurationLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Duration: Half Day", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 15)
             }
            
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

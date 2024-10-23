@@ -19,7 +19,6 @@ class LeaveBalanceRouter: LeaveBalanceRouterProtocol {
         let leaveInteractor = LeaveBalanceInteractor()
         
         leaveBalanceVC.leavePresenter = presenter
-        
         presenter.view = leaveBalanceVC
         presenter.leaveBalanceInteractor = leaveInteractor
         

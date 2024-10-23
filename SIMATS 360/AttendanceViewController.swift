@@ -20,6 +20,7 @@ class AttendanceViewController: UIViewController {
     @IBOutlet weak var daysPresent: UILabel!
     var attendanceResponse: HomePageResponse?
     
+    @IBOutlet weak var monthTF: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         imgFour.makeCircular()
@@ -37,6 +38,16 @@ class AttendanceViewController: UIViewController {
             totalWorkingDays.text = "Total Working days: \(data.totalWorkingDays)"
             daysAbsent.text = "Days Absent: \(data.absentDays)"
             daysPresent.text = "Days Present: \(data.presentDays)"
+            monthTF.text = Utils.getCurrentMonth()
+            monthTF.isUserInteractionEnabled = false
+            DispatchQueue.main.async {
+                if let userImage = Constants.profileData.userData.first?.profileImgURL {
+                    self.imgFour.loadImage(from: userImage)
+                    self.imgThree.loadImage(from: userImage)
+                    self.imgTwo.loadImage(from: userImage)
+                    self.imgOne.loadImage(from: userImage)
+                }
+            }
         }
     }
     

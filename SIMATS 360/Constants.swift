@@ -9,4 +9,5 @@ import Foundation
 
 class Constants {
     static var profileData: LoginResponse!
+    static var availableLeaveTypes: [String] = []
 }

@@ -43,7 +43,7 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     }
     
     @IBAction func applyLeaveTapped(_ sender: Any) {
-        let leaveApplicationVC: LeaveApplicationViewController = LeaveApplicationViewController.instantiate()
+        let leaveApplicationVC = ApplyLeaveRouter.createApplyLeaveRouter()
         self.navigationController?.pushViewController(leaveApplicationVC, animated: true)
     }
     
@@ -68,6 +68,28 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
             let totalLeaveWithSick = Double(availableLeave.academicLeave) + Double(availableLeave.casualLeave) + availableLeave.sickLeave + Double(availableLeave.earnedLeave)
             leaveBalance.text = "\(totalLeaveWithSick) Days"
         }
+        Constants.availableLeaveTypes = getLeaveTypes(leaveModel: leaveData)
+    }
+    
+    func getLeaveTypes(leaveModel: AvailableLeaveModel) -> [String] {
+        var leaveTypes: [String] = []
+        
+        for leaveData in leaveModel.data {
+            if leaveData.casualLeave > 0 {
+                leaveTypes.append("Casual Leave")
+            }
+            if leaveData.sickLeave > 0 {
+                leaveTypes.append("Sick Leave")
+            }
+            if leaveData.earnedLeave > 0 {
+                leaveTypes.append("Earned Leave")
+            }
+            if leaveData.academicLeave > 0 {
+                leaveTypes.append("Academic Leave")
+            }
+        }
+        
+        return leaveTypes
     }
     
     func showHomePageData(homeData: HomePageResponse) {
