@@ -195,6 +195,7 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
             leaveSessionTF.text = "-"
         } else {
             leaveSessionTF.isUserInteractionEnabled = true
+            leaveSessionTF.text = ""
         }
     }
     
