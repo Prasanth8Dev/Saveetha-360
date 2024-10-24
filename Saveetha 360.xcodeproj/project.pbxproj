@@ -117,6 +117,7 @@
 		5DA9F10E2CC8B29700F97E25 /* LeaveApplyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA9F10D2CC8B29700F97E25 /* LeaveApplyInteractor.swift */; };
 		5DA9F1102CC8B49300F97E25 /* LeaveApplyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA9F10F2CC8B49300F97E25 /* LeaveApplyPresenter.swift */; };
 		5DA9F1122CC8B7E700F97E25 /* ApplyLeaveRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA9F1112CC8B7E700F97E25 /* ApplyLeaveRouter.swift */; };
+		5DF195E02CCA14DB00A9B9B0 /* DutyRosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF195DF2CCA14DA00A9B9B0 /* DutyRosterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -247,6 +248,7 @@
 		5DA9F10D2CC8B29700F97E25 /* LeaveApplyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplyInteractor.swift; sourceTree = "<group>"; };
 		5DA9F10F2CC8B49300F97E25 /* LeaveApplyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplyPresenter.swift; sourceTree = "<group>"; };
 		5DA9F1112CC8B7E700F97E25 /* ApplyLeaveRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyLeaveRouter.swift; sourceTree = "<group>"; };
+		5DF195DF2CCA14DA00A9B9B0 /* DutyRosterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutyRosterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +310,7 @@
 				5D0296DA2CABE95F0037427C /* ProfileViewController.swift */,
 				5D9600CF2CAE9EBA00FA6981 /* SalaryDetailsViewController.swift */,
 				5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */,
+				5DF195DF2CCA14DA00A9B9B0 /* DutyRosterViewController.swift */,
 				5D2C4E0E2CAFEBA80041E0FB /* LeaveApplicationViewController.swift */,
 			);
 			path = View;
@@ -700,6 +703,7 @@
 				5D92CE352CC654230098560F /* BufferTimePresenter.swift in Sources */,
 				5D8E56752CAFB84600900A04 /* LeaveBalanceViewController.swift in Sources */,
 				5D92CE332CC652EB0098560F /* BufferTimeInteractor.swift in Sources */,
+				5DF195E02CCA14DB00A9B9B0 /* DutyRosterViewController.swift in Sources */,
 				23283A8E2CBCD45900E9DB0F /* APIWrapper.swift in Sources */,
 				5D3CE9C82CC75EB300F22BE0 /* LeaveDatailTableViewCell.swift in Sources */,
 				23283A962CBCD7A700E9DB0F /* LoginPresenter.swift in Sources */,

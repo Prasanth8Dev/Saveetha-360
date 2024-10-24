@@ -35,11 +35,18 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     @IBOutlet weak var bioIdLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadDefault()
         profileImgView.makeCircular()
         addTapActionForViews()
         initNavigationBar()
         loadProfileData()
       
+    }
+    
+    private func loadDefault() {
+        leaveBalance.text = "N/A"
+        attendancePercentage.text = "N/A"
+        bufferTime.text = "N/A"
     }
     
     @IBAction func applyLeaveTapped(_ sender: Any) {
@@ -76,16 +83,16 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
         
         for leaveData in leaveModel.data {
             if leaveData.casualLeave > 0 {
-                leaveTypes.append("Casual Leave")
+                leaveTypes.append("Casual Leave - \(leaveData.casualLeave)")
             }
             if leaveData.sickLeave > 0 {
-                leaveTypes.append("Sick Leave")
+                leaveTypes.append("Sick Leave - \(leaveData.sickLeave)")
             }
             if leaveData.earnedLeave > 0 {
-                leaveTypes.append("Earned Leave")
+                leaveTypes.append("Earned Leave - \(leaveData.earnedLeave)")
             }
             if leaveData.academicLeave > 0 {
-                leaveTypes.append("Academic Leave")
+                leaveTypes.append("Academic Leave - \(leaveData.academicLeave)")
             }
         }
         
@@ -93,7 +100,7 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     }
     
     func showHomePageData(homeData: HomePageResponse) {
-        if let userData = homeData.data.first{
+        if let userData = homeData.data.summary.first{
             self.homePageResponse = homeData
             attendancePercentage.text = "\(userData.attendancePercentage)% for the current month"
             bufferTime.text = "\(Int(userData.adjustedBuffTime)) Minutes"
@@ -114,7 +121,9 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
         }
         
         bufferTimeView.addTap {
-            let bufferTimeVc = BufferTimeRouter.createBufferTime()
+            let bufferTimeVc = BufferTimeRouter.createBufferTime() as! BufferTimingViewController
+            bufferTimeVc.attendanceData = self.homePageResponse?.data.attendance
+            bufferTimeVc.attendanceSummary = self.homePageResponse?.data.summary
             self.navigationController?.pushViewController(bufferTimeVc, animated: true)
         }
         
@@ -123,6 +132,7 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
             self.navigationController?.pushViewController(dutyVc, animated: true)
         }
     }
+    
     func initNavigationBar() {
         // Hide the navigation bar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -149,10 +159,8 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
             homePresenter?.fetchHomeData(
                 bioId: String(userData.bioID),
                 campus: userData.campus,
-                category: userData.category,
-                year: String(yearMonth[0]),
-                month: String(yearMonth[1])
-            ) {
+                category: userData.category
+               ) {
                
                 dispatchGroup.leave()
             }

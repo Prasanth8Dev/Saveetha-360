@@ -12,7 +12,6 @@ protocol BufferTimePresenterProtocol: AnyObject {
     func fetchBufferTime(bioId: String, campus: String, category: String, year: String, month: String)
 }
 
-
 class BufferTimePresenter: BufferTimePresenterProtocol {
     
     weak var view: BufferTimeViewProtocol?

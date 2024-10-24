@@ -69,10 +69,17 @@ class Utils {
         return dateFormatter.string(from: currentDate)
     }
     
+    static func getCurrentYearWithMonth() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM yyyy"  // "MMMM" gives the full month name
+        let currentDate = Date()
+        return dateFormatter.string(from: currentDate)
+    }
+    
     
     static func getCurrentMonthWithDate() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd"  // "MMMM" gives the full month name
+        dateFormatter.dateFormat = "MMMM dd"
         let currentDate = Date()
         return dateFormatter.string(from: currentDate)
     }
@@ -88,23 +95,47 @@ class Utils {
         
         return dateFormatter.string(from: date)
     }
-    
-    static func attributedStringWithColorAndFont(text: String, colorHex: String, font: UIFont, length: Int, fontWeight: UIFont.Weight = .bold, fontSize: CGFloat = 18) -> NSAttributedString {
+    static func attributedStringWithColorAndFont(
+        text: String,
+        colorHex: String,
+        font: UIFont,
+        length: Int,
+        fontWeight: UIFont.Weight = .regular,
+        fontSize: CGFloat = 16,
+        secondColorHex: String = "#7E8A8C" // New color for the text after the range
+    ) -> NSAttributedString {
+        
         let attributedString = NSMutableAttributedString(string: text)
         let range = NSRange(location: 0, length: length)
         
-        // Use the provided font and size directly, without specifying a custom font
-        let font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
-        
-        let attributes: [NSAttributedString.Key: Any] = [
+        // First part: Apply the first color and font
+        let primaryFont = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
+        let primaryAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor(hex: colorHex),
-            .font: font
+            .font: primaryFont
         ]
-
-        attributedString.addAttributes(attributes, range: range)
+        attributedString.addAttributes(primaryAttributes, range: range)
+        
+        // Second part: Apply a different color for the remaining text
+        if text.count > length {
+            let remainingRange = NSRange(location: length, length: text.count - length)
+            let secondAttributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor(hex: secondColorHex),
+                .font: primaryFont // Optionally, you can change the font here if needed
+            ]
+            attributedString.addAttributes(secondAttributes, range: remainingRange)
+        }
+        
         return attributedString
     }
-
+    
+    static  func removeAfterAnyString(from input: String, inputStr: String) -> String {
+        if let range = input.range(of: inputStr) {
+            let trimmedString = input[..<range.lowerBound].trimmingCharacters(in: .whitespaces)
+            return String(trimmedString)
+        }
+        return input.trimmingCharacters(in: .whitespaces) 
+    }
     
 }
 

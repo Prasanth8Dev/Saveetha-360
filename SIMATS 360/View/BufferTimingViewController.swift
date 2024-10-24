@@ -23,6 +23,10 @@ class BufferTimingViewController: UIViewController, UITableViewDelegate, UITable
     
     var bPresenter: BufferTimePresenterProtocol?
     var bufferTimeResponse: BufferTimeModel?
+    var attendanceData: [Attendance]?
+    var attendanceSummary: [Summary]?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bufferDataTableview.delegate = self
@@ -30,15 +34,18 @@ class BufferTimingViewController: UIViewController, UITableViewDelegate, UITable
         initNavigationBar()
     }
     
+
+    
     override func viewWillAppear(_ animated: Bool) {
-        if let userData = Constants.profileData.userData.first {
+        if let userData = Constants.profileData.userData.first, let summary = self.attendanceSummary?.first {
             let date = Utils.getCurrentDateInYearMonthFormat()
             let yearMonth = date.split(separator: ":")
             
             bioIdLabel.text = "Bio Id: \(userData.bioID)"
             userNameLabel.text = userData.userName
-            
-            bPresenter?.fetchBufferTime(bioId: String(userData.bioID), campus: userData.campus, category: userData.category, year: String(yearMonth[0]), month: String(yearMonth[1]))
+            bufferTimeLabel.text =  String(summary.adjustedBuffTime)
+            currentMonthLabel.text = "Minutes Available for \(Utils.getCurrentMonth()) month"
+           // bPresenter?.fetchBufferTime(bioId: String(userData.bioID), campus: userData.campus, category: userData.category, year: String(yearMonth[0]), month: String(yearMonth[1]))
         }
     }
     
@@ -61,8 +68,11 @@ class BufferTimingViewController: UIViewController, UITableViewDelegate, UITable
         navigationItem.title = "Buffer Time"
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = .black
-        let image = UIImage(named: "logo 2")
+        
+        let image = UIImage(named: "logo-tabbar")?.withRenderingMode(.alwaysOriginal) // Ensure the image is rendered
         let notificationButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(notificationTapped))
+        
+        notificationButton.tintColor = .clear
         let button = UIButton(type: .custom)
         button.setImage(image, for: .normal)
         button.frame = CGRect(x: 0, y: 50, width: 30, height: 30)
@@ -71,15 +81,16 @@ class BufferTimingViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.bufferTimeResponse?.data.first?.gsonData.count ?? 0
+        return self.attendanceData?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = bufferDataTableview.dequeueReusableCell(withIdentifier: "BufferTimeTableViewCell", for: indexPath) as! BufferTimeTableViewCell
-        if let date = self.bufferTimeResponse?.data.first?.gsonData[indexPath.row].date ,let convertedDate = Utils.convertDateToMonthDay(dateString: date) {
+        cell.selectionStyle = .none
+        if let date = self.attendanceData?[indexPath.row].date ,let convertedDate = Utils.convertDateToMonthDay(dateString: date) {
             cell.currentMonthlabel.text = convertedDate
         }
-        if let earlyTime = self.bufferTimeResponse?.data.first?.gsonData[indexPath.row].early, let exceedTime = self.bufferTimeResponse?.data.first?.gsonData[indexPath.row].exceed,let remainingBufferTime = self.bufferTimeResponse?.data.first?.gsonData[indexPath.row].remainingBuff  {
+        if let earlyTime = self.attendanceData?[indexPath.row].early, let exceedTime = self.attendanceData?[indexPath.row].exceed,let remainingBufferTime = self.attendanceData?[indexPath.row].remainingBufferTime  {
             var timing = ""
             var earlyTiming = ""
             if  exceedTime > 0 {
@@ -88,14 +99,18 @@ class BufferTimingViewController: UIViewController, UITableViewDelegate, UITable
             if earlyTime > 0 {
                 earlyTiming = ", Pre Exit by \(earlyTime) minutes"
             }
-            cell.lateLabel.text = "\(timing) \(earlyTiming) \n Balance: \(Int(remainingBufferTime)) "
+            if exceedTime > 0 || earlyTime > 0 {
+                cell.lateLabel.text = "\(timing) \(earlyTiming) \n Balance: \(Int(remainingBufferTime)) "
+            } else {
+                cell.lateLabel.text = "Balance: \(Int(remainingBufferTime)) "
+            }
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 80
         
     }
    

@@ -6,34 +6,59 @@
 //
 
 import UIKit
+import FSCalendar
 
-class AttendanceViewController: UIViewController {
+class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
 
     @IBOutlet weak var imgFour: UIImageView!
     @IBOutlet weak var imgThree: UIImageView!
     @IBOutlet weak var imgTwo: UIImageView!
     @IBOutlet weak var imgOne: UIImageView!
     
+    @IBOutlet weak var attendanceCalendar: FSCalendar!
     @IBOutlet weak var attendancePercentage: UILabel!
     @IBOutlet weak var totalWorkingDays: UILabel!
     @IBOutlet weak var daysAbsent: UILabel!
     @IBOutlet weak var daysPresent: UILabel!
     var attendanceResponse: HomePageResponse?
+    var presentDates: [String] = []
+    var absentDates: [String] = []
+    let dateFormatter: DateFormatter = {
+           let formatter = DateFormatter()
+           formatter.dateFormat = "dd-MM-yyyy"
+           return formatter
+       }()
     
+    @IBOutlet weak var bioIdLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var monthTF: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         imgFour.makeCircular()
         imgThree.makeCircular()
         imgTwo.makeCircular()
         imgOne.makeCircular()
         initNavigationBar()
         loadAttendanceData()
+        filterPresentDates()
+        attendanceCalendar.delegate = self
+        attendanceCalendar.dataSource = self
+       
         // Do any additional setup after loading the view.
     }
     
+    private func filterPresentDates() {
+        if let attedanceResponse = self.attendanceResponse?.data.attendance {
+            presentDates = attedanceResponse.filter {$0.presence.lowercased() == "present"}.map({ $0.date })
+            absentDates = attedanceResponse.filter {$0.presence.lowercased() == "absent"}.map({ $0.date })
+            attendanceCalendar.reloadData()
+            
+        }
+    }
+    
     private func loadAttendanceData() {
-        if let data = attendanceResponse?.data.first {
+        if let data = attendanceResponse?.data.summary.first {
             attendancePercentage.text = "Attendance percentage: \(data.attendancePercentage)"
             totalWorkingDays.text = "Total Working days: \(data.totalWorkingDays)"
             daysAbsent.text = "Days Absent: \(data.absentDays)"
@@ -41,7 +66,9 @@ class AttendanceViewController: UIViewController {
             monthTF.text = Utils.getCurrentMonth()
             monthTF.isUserInteractionEnabled = false
             DispatchQueue.main.async {
-                if let userImage = Constants.profileData.userData.first?.profileImgURL {
+                if let userImage = Constants.profileData.userData.first?.profileImgURL, let userName = Constants.profileData.userData.first?.userName, let bioId = Constants.profileData.userData.first?.bioID {
+                    self.userNameLabel.text = userName
+                    self.bioIdLabel.text = "Bio Id: \(String(bioId))"
                     self.imgFour.loadImage(from: userImage)
                     self.imgThree.loadImage(from: userImage)
                     self.imgTwo.loadImage(from: userImage)
@@ -57,9 +84,10 @@ class AttendanceViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         
         self.navigationController?.navigationBar.tintColor = .black
-        let image = UIImage(named: "logo 2")
-        
+        let image = UIImage(named: "logo-tabbar")?.withRenderingMode(.alwaysOriginal) // Ensure the image is rendered
         let notificationButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(notificationTapped))
+        
+        notificationButton.tintColor = .clear
         
         let button = UIButton(type: .custom)
         button.setImage(image, for: .normal)
@@ -76,14 +104,37 @@ class AttendanceViewController: UIViewController {
         print("Right button tapped")
        
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    // MARK: - FSCalendarDelegateAppearance Methods
+       
+       func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+           let dateString = dateFormatter.string(from: date)
+          
+           if presentDates.contains(dateString) {
+               return UIColor.init(hex: "#B8F5B7") // Mark present dates in green
+           }
+           
+           if absentDates.contains(dateString) {
+               return UIColor.init(hex: "#EE4B2B") // Mark absent dates in red
+           }
+           
+           if Calendar.current.isDateInToday(date) {
+               return UIColor.init(hex: "#17C6ED") // Mark the current date in blue
+           }
+           
+           return nil
+       }
+       
+       // Optional: Customize text color for dates
+       func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+           let dateString = dateFormatter.string(from: date)
+           
+           // Optional: Change text color for specific dates if needed
+           if presentDates.contains(dateString) || absentDates.contains(dateString) {
+               return UIColor.white // Make the text white for better contrast on colored backgrounds
+           }
+           
+           return nil // Default color
+       }
+    
 }

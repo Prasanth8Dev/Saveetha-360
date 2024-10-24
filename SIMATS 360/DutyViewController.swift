@@ -31,7 +31,8 @@ class DutyViewController: UIViewController {
         }
         
         dutyRosterView.addTap {
-//            let duty
+            let dutyDetailVC: DutyRosterViewController = DutyRosterViewController.instantiate()
+            self.navigationController?.pushViewController(dutyDetailVC, animated: true)
         }
     }
     
@@ -41,9 +42,10 @@ class DutyViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         
         self.navigationController?.navigationBar.tintColor = .black
-        let image = UIImage(named: "logo 2")
-        
+        let image = UIImage(named: "logo-tabbar")?.withRenderingMode(.alwaysOriginal) // Ensure the image is rendered
         let notificationButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(notificationTapped))
+        
+        notificationButton.tintColor = .clear
         
         let button = UIButton(type: .custom)
         button.setImage(image, for: .normal)

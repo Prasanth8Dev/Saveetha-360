@@ -14,6 +14,9 @@ protocol LeaveBalanceViewControllerProtocol: AnyObject {
 
 class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerProtocol, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var bioIdLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var monthYearLabel: UILabel!
     @IBOutlet weak var earnedleave: UILabel!
     @IBOutlet weak var academicLeave: UILabel!
     @IBOutlet weak var sickLeave: UILabel!
@@ -38,8 +41,11 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
     
     override func viewWillAppear(_ animated: Bool) {
         loadLeaveData()
-        if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus {
+        if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus, let name = Constants.profileData.userData.first?.userName {
             leavePresenter?.fecthLeaveDetails(bioId: String(bioId), campus: campus)
+            monthYearLabel.text = Utils.getCurrentYearWithMonth()
+            userNameLabel.text = name
+            bioIdLabel.text = "Bio Id: \(String(bioId))"
         }
        
     }
@@ -71,10 +77,10 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
         self.navigationItem.hidesBackButton = false
         
         self.navigationController?.navigationBar.tintColor = .black
-        let image = UIImage(named: "logo 2")
-        
+        let image = UIImage(named: "logo-tabbar")?.withRenderingMode(.alwaysOriginal) // Ensure the image is rendered
         let notificationButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(notificationTapped))
         
+        notificationButton.tintColor = .clear
         
         let button = UIButton(type: .custom)
         button.setImage(image, for: .normal)
@@ -102,23 +108,25 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeaveDatailTableViewCell", for: indexPath) as! LeaveDatailTableViewCell
-        if let leaveData = self.leaveDetailResponse?.data.first {
-            cell.leaveTypeLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "Leave Type: \(leaveData.category)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 11)
+        cell.selectionStyle = .none
+        if let leaveData = self.leaveDetailResponse?.data[indexPath.row] {
+            cell.leaveTypeLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "Leave Type: \(leaveData.category)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 8), length: 11)
             
-            cell.fromDateLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "From Date: \(leaveData.startDate)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 10)
+            cell.fromDateLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "Leave Date: \(leaveData.startDate)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 10)
             cell.toDateLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "To Date: \(leaveData.endDate)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 8)
-            if leaveData.leaveType.contains("full") {
+            if leaveData.leaveType.lowercased().contains("full") {
                 cell.leaveDurationLabel.attributedText =  Utils.attributedStringWithColorAndFont(text:  "Leave Duration: Full Day", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 15)
-            } else if leaveData.leaveType.contains("half") {
+            } else if leaveData.leaveType.lowercased().contains("half") {
                 cell.leaveDurationLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Duration: Half Day", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 15)
             }
+            cell.toDateLabel.isHidden = true
            
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        leaveDetailTableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

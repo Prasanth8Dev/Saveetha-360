@@ -38,9 +38,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         self.navigationItem.hidesBackButton = true
         
         self.navigationController?.navigationBar.tintColor = .black
-        let image = UIImage(named: "logo 2")
-        
+        let image = UIImage(named: "logo-tabbar")?.withRenderingMode(.alwaysOriginal) // Ensure the image is rendered
         let notificationButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(notificationTapped))
+        
+        notificationButton.tintColor = .clear
         
         let button = UIButton(type: .custom)
         button.setImage(image, for: .normal)
@@ -57,17 +58,85 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         print("Right button tapped")
        
     }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if section == 0 {
+            return 3
+        } else {
+            return 8
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
-        cell.imgView.makeCircular()
-        return cell
+        var DynamicCell = UITableViewCell()
+        if indexPath.section == 0 {
+           let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
+            cell.imgView.image = UIImage(named: "Frame")
+            cell.iconImg.image = UIImage(named: "Vector (14)")
+            cell.titleLabel.text = "Saveetha Notice Board"
+            cell.descriptionLabel.text = "Asso. Dean Faculty: Faculty with pending leave requests will be notified"
+            cell.imgView.makeCircular()
+            DynamicCell = cell
+        } else if indexPath.section == 1{
+            let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
+            cell.imgView.image = UIImage(named: "approvalImg")
+            cell.iconImg.image = UIImage(named: "approvalIcon")
+            cell.iconImg.contentMode = .scaleAspectFill
+            cell.titleLabel.text = "Substitution Request"
+            cell.descriptionLabel.text = "Dr. Ravi for 26 Oct 2024"
+            cell.imgView.makeCircular()
+            DynamicCell = cell
+        }
+        DynamicCell.selectionStyle = .none
+        return DynamicCell
+        
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         notificationTableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "1"
+        } else {
+            return "2"
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor(hex: "#F6F8F9")
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textColor = .black
+        
+        if section == 0 {
+            label.text = "Announcement"
+        } else {
+            label.text = "Approval"
+        }
+        
+        headerView.addSubview(label)
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+        ])
+        
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40 // Adjust the height for the header if needed
+    }
+
 }

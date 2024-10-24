@@ -18,6 +18,7 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
     
     @IBOutlet weak var bioIdLabel: UILabel!
     
+    @IBOutlet weak var formUploadView: UIView!
     @IBOutlet weak var leaveCategory: UITextField!
     @IBOutlet weak var reasonTextView: UITextView! {
         didSet {
@@ -44,6 +45,7 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
         super.viewDidLoad()
         initNavigationBar()
         initPickerViewForTF()
+        loadUserData()
         pickerView.delegate = self
         pickerView.dataSource = self
         //
@@ -51,7 +53,24 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
         calendarView.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        formUploadView.addTap {
+            self.openGallery()
+        }
+    }
+    
+    private func loadUserData() {
+        if let userName = Constants.profileData.userData.first?.userName, let bioId = Constants.profileData.userData.first?.bioID {
+            userNameLabel.text = userName
+            bioIdLabel.text = "Bio Id: \(String(bioId))"
+        }
+    }
+    
     @IBAction func imageUpload(_ sender: Any) {
+        self.openGallery()
+    }
+    
+    private func openGallery() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary // Use .camera for camera access
@@ -71,9 +90,10 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
         }
         let totaldays = leaveType.lowercased() == "full day" ? "1" : "0.5"
         let session = leaveType.lowercased() == "full day" ? "" : leaveSession
+        let leaveCatgory = Utils.removeAfterAnyString(from: leaveCat, inputStr: "-")
         let param: [String : Any] = ["campus":campus,
                      "bioId":String(bioId),
-                     "leaveCategory":leaveCat,
+                     "leaveCategory":leaveCatgory,
                      "leaveType": leaveType,
                      "totalDays":totaldays,
                     "headId": String(headId),
@@ -116,10 +136,10 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
         self.navigationItem.hidesBackButton = false
         
         self.navigationController?.navigationBar.tintColor = .black
-        let image = UIImage(named: "logo 2")
-        
+        let image = UIImage(named: "logo-tabbar")?.withRenderingMode(.alwaysOriginal) // Ensure the image is rendered
         let notificationButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(notificationTapped))
         
+        notificationButton.tintColor = .clear
         
         let button = UIButton(type: .custom)
         button.setImage(image, for: .normal)
@@ -173,6 +193,8 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
         if leaveTypeTextField.text?.lowercased() == "full day" {
             leaveSessionTF.isUserInteractionEnabled = false
             leaveSessionTF.text = "-"
+        } else {
+            leaveSessionTF.isUserInteractionEnabled = true
         }
     }
     

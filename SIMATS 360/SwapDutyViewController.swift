@@ -9,21 +9,30 @@ import UIKit
 
 class SwapDutyViewController: UIViewController {
 
+    @IBOutlet weak var bioIdLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
+        loadUserData()
         // Do any additional setup after loading the view.
     }
-    
+    private func loadUserData() {
+        if let name = Constants.profileData.userData.first?.userName, let bioId = Constants.profileData.userData.first?.bioID {
+            userNameLabel.text = name
+            bioIdLabel.text = "Bio ID: \(bioId)"
+        }
+    }
     func initNavigationBar() {
         navigationController?.navigationBar.updateNavigationBarAppearance(backgroundColor: UIColor(hex: "#F6F8F9"), titleColor: .black)
         navigationItem.title = "Swap Duty"
         self.navigationController?.navigationBar.isHidden = false
         
         self.navigationController?.navigationBar.tintColor = .black
-        let image = UIImage(named: "logo 2")
-        
+        let image = UIImage(named: "logo-tabbar")?.withRenderingMode(.alwaysOriginal) // Ensure the image is rendered
         let notificationButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(notificationTapped))
+        
+        notificationButton.tintColor = .clear
         
         let button = UIButton(type: .custom)
         button.setImage(image, for: .normal)

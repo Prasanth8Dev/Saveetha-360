@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol HomePresenterProtocol: AnyObject {
-    func fetchHomeData(bioId: String, campus: String, category: String, year: String, month: String, completionHandler: @escaping () -> Void)
+    func fetchHomeData(bioId: String, campus: String, category: String, completionHandler: @escaping () -> Void)
     func fetchAvialableleave(bioId: String, campus: String, category: String,completionHandler: @escaping () -> Void)
 }
 
@@ -19,8 +19,8 @@ class HomePresenter: HomePresenterProtocol {
     var homeInteractor: HomePageInteractorProtocol?
     private var cancellables = Set<AnyCancellable>()
     
-func fetchHomeData(bioId: String, campus: String, category: String, year: String, month: String, completionHandler: @escaping () -> Void) {
-        homeInteractor?.fetchHomePageData(bioId: bioId, campus: campus, category: category, year: year, month: month).sink(receiveCompletion: { completion in
+func fetchHomeData(bioId: String, campus: String, category: String, completionHandler: @escaping () -> Void) {
+        homeInteractor?.fetchHomePageData(bioId: bioId, campus: campus, category: category).sink(receiveCompletion: { completion in
             switch completion {
             case .finished
                 

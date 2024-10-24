@@ -17,7 +17,7 @@ import Combine
 //"month" : 9
 
 protocol HomePageInteractorProtocol: AnyObject {
-    func fetchHomePageData(bioId: String, campus: String, category: String, year: String, month: String) -> AnyPublisher<HomePageResponse, Error>
+    func fetchHomePageData(bioId: String, campus: String, category: String) -> AnyPublisher<HomePageResponse, Error>
     func fetchAvailableLeave(bioId: String, campus: String, category: String) -> AnyPublisher<AvailableLeaveModel, Error>
 }
 
@@ -33,14 +33,13 @@ class HomeInteractor: HomePageInteractorProtocol {
         return APIWrapper.shared.postRequestMethod(url: url, body: param, responseType: AvailableLeaveModel.self)
     }
     
-    func fetchHomePageData(bioId: String, campus: String, category: String, year: String, month: String) -> AnyPublisher<HomePageResponse, Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/homeCopy") else {
+    func fetchHomePageData(bioId: String, campus: String, category: String) -> AnyPublisher<HomePageResponse, Error> {
+        guard let url = URL(string: "http://localhost:1312/employee/homeInfo") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId": bioId,
                      "campus": campus,
-                     "category": category,
-                     "year":year,"month":month]
+                     "category": category]
         return APIWrapper.shared.postRequestMethod(url: url, body: param, responseType: HomePageResponse.self)
     }
 }
