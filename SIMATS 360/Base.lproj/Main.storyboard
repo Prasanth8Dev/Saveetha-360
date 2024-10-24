@@ -810,23 +810,23 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8e-47-t3k">
-                                                            <rect key="frame" x="16" y="11" width="288" height="169"/>
+                                                            <rect key="frame" x="16" y="14" width="288" height="163"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame" translatesAutoresizingMaskIntoConstraints="NO" id="G1m-5W-7bN">
-                                                                    <rect key="frame" x="15" y="48.5" width="72" height="72"/>
+                                                                    <rect key="frame" x="15" y="45.5" width="72" height="72"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="72" id="JHN-VI-NX9"/>
                                                                         <constraint firstAttribute="width" constant="72" id="hWK-GY-xqP"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saveetha Notice Board" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwS-oS-W8y">
-                                                                    <rect key="frame" x="102" y="50.5" width="173" height="34"/>
+                                                                    <rect key="frame" x="102" y="49" width="173" height="32.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dean: Holiday Declared for the week of " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2t-1n-Od1">
-                                                                    <rect key="frame" x="102" y="89.5" width="211.5" height="21"/>
+                                                                    <rect key="frame" x="102" y="86.5" width="211.5" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="ghE-xE-td4"/>
                                                                         <constraint firstAttribute="width" constant="211.66999999999999" id="rnF-gt-mQR"/>
@@ -836,7 +836,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector (14)" translatesAutoresizingMaskIntoConstraints="NO" id="38Z-ZD-eWw">
-                                                                    <rect key="frame" x="256" y="57.5" width="20" height="20"/>
+                                                                    <rect key="frame" x="256" y="55" width="20" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="dXH-TF-p5a"/>
                                                                         <constraint firstAttribute="width" constant="20" id="fmk-Dx-SN6"/>
@@ -863,11 +863,11 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="v8e-47-t3k" firstAttribute="leading" secondItem="qe0-0m-DQt" secondAttribute="leadingMargin" id="3A2-09-3pv"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="v8e-47-t3k" secondAttribute="bottom" id="G6B-re-Yf5"/>
-                                                        <constraint firstItem="v8e-47-t3k" firstAttribute="top" secondItem="qe0-0m-DQt" secondAttribute="topMargin" id="ZBP-RK-Oij"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="v8e-47-t3k" secondAttribute="bottom" constant="3" id="G6B-re-Yf5"/>
+                                                        <constraint firstItem="v8e-47-t3k" firstAttribute="top" secondItem="qe0-0m-DQt" secondAttribute="topMargin" constant="3" id="ZBP-RK-Oij"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="v8e-47-t3k" secondAttribute="trailing" id="pgW-4F-2Xy"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -3689,7 +3689,7 @@ Balance  748</string>
         <image name="logo 1" width="512" height="512"/>
         <image name="sampleProfile" width="512" height="512"/>
         <namedColor name="FontColor">
-            <color red="0.0039215686274509803" green="0.062745098039215685" blue="0.33725490196078434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0040000001899898052" green="0.063000001013278961" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3698,7 +3698,7 @@ Balance  748</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
