@@ -53,13 +53,12 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
             presentDates = attedanceResponse.filter {$0.presence.lowercased() == "present"}.map({ $0.date })
             absentDates = attedanceResponse.filter {$0.presence.lowercased() == "absent"}.map({ $0.date })
             attendanceCalendar.reloadData()
-            
         }
     }
     
     private func loadAttendanceData() {
         if let data = attendanceResponse?.data.summary.first {
-            attendancePercentage.text = "Attendance percentage: \(data.attendancePercentage)"
+            attendancePercentage.text = "Attendance percentage: \(Int(data.attendancePercentage))"
             totalWorkingDays.text = "Total Working days: \(data.totalWorkingDays)"
             daysAbsent.text = "Days Absent: \(data.absentDays)"
             daysPresent.text = "Days Present: \(data.presentDays)"
@@ -99,7 +98,6 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
         
     }
     
-   
     @objc func notificationTapped() {
         print("Right button tapped")
        
@@ -111,7 +109,7 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
            let dateString = dateFormatter.string(from: date)
           
            if presentDates.contains(dateString) {
-               return UIColor.init(hex: "#B8F5B7") // Mark present dates in green
+               return UIColor.init(hex: "#008000") // Mark present dates in green
            }
            
            if absentDates.contains(dateString) {
@@ -119,13 +117,12 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
            }
            
            if Calendar.current.isDateInToday(date) {
-               return UIColor.init(hex: "#17C6ED") // Mark the current date in blue
+               return UIColor.init(hex: "#17C6ED")
            }
-           
            return nil
        }
        
-       // Optional: Customize text color for dates
+       
        func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
            let dateString = dateFormatter.string(from: date)
            

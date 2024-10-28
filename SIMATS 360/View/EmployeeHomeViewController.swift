@@ -10,6 +10,7 @@ import UIKit
 protocol EmployeeHomeViewProtocol: AnyObject {
     func showHomePageData(homeData: HomePageResponse)
     func showAvailableLeave(leaveData: AvailableLeaveModel)
+    func showDutyCount(dutyData: DutyCountModel)
     func showError(error: String)
 }
 
@@ -29,6 +30,7 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     var loginresponse: LoginResponse?
     var homePresenter: HomePresenterProtocol?
     var homePageResponse: HomePageResponse?
+    var dutyCountResponse: DutyCountModel?
     
     @IBOutlet weak var userNameLabel: UILabel!
     
@@ -41,6 +43,12 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
         initNavigationBar()
         loadProfileData()
       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.fetchHomeData()
     }
     
     private func loadDefault() {
@@ -66,10 +74,19 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     }
     
     func showError(error: String) {
+        self.view.stopLoader()
         self.showAlert(title: "", message: error)
     }
-  
+    
+    func showDutyCount(dutyData: DutyCountModel) {
+         
+        if let status = self.dutyCountResponse?.status, status, let count = self.dutyCountResponse?.pendingCount {
+            dutyLabel.text = "\(count) Duty"
+        }
+    }
+    
     func showAvailableLeave(leaveData: AvailableLeaveModel) {
+        self.view.stopLoader()
         if let availableLeave = leaveData.data.first {
             self.availableLeaveData = leaveData
             let totalLeaveWithSick = Double(availableLeave.academicLeave) + Double(availableLeave.casualLeave) + availableLeave.sickLeave + Double(availableLeave.earnedLeave)
@@ -100,9 +117,10 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     }
     
     func showHomePageData(homeData: HomePageResponse) {
+        self.view.stopLoader()
         if let userData = homeData.data.summary.first{
             self.homePageResponse = homeData
-            attendancePercentage.text = "\(userData.attendancePercentage)% for the current month"
+            attendancePercentage.text = "\(Int(userData.attendancePercentage))% for the current month"
             bufferTime.text = "\(Int(userData.adjustedBuffTime)) Minutes"
         }
     }
@@ -144,17 +162,15 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
         self.navigationItem.title = "Notifications"
         self.navigationItem.hidesBackButton = true
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-     
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
+    
+    private func fetchHomeData() {
         if let userData = Constants.profileData.userData.first {
+            self.view.startLoader()
             let date = Utils.getCurrentDateInYearMonthFormat()
-            let yearMonth = date.split(separator: ":")
+            //let yearMonth = date.split(separator: ":")
            
             let dispatchGroup = DispatchGroup()
+            
             dispatchGroup.enter()
             homePresenter?.fetchHomeData(
                 bioId: String(userData.bioID),
@@ -173,8 +189,11 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
             ) {
                 dispatchGroup.leave()
             }
-
-     
+            dispatchGroup.enter()
+            homePresenter?.fetchDutyCounts(bioId: String(userData.bioID), completionHandler: {
+                dispatchGroup.leave()
+            })
+            
             dispatchGroup.notify(queue: .main) {
       
                 print("Both API calls are completed.")

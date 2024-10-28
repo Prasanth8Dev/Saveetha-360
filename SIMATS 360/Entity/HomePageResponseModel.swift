@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 // MARK: - HomePageResponse
 struct HomePageResponse: Codable {
     let status: Bool
@@ -40,5 +38,7 @@ struct Summary: Codable {
     let totalWorkingDays, totalPresent, presentDays, totalHalfWorkingDays: Int
     let absentDays, weekoffDays: Int
     let totalWorkingHours: Double
-    let adjustedBuffTime, attendancePercentage, lop: Int
+    let adjustedBuffTime: Int
+    let attendancePercentage: Double
+    let lop: Int
 }

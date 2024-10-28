@@ -24,7 +24,8 @@ class SalaryDetailsViewController: UIViewController, SalaryDetailsProtocol {
     @IBOutlet weak var basicSalaryValue: UILabel!
     @IBOutlet weak var hraLabel: UILabel!
     @IBOutlet weak var daLabel: UILabel!
-    
+    @IBOutlet weak var esiLabel: UILabel!
+    @IBOutlet weak var esiValue: UILabel!
     @IBOutlet weak var pfValue: UILabel!
     @IBOutlet weak var ccaValue: UILabel!
     @IBOutlet weak var hraValue: UILabel!
@@ -71,6 +72,12 @@ class SalaryDetailsViewController: UIViewController, SalaryDetailsProtocol {
                 pfLabel.isHidden = true
                 pfValue.isHidden = true
             }
+            if let esi = salaryReportData.deductionsESI {
+                esiValue.text = "-\(esi)"
+            } else {
+                esiValue.isHidden = true
+                esiLabel.isHidden = true
+            }
             
         }
     }
@@ -84,7 +91,7 @@ class SalaryDetailsViewController: UIViewController, SalaryDetailsProtocol {
         super.viewDidLoad()
         title = "Salary Details"
         if let userData = Constants.profileData.userData.first {
-            salaryDetailsPresenter?.fetchSalaryDetails(bioId: String(userData.bioID))
+            salaryDetailsPresenter?.fetchSalaryDetails(bioId: String(2323))
             bioIdLabel.text = "Bio Id: \(String(userData.bioID))"
             userNameLabel.text = userData.userName
         }

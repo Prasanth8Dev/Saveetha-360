@@ -11,6 +11,7 @@ import Combine
 protocol HomePresenterProtocol: AnyObject {
     func fetchHomeData(bioId: String, campus: String, category: String, completionHandler: @escaping () -> Void)
     func fetchAvialableleave(bioId: String, campus: String, category: String,completionHandler: @escaping () -> Void)
+    func fetchDutyCounts(bioId: String, completionHandler: @escaping () -> Void)
 }
 
 class HomePresenter: HomePresenterProtocol {
@@ -52,6 +53,26 @@ func fetchHomeData(bioId: String, campus: String, category: String, completionHa
         }, receiveValue: { response in
             if response.status {
                 self.view?.showAvailableLeave(leaveData: response)
+            } else {
+                self.view?.showError(error: response.message)
+            }
+            completionHandler()
+        })
+        .store(in: &cancellables)
+    }
+    
+    func fetchDutyCounts(bioId: String, completionHandler: @escaping () -> Void) {
+        homeInteractor?.fetchDutyCount(bioId: bioId).sink(receiveCompletion: { completion in
+            switch completion {
+            case .finished:
+                break
+            case .failure(let err):
+                self.view?.showError(error: err.localizedDescription)
+                completionHandler()
+            }
+        }, receiveValue: { response in
+            if response.status {
+                self.view?.showDutyCount(dutyData: response)
             } else {
                 self.view?.showError(error: response.message)
             }

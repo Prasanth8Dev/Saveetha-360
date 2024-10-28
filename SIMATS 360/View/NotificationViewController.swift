@@ -7,10 +7,14 @@
 
 import UIKit
 
-class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol NotificationViewControllerProtocol: AnyObject {
+    func showGeneralNotification(data: NotificationModel)
+    func showApprovalNotification(data: ApprovalNotificationModel)
+    func showAlert(message: String)
+}
 
-    
-    
+class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NotificationViewControllerProtocol {
+
     @IBOutlet weak var notificationTableView: UITableView! {
         didSet {
             notificationTableView.delegate = self
@@ -18,17 +22,38 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             notificationTableView.separatorStyle = .none
         }
     }
+    var notificationPresenter: NotificationPresenterProtocol?
+    var genaralNotificationData: [NotificationData]?
+    var approvalNotificationData: [RequestData]?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         initNavigationBar()
+        fetchNotification()
+    }
+    
+    func fetchNotification() {
+        let dispatchgroup = DispatchGroup()
+
+        dispatchgroup.enter()
+        notificationPresenter?.fetchGeneralNotification(completionHandler: {
+            dispatchgroup.leave()
+        })
+        if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus {
+            dispatchgroup.enter()
+            notificationPresenter?.fetchApprovalNotification(bioId: String(bioId), campus: campus, completionHandler: {
+                dispatchgroup.leave()
+            })
+        }
+        
+        dispatchgroup.notify(queue: DispatchQueue.main) {
+            self.tableViewReload()
+        }
     }
     
     func initNavigationBar() {
@@ -52,21 +77,43 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         self.navigationItem.rightBarButtonItems = [notificationButton]
         
     }
-    
    
     @objc func notificationTapped() {
         print("Right button tapped")
        
     }
+    
+    func showGeneralNotification(data: NotificationModel) {
+        self.genaralNotificationData = data.notificationData
+       
+    }
+    
+    func showApprovalNotification(data: ApprovalNotificationModel) {
+        self.approvalNotificationData = data.notificationData
+        
+    }
+    
+    private func tableViewReload() {
+        if self.approvalNotificationData?.count ?? 0 > 0 || self.genaralNotificationData?.count ?? 0 > 0 {
+            notificationTableView.reloadData()
+        } else {
+            // show the alert and hide the table view
+        }
+    }
+    
+    func showAlert(message: String) {
+        self.showAlert(title: "", message: message)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 3
+            return self.genaralNotificationData?.count ?? 0
         } else {
-            return 8
+            return self.approvalNotificationData?.count ?? 0
         }
         
     }
@@ -77,17 +124,22 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
            let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
             cell.imgView.image = UIImage(named: "Frame")
             cell.iconImg.image = UIImage(named: "Vector (14)")
-            cell.titleLabel.text = "Saveetha Notice Board"
-            cell.descriptionLabel.text = "Asso. Dean Faculty: Faculty with pending leave requests will be notified"
+            if let notificationdata = self.genaralNotificationData {
+                cell.titleLabel.text = notificationdata[indexPath.row].notificationTitle
+                cell.descriptionLabel.text = notificationdata[indexPath.row].notificationMessage
+            }
+            
             cell.imgView.makeCircular()
             DynamicCell = cell
-        } else if indexPath.section == 1{
+        } else if indexPath.section == 1 {
             let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
             cell.imgView.image = UIImage(named: "approvalImg")
             cell.iconImg.image = UIImage(named: "approvalIcon")
             cell.iconImg.contentMode = .scaleAspectFill
-            cell.titleLabel.text = "Substitution Request"
-            cell.descriptionLabel.text = "Dr. Ravi for 26 Oct 2024"
+            if let notificationdata = self.approvalNotificationData {
+                cell.titleLabel.text = "Leave Request" /*notificationdata[indexPath.row].notificationTitle*/
+                cell.descriptionLabel.text = notificationdata[indexPath.row].reason
+            }
             cell.imgView.makeCircular()
             DynamicCell = cell
         }
@@ -101,13 +153,21 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         notificationTableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "1"
+        if indexPath.section == 0 {
+            if let notification = self.genaralNotificationData {
+                let detailNotificationVC: NotificationDetailViewController = NotificationDetailViewController.instantiate()
+                detailNotificationVC.notificationData = notification[indexPath.row]
+                detailNotificationVC.isGeneral = true
+                self.present(detailNotificationVC, animated: true)
+            }
         } else {
-            return "2"
+            if let approvalNotificationdata = self.approvalNotificationData {
+                let detailNotificationVC: NotificationDetailViewController = NotificationDetailViewController.instantiate()
+                detailNotificationVC.requestData = approvalNotificationdata[indexPath.row]
+                detailNotificationVC.isApproval = true
+                self.present(detailNotificationVC, animated: true)
+               // self.navigationController?.pushViewController(detailNotificationVC, animated: true)
+            }
         }
     }
     
@@ -136,7 +196,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40 // Adjust the height for the header if needed
+        return 25
     }
-
 }

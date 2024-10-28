@@ -37,7 +37,7 @@ class EmployeeTabBarViewController: UITabBarController {
         empVC.loginresponse = self.loginData
         let empNavVC = UINavigationController(rootViewController: empVC)
 
-        let notificationVC: NotificationViewController = NotificationViewController.instantiate()
+        let notificationVC = NotificationRouter.navigateToNotification()
         notificationVC.tabBarItem.image = UIImage(named: "Notifications")
         notificationVC.tabBarItem.title = "Notifications"
         let notificationNavVC = UINavigationController(rootViewController: notificationVC)

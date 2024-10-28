@@ -89,14 +89,15 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
             return
         }
         let totaldays = leaveType.lowercased() == "full day" ? "1" : "0.5"
+        let leaveT = leaveType.lowercased() == "full day" ? "full_day" : "half_day"
         let session = leaveType.lowercased() == "full day" ? "" : leaveSession
         let leaveCatgory = Utils.removeAfterAnyString(from: leaveCat, inputStr: "-")
         let param: [String : Any] = ["campus":campus,
                      "bioId":String(bioId),
                      "leaveCategory":leaveCatgory,
-                     "leaveType": leaveType,
+                    "leaveType": leaveT,
                      "totalDays":totaldays,
-                    "headId": String(headId),
+                     "headId": String(headId),
                      "reason":leaveReason,
                      "startDate":selectedDate,
                      "file":imageForm,
@@ -195,7 +196,7 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
             leaveSessionTF.text = "-"
         } else {
             leaveSessionTF.isUserInteractionEnabled = true
-            leaveSessionTF.text = ""
+            leaveSessionTF.text =  leaveTypeTextField.text?.lowercased() == "half day" ? leaveSessionTF.text : ""
         }
     }
     

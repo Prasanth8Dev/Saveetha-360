@@ -19,9 +19,11 @@ import Combine
 protocol HomePageInteractorProtocol: AnyObject {
     func fetchHomePageData(bioId: String, campus: String, category: String) -> AnyPublisher<HomePageResponse, Error>
     func fetchAvailableLeave(bioId: String, campus: String, category: String) -> AnyPublisher<AvailableLeaveModel, Error>
+    func fetchDutyCount(bioId: String) -> AnyPublisher<DutyCountModel, Error>
 }
 
 class HomeInteractor: HomePageInteractorProtocol {
+    
     func fetchAvailableLeave(bioId: String, campus: String, category: String) -> AnyPublisher<AvailableLeaveModel, any Error> {
         guard let url = URL(string: "http://localhost:1312/employee/getAvailableLeave") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
@@ -41,5 +43,13 @@ class HomeInteractor: HomePageInteractorProtocol {
                      "campus": campus,
                      "category": category]
         return APIWrapper.shared.postRequestMethod(url: url, body: param, responseType: HomePageResponse.self)
+    }
+    
+    func fetchDutyCount(bioId: String) -> AnyPublisher<DutyCountModel, any Error> {
+        guard let url = URL(string: "http://localhost:1312/employee/pendingDutyCount") else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        let param = ["bioId": bioId]
+        return APIWrapper.shared.postRequestMethod(url: url, body: param, responseType: DutyCountModel.self)
     }
 }

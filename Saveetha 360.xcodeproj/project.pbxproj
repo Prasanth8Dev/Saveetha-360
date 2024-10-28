@@ -85,6 +85,7 @@
 		5D0297222CABF21A0037427C /* InterDisplay-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D0296FD2CABF21A0037427C /* InterDisplay-SemiBoldItalic.ttf */; };
 		5D0297232CABF21A0037427C /* InterDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D0296FE2CABF21A0037427C /* InterDisplay-Thin.ttf */; };
 		5D0297242CABF21A0037427C /* InterDisplay-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D0296FF2CABF21A0037427C /* InterDisplay-ThinItalic.ttf */; };
+		5D035A2E2CCCA2D00061D1B6 /* NotificationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D035A2D2CCCA2D00061D1B6 /* NotificationDetailViewController.swift */; };
 		5D282BAE2CB65C7200597991 /* DutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D282BAD2CB65C7200597991 /* DutyViewController.swift */; };
 		5D282BB02CB6811D00597991 /* ClaimsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D282BAF2CB6811D00597991 /* ClaimsViewController.swift */; };
 		5D282BB22CB6816000597991 /* SwapDutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D282BB12CB6816000597991 /* SwapDutyViewController.swift */; };
@@ -97,8 +98,13 @@
 		5D3CE9CC2CC7613B00F22BE0 /* LeaveDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9CB2CC7613B00F22BE0 /* LeaveDetailModel.swift */; };
 		5D3CE9CE2CC761E600F22BE0 /* LeaveDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9CD2CC761E600F22BE0 /* LeaveDetailPresenter.swift */; };
 		5D3CE9D02CC762C100F22BE0 /* LeaveBalanceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9CF2CC762C100F22BE0 /* LeaveBalanceRouter.swift */; };
+		5D571A5B2CCF55B300D0067D /* ApprovalNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D571A5A2CCF55B300D0067D /* ApprovalNotificationModel.swift */; };
 		5D8E56752CAFB84600900A04 /* LeaveBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */; };
 		5D8E56782CAFE57100900A04 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 5D8E56772CAFE57100900A04 /* FSCalendar */; };
+		5D90F9DD2CCB921300ACF856 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D90F9DC2CCB921300ACF856 /* NotificationModel.swift */; };
+		5D90F9DF2CCB950A00ACF856 /* NotificationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D90F9DE2CCB950A00ACF856 /* NotificationInteractor.swift */; };
+		5D90F9E12CCB9D2200ACF856 /* NotificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D90F9E02CCB9D2200ACF856 /* NotificationPresenter.swift */; };
+		5D90F9E32CCBA66300ACF856 /* NotificationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D90F9E22CCBA66300ACF856 /* NotificationRouter.swift */; };
 		5D92CE262CC61FC50098560F /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D92CE252CC61FC50098560F /* HomeInteractor.swift */; };
 		5D92CE282CC6203C0098560F /* HomePageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D92CE272CC6203C0098560F /* HomePageResponseModel.swift */; };
 		5D92CE2A2CC623050098560F /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D92CE292CC623050098560F /* HomePresenter.swift */; };
@@ -117,6 +123,7 @@
 		5DA9F10E2CC8B29700F97E25 /* LeaveApplyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA9F10D2CC8B29700F97E25 /* LeaveApplyInteractor.swift */; };
 		5DA9F1102CC8B49300F97E25 /* LeaveApplyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA9F10F2CC8B49300F97E25 /* LeaveApplyPresenter.swift */; };
 		5DA9F1122CC8B7E700F97E25 /* ApplyLeaveRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA9F1112CC8B7E700F97E25 /* ApplyLeaveRouter.swift */; };
+		5DEBFF792CCF67F300250FDA /* DutyCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEBFF782CCF67F300250FDA /* DutyCountModel.swift */; };
 		5DF195E02CCA14DB00A9B9B0 /* DutyRosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF195DF2CCA14DA00A9B9B0 /* DutyRosterViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -217,6 +224,7 @@
 		5D0296FE2CABF21A0037427C /* InterDisplay-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "InterDisplay-Thin.ttf"; sourceTree = "<group>"; };
 		5D0296FF2CABF21A0037427C /* InterDisplay-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "InterDisplay-ThinItalic.ttf"; sourceTree = "<group>"; };
 		5D0297252CABF6BD0037427C /* Inter-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.otf"; sourceTree = "<group>"; };
+		5D035A2D2CCCA2D00061D1B6 /* NotificationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailViewController.swift; sourceTree = "<group>"; };
 		5D282BAD2CB65C7200597991 /* DutyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutyViewController.swift; sourceTree = "<group>"; };
 		5D282BAF2CB6811D00597991 /* ClaimsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsViewController.swift; sourceTree = "<group>"; };
 		5D282BB12CB6816000597991 /* SwapDutyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapDutyViewController.swift; sourceTree = "<group>"; };
@@ -229,7 +237,12 @@
 		5D3CE9CB2CC7613B00F22BE0 /* LeaveDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveDetailModel.swift; sourceTree = "<group>"; };
 		5D3CE9CD2CC761E600F22BE0 /* LeaveDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveDetailPresenter.swift; sourceTree = "<group>"; };
 		5D3CE9CF2CC762C100F22BE0 /* LeaveBalanceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveBalanceRouter.swift; sourceTree = "<group>"; };
+		5D571A5A2CCF55B300D0067D /* ApprovalNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovalNotificationModel.swift; sourceTree = "<group>"; };
 		5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveBalanceViewController.swift; sourceTree = "<group>"; };
+		5D90F9DC2CCB921300ACF856 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		5D90F9DE2CCB950A00ACF856 /* NotificationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInteractor.swift; sourceTree = "<group>"; };
+		5D90F9E02CCB9D2200ACF856 /* NotificationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPresenter.swift; sourceTree = "<group>"; };
+		5D90F9E22CCBA66300ACF856 /* NotificationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRouter.swift; sourceTree = "<group>"; };
 		5D92CE252CC61FC50098560F /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		5D92CE272CC6203C0098560F /* HomePageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageResponseModel.swift; sourceTree = "<group>"; };
 		5D92CE292CC623050098560F /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
@@ -248,6 +261,7 @@
 		5DA9F10D2CC8B29700F97E25 /* LeaveApplyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplyInteractor.swift; sourceTree = "<group>"; };
 		5DA9F10F2CC8B49300F97E25 /* LeaveApplyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplyPresenter.swift; sourceTree = "<group>"; };
 		5DA9F1112CC8B7E700F97E25 /* ApplyLeaveRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyLeaveRouter.swift; sourceTree = "<group>"; };
+		5DEBFF782CCF67F300250FDA /* DutyCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutyCountModel.swift; sourceTree = "<group>"; };
 		5DF195DF2CCA14DA00A9B9B0 /* DutyRosterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutyRosterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,8 +300,11 @@
 			children = (
 				23283A912CBCD5DE00E9DB0F /* LoginResponseModel.swift */,
 				238D522F2CC10F8100927D4C /* ProfileDataModel.swift */,
+				5D90F9DC2CCB921300ACF856 /* NotificationModel.swift */,
 				5D92CE272CC6203C0098560F /* HomePageResponseModel.swift */,
+				5D571A5A2CCF55B300D0067D /* ApprovalNotificationModel.swift */,
 				5D3CE9CB2CC7613B00F22BE0 /* LeaveDetailModel.swift */,
+				5DEBFF782CCF67F300250FDA /* DutyCountModel.swift */,
 				5DA9F10B2CC8B21500F97E25 /* ApplyLeaveModel.swift */,
 				23788DD72CC24B8D003CBEE1 /* SalaryReportResponse.swift */,
 				5D92CE302CC652890098560F /* BufferTimeModel.swift */,
@@ -321,6 +338,7 @@
 			children = (
 				23283A8F2CBCD4C100E9DB0F /* LoginInteractor.swift */,
 				23283AA62CBD0E5700E9DB0F /* ReportsInteractor.swift */,
+				5D90F9DE2CCB950A00ACF856 /* NotificationInteractor.swift */,
 				5DA9F10D2CC8B29700F97E25 /* LeaveApplyInteractor.swift */,
 				5D3CE9C92CC75FDB00F22BE0 /* LeaveBalanceInteractor.swift */,
 				5D92CE322CC652EB0098560F /* BufferTimeInteractor.swift */,
@@ -337,6 +355,7 @@
 				23283A952CBCD7A700E9DB0F /* LoginPresenter.swift */,
 				5D92CE292CC623050098560F /* HomePresenter.swift */,
 				5DA9F10F2CC8B49300F97E25 /* LeaveApplyPresenter.swift */,
+				5D90F9E02CCB9D2200ACF856 /* NotificationPresenter.swift */,
 				5D3CE9CD2CC761E600F22BE0 /* LeaveDetailPresenter.swift */,
 				5D92CE342CC654230098560F /* BufferTimePresenter.swift */,
 				238D52332CC110D200927D4C /* ProfilePresenter.swift */,
@@ -352,6 +371,7 @@
 				23283A972CBCD82100E9DB0F /* LoginRouter.swift */,
 				23283AAA2CBD140200E9DB0F /* ReportsRouter.swift */,
 				5DA9F1112CC8B7E700F97E25 /* ApplyLeaveRouter.swift */,
+				5D90F9E22CCBA66300ACF856 /* NotificationRouter.swift */,
 				5D3CE9CF2CC762C100F22BE0 /* LeaveBalanceRouter.swift */,
 				5D92CE2B2CC6263E0098560F /* HomeRouter.swift */,
 				5D92CE362CC655DA0098560F /* BufferTimeRouter.swift */,
@@ -405,6 +425,7 @@
 				5D0296CA2CABE77F0037427C /* EmployeeTabBarViewController.swift */,
 				5D2C4E102CAFF8800041E0FB /* AttendanceViewController.swift */,
 				5DA486A72CAE587B009E0A56 /* NotificationTableViewCell.swift */,
+				5D035A2D2CCCA2D00061D1B6 /* NotificationDetailViewController.swift */,
 				5D282BAD2CB65C7200597991 /* DutyViewController.swift */,
 				23283AAC2CBD21D100E9DB0F /* Utils.swift */,
 				5D282BB12CB6816000597991 /* SwapDutyViewController.swift */,
@@ -699,6 +720,7 @@
 				5D0296D02CABE80E0037427C /* UIViewControllerExtension.swift in Sources */,
 				23283A8B2CBCD3F900E9DB0F /* LoginViewController.swift in Sources */,
 				5D92CE2E2CC62F850098560F /* AvailableLeaveModel.swift in Sources */,
+				5D90F9DF2CCB950A00ACF856 /* NotificationInteractor.swift in Sources */,
 				5D0296D32CABE80E0037427C /* UIImageExtension.swift in Sources */,
 				5D92CE352CC654230098560F /* BufferTimePresenter.swift in Sources */,
 				5D8E56752CAFB84600900A04 /* LeaveBalanceViewController.swift in Sources */,
@@ -716,12 +738,15 @@
 				5D282BB22CB6816000597991 /* SwapDutyViewController.swift in Sources */,
 				5DA9F10C2CC8B21500F97E25 /* ApplyLeaveModel.swift in Sources */,
 				23283AA92CBD106500E9DB0F /* ReportsPresenter.swift in Sources */,
+				5D90F9E32CCBA66300ACF856 /* NotificationRouter.swift in Sources */,
 				5D0296DB2CABE95F0037427C /* ProfileViewController.swift in Sources */,
 				5D282BB02CB6811D00597991 /* ClaimsViewController.swift in Sources */,
 				23788DD82CC24B8D003CBEE1 /* SalaryReportResponse.swift in Sources */,
+				5D571A5B2CCF55B300D0067D /* ApprovalNotificationModel.swift in Sources */,
 				238D52322CC10FC400927D4C /* ProfileInteractor.swift in Sources */,
 				5D0296D92CABE91E0037427C /* ReportsViewController.swift in Sources */,
 				5D92CE262CC61FC50098560F /* HomeInteractor.swift in Sources */,
+				5D90F9DD2CCB921300ACF856 /* NotificationModel.swift in Sources */,
 				5D0296982CABC4770037427C /* AppDelegate.swift in Sources */,
 				23283AAB2CBD140200E9DB0F /* ReportsRouter.swift in Sources */,
 				5D92CE2C2CC6263E0098560F /* HomeRouter.swift in Sources */,
@@ -731,13 +756,16 @@
 				5D3CE9D02CC762C100F22BE0 /* LeaveBalanceRouter.swift in Sources */,
 				5D92CE282CC6203C0098560F /* HomePageResponseModel.swift in Sources */,
 				23788DDE2CC24D24003CBEE1 /* SalaryDetailsPresenter.swift in Sources */,
+				5D90F9E12CCB9D2200ACF856 /* NotificationPresenter.swift in Sources */,
 				5D0296D52CABE8410037427C /* EmployeeHomeViewController.swift in Sources */,
 				23788DDC2CC24C13003CBEE1 /* SalaryDetailsInteractor.swift in Sources */,
 				5D02969A2CABC4770037427C /* SceneDelegate.swift in Sources */,
+				5DEBFF792CCF67F300250FDA /* DutyCountModel.swift in Sources */,
 				5D2C4E112CAFF8800041E0FB /* AttendanceViewController.swift in Sources */,
 				238D522E2CC1081A00927D4C /* Constants.swift in Sources */,
 				238D52342CC110D200927D4C /* ProfilePresenter.swift in Sources */,
 				5D3CE9CE2CC761E600F22BE0 /* LeaveDetailPresenter.swift in Sources */,
+				5D035A2E2CCCA2D00061D1B6 /* NotificationDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,19 +29,11 @@ class Utils {
     
     static func formatDateString(_ isoDate: String) -> String? {
         let dateFormatter = DateFormatter()
-        
-        // Set the date format for the input string
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        
-        // Convert the ISO string to a Date object
         guard let date = dateFormatter.date(from: isoDate) else {
             return nil // Return nil if the conversion fails
         }
-        
-        // Set the desired output format
         dateFormatter.dateFormat = "dd-MM-yyyy"
-        
-        // Convert the Date object back to the desired string format
         let formattedDate = dateFormatter.string(from: date)
         return formattedDate
     }
@@ -102,7 +94,7 @@ class Utils {
         length: Int,
         fontWeight: UIFont.Weight = .regular,
         fontSize: CGFloat = 16,
-        secondColorHex: String = "#7E8A8C" // New color for the text after the range
+        secondColorHex: String = "#848884" // New color for the text after the range
     ) -> NSAttributedString {
         
         let attributedString = NSMutableAttributedString(string: text)

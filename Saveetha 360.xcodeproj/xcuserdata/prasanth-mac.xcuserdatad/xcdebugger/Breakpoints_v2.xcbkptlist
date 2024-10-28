@@ -7,32 +7,138 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0520AC7A-A588-464D-8DBC-A9676409801D"
+            uuid = "C901E50B-5349-452A-B28E-FBD686793CCB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SIMATS 360/View/LeaveApplicationViewController.swift"
+            filePath = "SIMATS 360/NotificationDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "loadNotificationData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C901E50B-5349-452A-B28E-FBD686793CCB - 510dfc86168b6df5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Saveetha_360.NotificationDetailViewController.loadNotificationData() -&gt; ()"
+                  moduleName = "Saveetha 360.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/prasanth-mac/Documents/GitHub/Saveetha-360/SIMATS%20360/NotificationDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68">
+               </Location>
+               <Location
+                  uuid = "C901E50B-5349-452A-B28E-FBD686793CCB - 510dfc86168b6df5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Saveetha_360.NotificationDetailViewController.loadNotificationData() -&gt; ()"
+                  moduleName = "Saveetha 360.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/prasanth-mac/Documents/GitHub/Saveetha-360/SIMATS%20360/NotificationDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68">
+               </Location>
+               <Location
+                  uuid = "C901E50B-5349-452A-B28E-FBD686793CCB - 510dfc86168b6df5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Saveetha_360.NotificationDetailViewController.loadNotificationData() -&gt; ()"
+                  moduleName = "Saveetha 360.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/prasanth-mac/Documents/GitHub/Saveetha-360/SIMATS%20360/NotificationDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E70378CA-A113-430E-9A6E-656D2D3B6115"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMATS 360/NotificationDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "loadNotificationData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A242311E-B6F6-47B9-9537-6FCC27D40465"
+            uuid = "66CCA5C8-C969-4FD6-A45E-565E05D7262C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SIMATS 360/View/LeaveApplicationViewController.swift"
+            filePath = "SIMATS 360/View/EmployeeHomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "imageUpload(_:)"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "fetchHomeData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "66CCA5C8-C969-4FD6-A45E-565E05D7262C - cc95a1a01e84a15b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Saveetha_360.EmployeeHomeViewController.fetchHomeData() -&gt; ()"
+                  moduleName = "Saveetha 360.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/prasanth-mac/Documents/GitHub/Saveetha-360/SIMATS%20360/View/EmployeeHomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "193"
+                  endingLineNumber = "193">
+               </Location>
+               <Location
+                  uuid = "66CCA5C8-C969-4FD6-A45E-565E05D7262C - c84aa0da9bf7f14d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in Saveetha_360.EmployeeHomeViewController.fetchHomeData() -&gt; ()"
+                  moduleName = "Saveetha 360.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/prasanth-mac/Documents/GitHub/Saveetha-360/SIMATS%20360/View/EmployeeHomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "193"
+                  endingLineNumber = "193">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4CB6C8EA-0782-450F-B9C3-8A85BBF24B99"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMATS 360/Presenter/HomePresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "fetchDutyCounts(bioId:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
