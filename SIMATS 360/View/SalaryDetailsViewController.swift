@@ -32,20 +32,23 @@ class SalaryDetailsViewController: UIViewController, SalaryDetailsProtocol {
     @IBOutlet weak var daValue: UILabel!
     @IBOutlet weak var taValue: UILabel!
     @IBOutlet weak var taLabel: UILabel!
-    
     @IBOutlet weak var deductionsValue: UILabel!
     @IBOutlet weak var ccaLabel: UILabel!
-    
-    
     @IBOutlet weak var pfLabel: UILabel!
-    
     @IBOutlet weak var totalValue: UILabel!
-    
     @IBOutlet weak var deductionsLabel: UILabel!
     
-    
-    
     var salaryDetailsPresenter: SalaryDetailsPresenter?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Salary Details"
+        if let userData = Constants.profileData.userData.first {
+            salaryDetailsPresenter?.fetchSalaryDetails(bioId: String(userData.bioID))
+            bioIdLabel.text = "Bio Id: \(String(userData.bioID))"
+            userNameLabel.text = userData.userName
+        }
+    }
     
     func displaySalaryReports(_ reports: SalaryReportResponse) {
         if let salaryReportData = reports.salaryReportData.first {
@@ -72,7 +75,7 @@ class SalaryDetailsViewController: UIViewController, SalaryDetailsProtocol {
                 pfLabel.isHidden = true
                 pfValue.isHidden = true
             }
-            if let esi = salaryReportData.deductionsESI {
+            if let esi = salaryReportData.deductionsESI, !esi.isEmpty {
                 esiValue.text = "-\(esi)"
             } else {
                 esiValue.isHidden = true
@@ -85,20 +88,4 @@ class SalaryDetailsViewController: UIViewController, SalaryDetailsProtocol {
     func showError(_ message: String) {
         self.showAlert(title: "", message: message)
     }
-    
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Salary Details"
-        if let userData = Constants.profileData.userData.first {
-            salaryDetailsPresenter?.fetchSalaryDetails(bioId: String(2323))
-            bioIdLabel.text = "Bio Id: \(String(userData.bioID))"
-            userNameLabel.text = userData.userName
-        }
-
-        // Do any additional setup after loading the view.
-    }
-    
-
-
 }

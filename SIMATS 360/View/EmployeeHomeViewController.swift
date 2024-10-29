@@ -146,8 +146,8 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
         }
         
         dutyView.addTap {
-            let dutyVc: DutyViewController = DutyViewController.instantiate()
-            self.navigationController?.pushViewController(dutyVc, animated: true)
+            let dutyVC = DutyRouter.navigateToDuty()
+            self.navigationController?.pushViewController(dutyVC, animated: true)
         }
     }
     

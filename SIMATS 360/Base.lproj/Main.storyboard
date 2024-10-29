@@ -1245,7 +1245,7 @@
                                         <rect key="frame" x="10" y="82" width="300" height="446"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Salary Breakdown" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2S-Hq-bBf">
-                                                <rect key="frame" x="10" y="10" width="270" height="26"/>
+                                                <rect key="frame" x="5" y="10" width="270" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="GHg-hq-qfv"/>
                                                 </constraints>
@@ -1401,7 +1401,7 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="q2S-Hq-bBf" firstAttribute="leading" secondItem="aDa-ZY-xpP" secondAttribute="leading" constant="10" id="5h0-sA-okt"/>
+                                            <constraint firstItem="q2S-Hq-bBf" firstAttribute="leading" secondItem="aDa-ZY-xpP" secondAttribute="leading" constant="5" id="5h0-sA-okt"/>
                                             <constraint firstItem="1yq-8x-cht" firstAttribute="top" secondItem="m4Z-79-J7x" secondAttribute="bottom" constant="5" id="8xm-pN-qOH"/>
                                             <constraint firstItem="S1l-P7-cPM" firstAttribute="width" secondItem="aDa-ZY-xpP" secondAttribute="width" multiplier="0.3" id="BK1-VD-U9G"/>
                                             <constraint firstAttribute="trailing" secondItem="S1l-P7-cPM" secondAttribute="trailing" constant="5" id="Dow-xe-qSQ"/>
@@ -3167,9 +3167,11 @@ Balance  748</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calendarView" destination="Hc4-gQ-MAj" id="368-sI-4sI"/>
                         <outlet property="claimsView" destination="Ipt-k1-u5A" id="CaJ-jl-oao"/>
                         <outlet property="dutyRosterView" destination="c1w-Uq-NmE" id="Xlp-m3-yWR"/>
                         <outlet property="swapDutyView" destination="klX-vU-0LE" id="afk-9B-ams"/>
+                        <outlet property="unclaimedLabel" destination="agp-yV-m9P" id="baV-aG-ef4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6L7-2k-Nqs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

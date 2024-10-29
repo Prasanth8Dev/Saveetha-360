@@ -119,7 +119,7 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
             } else if leaveData.leaveType.lowercased().contains("half") {
                 cell.leaveDurationLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Duration: Half Day", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 15)
             }
-            cell.toDateLabel.isHidden = true
+            cell.toDateLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Status: \(leaveData.status)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 16), length: 13)
            
         }
         return cell

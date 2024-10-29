@@ -234,7 +234,6 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         if leaveCategory.isFirstResponder {
             leaveCategory.text = Constants.availableLeaveTypes[row]
         } else if leaveTypeTextField.isFirstResponder {
