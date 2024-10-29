@@ -79,10 +79,12 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     }
     
     func showDutyCount(dutyData: DutyCountModel) {
-         
-        if let status = self.dutyCountResponse?.status, status, let count = self.dutyCountResponse?.pendingCount {
-            dutyLabel.text = "\(count) Duty"
-        }
+        dutyLabel.text = "\(dutyData.pendingCount) Duty"
+//        if let status = dutyData.status, status {
+//            
+//        } else {
+//            dutyLabel.text = "\(0) Duty"
+//        }
     }
     
     func showAvailableLeave(leaveData: AvailableLeaveModel) {

@@ -10,6 +10,7 @@ import Combine
 
 protocol DutyPresenterProtocol {
     func fetchPendingDuty(bioId: String)
+    func fetchClaims(bioId: String)
 }
 
 class DutyPresenter: DutyPresenterProtocol {
@@ -29,6 +30,24 @@ class DutyPresenter: DutyPresenterProtocol {
         }, receiveValue: { response in
             if response.status {
                 self.view?.showPendingDutyData(response)
+            } else {
+                self.view?.showMessage(Str: response.message)
+            }
+        })
+        .store(in: &cancellables)
+    }
+    
+    func fetchClaims(bioId: String) {
+        dutyInteractor?.fetchClaims(bioId: bioId).sink(receiveCompletion: { completion in
+            switch completion {
+            case .failure(let err):
+                self.view?.showMessage(Str: err.localizedDescription)
+            case .finished:
+                break
+            }
+        }, receiveValue: { response in
+            if response.status {
+                self.view?.showClaimsData(response)
             } else {
                 self.view?.showMessage(Str: response.message)
             }
