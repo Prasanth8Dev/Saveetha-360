@@ -798,8 +798,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZd-YW-8Da">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vPn-2N-4aU">
+                                        <rect key="frame" x="0.0" y="5" width="320" height="34"/>
+                                        <color key="backgroundColor" red="0.96470588235294119" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentTapped:" destination="O2h-Ed-V8D" eventType="valueChanged" id="eyO-T4-jrm"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rCt-sk-0N0">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                        <rect key="frame" x="0.0" y="38" width="320" height="510"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationTableViewCell" rowHeight="329" id="42g-MB-qGd" customClass="NotificationTableViewCell" customModule="Saveetha_360" customModuleProvider="target">
@@ -884,8 +895,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="rCt-sk-0N0" firstAttribute="top" secondItem="EZd-YW-8Da" secondAttribute="top" id="JYD-xX-KHX"/>
+                                    <constraint firstItem="rCt-sk-0N0" firstAttribute="top" secondItem="vPn-2N-4aU" secondAttribute="bottom" id="NkL-CX-cQR"/>
                                     <constraint firstAttribute="bottom" secondItem="rCt-sk-0N0" secondAttribute="bottom" id="OBl-za-cBf"/>
+                                    <constraint firstItem="vPn-2N-4aU" firstAttribute="centerX" secondItem="EZd-YW-8Da" secondAttribute="centerX" id="TSK-6v-2jQ"/>
+                                    <constraint firstItem="vPn-2N-4aU" firstAttribute="height" secondItem="EZd-YW-8Da" secondAttribute="height" multiplier="0.06" id="Td5-6S-PEE"/>
+                                    <constraint firstItem="vPn-2N-4aU" firstAttribute="width" secondItem="EZd-YW-8Da" secondAttribute="width" id="Zga-Qk-xWc"/>
+                                    <constraint firstItem="vPn-2N-4aU" firstAttribute="top" secondItem="EZd-YW-8Da" secondAttribute="top" constant="5" id="cZO-Lm-uRw"/>
                                     <constraint firstItem="rCt-sk-0N0" firstAttribute="leading" secondItem="EZd-YW-8Da" secondAttribute="leading" id="otx-4x-BWm"/>
                                     <constraint firstAttribute="trailing" secondItem="rCt-sk-0N0" secondAttribute="trailing" id="ukd-WK-YYC"/>
                                 </constraints>
@@ -901,6 +916,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="notificationSegment" destination="vPn-2N-4aU" id="mTV-sG-dUb"/>
                         <outlet property="notificationTableView" destination="rCt-sk-0N0" id="Rcd-8i-G40"/>
                     </connections>
                 </viewController>

@@ -15,6 +15,7 @@ protocol NotificationViewControllerProtocol: AnyObject {
 
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NotificationViewControllerProtocol {
 
+    @IBOutlet weak var notificationSegment: UISegmentedControl!
     @IBOutlet weak var notificationTableView: UITableView! {
         didSet {
             notificationTableView.delegate = self
@@ -52,8 +53,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
         
         dispatchgroup.notify(queue: DispatchQueue.main) {
+            self.notificationSegment.setTitle("Announcement \(self.genaralNotificationData?.count ?? 0)", forSegmentAt: 0)
+            self.notificationSegment.setTitle("Approval \(self.approvalNotificationData?.count ?? 0)", forSegmentAt: 1)
             self.tableViewReload()
         }
+    }
+    
+    @IBAction func segmentTapped(_ sender: Any) {
+        notificationTableView.reloadData()
     }
     
     func initNavigationBar() {
@@ -106,21 +113,22 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        if notificationSegment.selectedSegmentIndex == 0 {
             return self.genaralNotificationData?.count ?? 0
-        } else {
+        } else if notificationSegment.selectedSegmentIndex == 1 {
             return self.approvalNotificationData?.count ?? 0
+        } else {
+            return 0
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var DynamicCell = UITableViewCell()
-        if indexPath.section == 0 {
+        if notificationSegment.selectedSegmentIndex == 0 {
            let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
             cell.imgView.image = UIImage(named: "Frame")
             cell.iconImg.image = UIImage(named: "Vector (14)")
@@ -131,7 +139,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             
             cell.imgView.makeCircular()
             DynamicCell = cell
-        } else if indexPath.section == 1 {
+        } else if notificationSegment.selectedSegmentIndex == 1 {
             let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
             cell.imgView.image = UIImage(named: "approvalImg")
             cell.iconImg.image = UIImage(named: "approvalIcon")
@@ -153,7 +161,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         notificationTableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 {
+        if notificationSegment.selectedSegmentIndex == 0 {
             if let notification = self.genaralNotificationData {
                 let detailNotificationVC: NotificationDetailViewController = NotificationDetailViewController.instantiate()
                 detailNotificationVC.notificationData = notification[indexPath.row]
@@ -171,29 +179,29 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor(hex: "#F6F8F9")
-        
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .black
-        
-        if section == 0 {
-            label.text = "Announcement"
-        } else {
-            label.text = "Approval"
-        }
-        
-        headerView.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
-            label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
-        ])
-        
-        return headerView
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = UIView()
+//        headerView.backgroundColor = UIColor(hex: "#F6F8F9")
+//        
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+//        label.textColor = .black
+//        
+//        if section == 0 {
+//            label.text = "Announcement"
+//        } else {
+//            label.text = "Approval"
+//        }
+//        
+//        headerView.addSubview(label)
+//        NSLayoutConstraint.activate([
+//            label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+//            label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+//        ])
+//        
+//        return headerView
+//    }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 25
