@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="24B83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="GeneralNotification" representedClassName="GeneralNotification" syncable="YES" codeGenerationType="class">
+        <attribute name="isOpened" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="notificationCategory" optional="YES" attributeType="String"/>
+        <attribute name="notificationCreatedAt" optional="YES" attributeType="String"/>
+        <attribute name="notificationId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="notificationMessage" optional="YES" attributeType="String"/>
+        <attribute name="notificationReceiverId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="notificationSenderId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="notificationTitle" optional="YES" attributeType="String"/>
+    </entity>
 </model>

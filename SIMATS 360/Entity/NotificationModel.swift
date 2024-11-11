@@ -20,6 +20,7 @@ struct NotificationData: Codable {
     let notificationTitle, notificationMessage, notificationCategory: String
     let notificationSenderID, notificationReceiverID: Int
     let notificationCreatedAt: String
+    var isOpened: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case notificationID = "notification_id"

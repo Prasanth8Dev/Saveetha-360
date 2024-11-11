@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol ClaimsPresenterProtocol {
-    func applyClaims(bioId: String, campus: String, creditName: String, dutyDate: String)
+    func applyClaims(bioId: String, campus: String, creditName: String, dutyDate: String, dutyId: String)
 }
 
 class ClaimsPresenter: ClaimsPresenterProtocol {
@@ -17,8 +17,8 @@ class ClaimsPresenter: ClaimsPresenterProtocol {
     var claimsInteractor: ClaimsInteractorProtocol?
     private var cancellables = Set<AnyCancellable>()
     
-    func applyClaims(bioId: String, campus: String, creditName: String, dutyDate: String) {
-        claimsInteractor?.applyClaims(bioId: bioId, campus: campus, creditName: creditName, dutyDate: dutyDate).sink(receiveCompletion: { completion in
+    func applyClaims(bioId: String, campus: String, creditName: String, dutyDate: String, dutyId: String) {
+        claimsInteractor?.applyClaims(bioId: bioId, campus: campus, creditName: creditName, dutyDate: dutyDate, dutyId: dutyId).sink(receiveCompletion: { completion in
             switch completion {
             case .failure(let err):
                 self.view?.showMessage(err.localizedDescription)

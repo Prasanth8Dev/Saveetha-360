@@ -9,15 +9,15 @@ import Foundation
 import Combine
 
 protocol ClaimsInteractorProtocol {
-    func applyClaims(bioId: String, campus: String, creditName: String, dutyDate: String) -> AnyPublisher<ClaimsResponseModel, Error>
+    func applyClaims(bioId: String, campus: String, creditName: String, dutyDate: String, dutyId: String) -> AnyPublisher<ClaimsResponseModel, Error>
 }
 
 class ClaimsInteractor: ClaimsInteractorProtocol {
-    func applyClaims(bioId: String, campus: String, creditName: String, dutyDate: String) -> AnyPublisher<ClaimsResponseModel, Error> {
+    func applyClaims(bioId: String, campus: String, creditName: String, dutyDate: String, dutyId: String) -> AnyPublisher<ClaimsResponseModel, Error> {
         guard let url = URL(string: "http://localhost:1312/employee/dutyClaims") else {
             return Fail(error: APIError.invalidResponse).eraseToAnyPublisher()
         }
-        let param = ["bioId" : bioId,"campus":campus,"creditName":creditName,"dutyDate":dutyDate]
+        let param = ["bioId" : bioId,"campus":campus,"creditName":creditName,"dutyDate":dutyDate, "dutyId":dutyId]
         return APIWrapper.shared.postRequestMethod(url: url, body: param, responseType: ClaimsResponseModel.self)
     }
 }

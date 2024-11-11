@@ -9,7 +9,7 @@ import UIKit
 import FSCalendar
 
 class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
-
+    
     @IBOutlet weak var imgFour: UIImageView!
     @IBOutlet weak var imgThree: UIImageView!
     @IBOutlet weak var imgTwo: UIImageView!
@@ -24,14 +24,18 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
     var presentDates: [String] = []
     var absentDates: [String] = []
     let dateFormatter: DateFormatter = {
-           let formatter = DateFormatter()
-           formatter.dateFormat = "dd-MM-yyyy"
-           return formatter
-       }()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        return formatter
+    }()
     
     @IBOutlet weak var bioIdLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var monthTF: UITextField!
+    
+    @IBOutlet weak var backView: UIView!
+    
+    @IBOutlet weak var frontView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,8 +48,46 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
         filterPresentDates()
         attendanceCalendar.delegate = self
         attendanceCalendar.dataSource = self
-       
+        attendanceCalendar.appearance.headerDateFormat = "MMMM yyyy"
+        setupYearNavigationButtons()
         // Do any additional setup after loading the view.
+    }
+    
+    func setupYearNavigationButtons() {
+        // Create Previous Year Button
+        let previousYearButton = UIButton(type: .system)
+        previousYearButton.setTitle("<<", for: .normal)
+        previousYearButton.addTarget(self, action: #selector(goToPreviousYear), for: .touchUpInside)
+        previousYearButton.translatesAutoresizingMaskIntoConstraints = false // Use Auto Layout
+        previousYearButton.backgroundColor = .clear // Temporary color to debug
+        backView.addSubview(previousYearButton)
+        
+        // Create Next Year Button
+        let nextYearButton = UIButton(type: .system)
+        nextYearButton.setTitle("  >>", for: .normal)
+        nextYearButton.addTarget(self, action: #selector(goToNextYear), for: .touchUpInside)
+        nextYearButton.translatesAutoresizingMaskIntoConstraints = false // Use Auto Layout
+        nextYearButton.backgroundColor = .clear // Temporary color to debug
+        frontView.addSubview(nextYearButton)
+    }
+    
+    
+    @objc func goToPreviousYear() {
+        changeCalendarYear(by: -1)
+    }
+    
+    @objc func goToNextYear() {
+        changeCalendarYear(by: 1)
+    }
+    
+    func changeCalendarYear(by yearOffset: Int) {
+        let currentPage = attendanceCalendar.currentPage
+        var dateComponents = DateComponents()
+        dateComponents.year = yearOffset
+        
+        if let newDate = Calendar.current.date(byAdding: dateComponents, to: currentPage) {
+            attendanceCalendar.setCurrentPage(newDate, animated: true)
+        }
     }
     
     private func filterPresentDates() {
@@ -62,8 +104,8 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
             totalWorkingDays.text = "Total Working days: \(data.totalWorkingDays)"
             daysAbsent.text = "Days Absent: \(data.absentDays)"
             daysPresent.text = "Days Present: \(data.presentDays)"
-            monthTF.text = Utils.getCurrentMonth()
-            monthTF.isUserInteractionEnabled = false
+            //monthTF.text = Utils.getCurrentMonth()
+            //monthTF.isUserInteractionEnabled = false
             DispatchQueue.main.async {
                 if let userImage = Constants.profileData.userData.first?.profileImgURL, let userName = Constants.profileData.userData.first?.userName, let bioId = Constants.profileData.userData.first?.bioID {
                     self.userNameLabel.text = userName
@@ -100,38 +142,38 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
     
     @objc func notificationTapped() {
         print("Right button tapped")
-       
+        
     }
     
     // MARK: - FSCalendarDelegateAppearance Methods
-       
-       func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
-           let dateString = dateFormatter.string(from: date)
-          
-           if presentDates.contains(dateString) {
-               return UIColor.init(hex: "#008000") // Mark present dates in green
-           }
-           
-           if absentDates.contains(dateString) {
-               return UIColor.init(hex: "#EE4B2B") // Mark absent dates in red
-           }
-           
-           if Calendar.current.isDateInToday(date) {
-               return UIColor.init(hex: "#17C6ED")
-           }
-           return nil
-       }
-       
-       
-       func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-           let dateString = dateFormatter.string(from: date)
-           
-           // Optional: Change text color for specific dates if needed
-           if presentDates.contains(dateString) || absentDates.contains(dateString) {
-               return UIColor.white // Make the text white for better contrast on colored backgrounds
-           }
-           
-           return nil // Default color
-       }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+        let dateString = dateFormatter.string(from: date)
+        
+        if presentDates.contains(dateString) {
+            return UIColor.init(hex: "#008000") // Mark present dates in green
+        }
+        
+        if absentDates.contains(dateString) {
+            return UIColor.init(hex: "#EE4B2B") // Mark absent dates in red
+        }
+        
+        if Calendar.current.isDateInToday(date) {
+            return UIColor.init(hex: "#17C6ED")
+        }
+        return nil
+    }
+    
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        let dateString = dateFormatter.string(from: date)
+        
+        // Optional: Change text color for specific dates if needed
+        if presentDates.contains(dateString) || absentDates.contains(dateString) {
+            return UIColor.white // Make the text white for better contrast on colored backgrounds
+        }
+        
+        return nil // Default color
+    }
     
 }

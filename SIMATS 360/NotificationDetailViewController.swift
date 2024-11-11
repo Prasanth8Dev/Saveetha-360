@@ -22,6 +22,7 @@ class NotificationDetailViewController: UIViewController {
     
     @IBOutlet weak var approveButton: UIButton!
     
+    var reload: (()-> Void)?
     
     @IBOutlet weak var rejectButton: UIButton!
     var notificationData: NotificationData?
@@ -32,8 +33,19 @@ class NotificationDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadNotificationData()
+        if let notificationData = self.notificationData {
+            CoreDataManager.shared.updateGeneralNotifyInDB(notificationData)
+//            CoreDataManager.shared.saveOrUpdateGeneralNotifyInDB(notificationData)
+        }
+       
 //        approveButton.isHidden = true
 //        rejectButton.isHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print(CoreDataManager.shared.fetchAllGeneralNotification())
+        self.reload?()
+        
     }
     
     @IBAction func approveTapped(_ sender: Any) {
@@ -65,14 +77,15 @@ class NotificationDetailViewController: UIViewController {
                 
             }
         } else if isApproval {
-            if let data = requestData, let leaveDate = Utils.formatDateString(data.startDate) {
+            if let data = requestData {
+                //let leaveDate = Utils.formatDateString(data.startDate)
                 notificationTitleLabel.text = "Leave Request"
                // notificationMessageLabel.isHidden = true
                 namelabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Name: \(data.employeeName)", colorHex:  "#000000", font: UIFont.systemFont(ofSize: 8), length: 5)
                 LeaveTypeLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Type: \(data.leaveType)", colorHex:  "#000000", font: UIFont.systemFont(ofSize: 8), length: 11)
                 reasonLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Reason: \(data.reason)", colorHex:  "#000000", font: UIFont.systemFont(ofSize: 8), length: 13)
-                leaveDateLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Date: \(leaveDate)", colorHex:  "#000000", font: UIFont.systemFont(ofSize: 8), length: 11)
-                notificationMessageLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Duration: \(data.leaveCateogry ?? "")", colorHex:  "#000000", font: UIFont.systemFont(ofSize: 8), length: 15)
+                leaveDateLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Date: \(data.startDate)", colorHex:  "#000000", font: UIFont.systemFont(ofSize: 8), length: 11)
+                notificationMessageLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Leave Duration: \(data.leaveCategory)", colorHex:  "#000000", font: UIFont.systemFont(ofSize: 8), length: 15)
                 
                 approveButton.isHidden = false
                 rejectButton.isHidden = false

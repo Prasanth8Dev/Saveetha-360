@@ -7,7 +7,6 @@
 
 
 import Foundation
-
 // MARK: - DutyDataModel
 struct DutyDataModel: Codable {
     let status: Bool
@@ -17,10 +16,12 @@ struct DutyDataModel: Codable {
 
 // MARK: - Result
 struct Result: Codable {
+    let dutyID: Int
     let startdate, shift, totalHours, dutySwipe: String
     let swipeDetails, dutyStatus: String
 
     enum CodingKeys: String, CodingKey {
+        case dutyID = "dutyId"
         case startdate, shift
         case totalHours = "total_hours"
         case dutySwipe = "duty_swipe"
@@ -28,3 +29,4 @@ struct Result: Codable {
         case dutyStatus = "duty_status"
     }
 }
+

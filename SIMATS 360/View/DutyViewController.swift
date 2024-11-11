@@ -12,10 +12,13 @@ protocol DutyViewControllerProtocol: AnyObject {
     func showMessage(Str: String)
     func showPendingDutyData(_ data: DutyDataModel)
     func showClaimsData(_ data: ClaimsDataModel)
+    func getGropuData(_ data: GroupResponseModel)
 }
 
 class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance  {
-
+    
+    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var frontView: UIView!
     @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var claimsView: UIView!
     @IBOutlet weak var swapDutyView: UIView!
@@ -25,11 +28,13 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
     @IBOutlet weak var unclaimedLabel: UILabel!
     var dutyPrsentor: DutyPresenterProtocol?
     var dutyPendingDates:[String] = []
+    var dutyCompletedDates:[String] = []
+    var pendingDutyData: [Result]?
     let dateFormatter: DateFormatter = {
-           let formatter = DateFormatter()
-           formatter.dateFormat = "yyy-MM-dd"
-           return formatter
-       }()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyy-MM-dd"
+        return formatter
+    }()
     
     @IBOutlet weak var dutyDetailsView: UIStackView!
     @IBOutlet weak var detailDutySwipe: UILabel!
@@ -39,18 +44,57 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
     private var blurEffectView: UIVisualEffectView?
     var pendingDuty: DutyDataModel?
     var dutyClaim: ClaimsDataModel?
+    var groupData: GroupResponseModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapAction()
-        fetchDutyData()
         calendarView.delegate = self
         calendarView.dataSource = self
         calendarView.appearance.todayColor = .lightGray // Set the color for today to clear
-        calendarView.appearance.todaySelectionColor = .lightGray // Set the selection color for today to
+        calendarView.appearance.todaySelectionColor = .lightGray
+        calendarView.appearance.headerDateFormat = "MMMM yyyy"
+        setupYearNavigationButtons()
         setupBlurView()
         dutyDetailsView.backgroundColor = .clear
         // Do any additional setup after loading the view.
+    }
+    
+    func setupYearNavigationButtons() {
+        // Create Previous Year Button
+        let previousYearButton = UIButton(type: .system)
+        previousYearButton.setTitle("<<", for: .normal)
+        previousYearButton.addTarget(self, action: #selector(goToPreviousYear), for: .touchUpInside)
+        previousYearButton.translatesAutoresizingMaskIntoConstraints = false // Use Auto Layout
+        previousYearButton.backgroundColor = .clear // Temporary color to debug
+        frontView.addSubview(previousYearButton)
+        
+        // Create Next Year Button
+        let nextYearButton = UIButton(type: .system)
+        nextYearButton.setTitle("  >>", for: .normal)
+        nextYearButton.addTarget(self, action: #selector(goToNextYear), for: .touchUpInside)
+        nextYearButton.translatesAutoresizingMaskIntoConstraints = false // Use Auto Layout
+        nextYearButton.backgroundColor = .clear // Temporary color to debug
+        backView.addSubview(nextYearButton)
+    }
+    
+    
+    @objc func goToPreviousYear() {
+        changeCalendarYear(by: -1)
+    }
+    
+    @objc func goToNextYear() {
+        changeCalendarYear(by: 1)
+    }
+    
+    func changeCalendarYear(by yearOffset: Int) {
+        let currentPage = calendarView.currentPage
+        var dateComponents = DateComponents()
+        dateComponents.year = yearOffset
+        
+        if let newDate = Calendar.current.date(byAdding: dateComponents, to: currentPage) {
+            calendarView.setCurrentPage(newDate, animated: true)
+        }
     }
     
     private func setupBlurView() {
@@ -66,9 +110,10 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
     }
     
     private func fetchDutyData() {
-        if let bioId = Constants.profileData.userData.first?.bioID {
+        if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus {
             dutyPrsentor?.fetchPendingDuty(bioId: String(bioId))
             dutyPrsentor?.fetchClaims(bioId: String(bioId))
+            dutyPrsentor?.fetchGroupOptions(bioId: String(bioId), campus: campus)
         }
     }
     
@@ -88,7 +133,7 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        fetchDutyData()
     }
     
     private func setupTapAction() {
@@ -100,7 +145,9 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
         }
         
         swapDutyView.addTap {
-            let swapDutyVC: SwapDutyViewController = SwapDutyViewController.instantiate()
+            let swapDutyVC = SwapDutyRouter.createRouter() as! SwapDutyViewController
+            swapDutyVC.groupResponse = self.groupData
+            swapDutyVC.pendingDuty = self.pendingDutyData
             self.navigationController?.pushViewController(swapDutyVC, animated: true)
         }
         
@@ -114,9 +161,15 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
         self.showAlert(title: "", message: Str)
     }
     
+    func getGropuData(_ data: GroupResponseModel) {
+        self.groupData = data
+    }
+    
     func showPendingDutyData(_ data: DutyDataModel) {
         pendingDuty = data
-        dutyPendingDates = data.result.map { $0.startdate}
+        dutyPendingDates = data.result.filter({$0.dutyStatus.lowercased() == "pending"}).map({$0.startdate})
+        dutyCompletedDates = data.result.filter({$0.dutyStatus.lowercased() == "completed"}).map({$0.startdate})
+        pendingDutyData = data.result.filter({$0.dutyStatus.lowercased() == "pending"})
         print(dutyPendingDates)
         if !dutyPendingDates.isEmpty {
             calendarView.reloadData()
@@ -143,10 +196,10 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
         self.navigationItem.rightBarButtonItems = [notificationButton]
         
     }
-   
+    
     @objc func notificationTapped() {
         print("Right button tapped")
-       
+        
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -181,21 +234,24 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
             self.detailDutyDate.attributedText = Utils.attributedStringWithColorAndFont(text:  "Duty Date: \n ✦ \(date)", colorHex: "#000000", font: UIFont.systemFont(ofSize: 8), length: 10)
         }
     }
-
+    
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print("Deselected date: \(date)")
     }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         let dateString = dateFormatter.string(from: date)
-       
+        
         if dutyPendingDates.contains(dateString) {
-            return UIColor.init(hex: "#FF5F15") // Mark present dates in green
+            return UIColor.init(hex: "#FF5F15")
         }
-      
-//        if Calendar.current.isDateInToday(date) {
-//            return UIColor.white
-//        }
+        
+        if dutyCompletedDates.contains(dateString) {
+            return UIColor.init(hex: "#008000")
+        }
+        //        if Calendar.current.isDateInToday(date) {
+        //            return UIColor.white
+        //        }
         return nil
     }
 }

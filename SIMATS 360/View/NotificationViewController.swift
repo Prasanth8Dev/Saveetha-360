@@ -32,10 +32,18 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         
     }
     
+    private func fetchGeneralNotificationFromDB() {
+        self.genaralNotificationData = CoreDataManager.shared.fetchAllGeneralNotification()
+        if self.genaralNotificationData?.count ?? 0 > 0 {
+            tableViewReload()
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         initNavigationBar()
         fetchNotification()
+        fetchGeneralNotificationFromDB()
     }
     
     func fetchNotification() {
@@ -53,8 +61,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
         
         dispatchgroup.notify(queue: DispatchQueue.main) {
-            self.notificationSegment.setTitle("Announcement \(self.genaralNotificationData?.count ?? 0)", forSegmentAt: 0)
-            self.notificationSegment.setTitle("Approval \(self.approvalNotificationData?.count ?? 0)", forSegmentAt: 1)
+            let unopenedCounts = self.genaralNotificationData?.filter({$0.isOpened == false})
+            self.notificationSegment.setTitle("Announcement (\(unopenedCounts?.count ?? 0))", forSegmentAt: 0)
+            self.notificationSegment.setTitle("Approval (\(self.approvalNotificationData?.count ?? 0))", forSegmentAt: 1)
             self.tableViewReload()
         }
     }
@@ -91,8 +100,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func showGeneralNotification(data: NotificationModel) {
-        self.genaralNotificationData = data.notificationData
-       
+       // self.genaralNotificationData = data.notificationData
+        data.notificationData.forEach({ data in
+            CoreDataManager.shared.saveGeneralNotifyInDB(data)
+        })
+        fetchGeneralNotificationFromDB()
     }
     
     func showApprovalNotification(data: ApprovalNotificationModel) {
@@ -131,8 +143,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         if notificationSegment.selectedSegmentIndex == 0 {
            let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
             cell.imgView.image = UIImage(named: "Frame")
-            cell.iconImg.image = UIImage(named: "Vector (14)")
+            
+            
             if let notificationdata = self.genaralNotificationData {
+                cell.iconImg.image = UIImage(named:  notificationdata[indexPath.row].isOpened ? "read" : "unread")
                 cell.titleLabel.text = notificationdata[indexPath.row].notificationTitle
                 cell.descriptionLabel.text = notificationdata[indexPath.row].notificationMessage
             }
@@ -166,6 +180,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 let detailNotificationVC: NotificationDetailViewController = NotificationDetailViewController.instantiate()
                 detailNotificationVC.notificationData = notification[indexPath.row]
                 detailNotificationVC.isGeneral = true
+                detailNotificationVC.reload = { [weak self] in
+                    self?.fetchGeneralNotificationFromDB()
+                }
                 self.present(detailNotificationVC, animated: true)
             }
         } else {

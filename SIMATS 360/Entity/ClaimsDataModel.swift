@@ -17,5 +17,11 @@ struct ClaimsDataModel: Codable {
 
 // MARK: - ClaimsDatum
 struct ClaimsDatum: Codable {
-    let startdate: String
+    let dutyID: Int
+    let startDate: String
+
+    enum CodingKeys: String, CodingKey {
+        case dutyID = "dutyId"
+        case startDate
+    }
 }

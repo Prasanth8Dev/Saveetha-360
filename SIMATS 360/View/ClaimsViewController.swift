@@ -64,8 +64,8 @@ class ClaimsViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             self.showAlert(title: "", message: "Kindly select date and claim type")
             return
         }
-        if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus {
-            claimsPresenter?.applyClaims(bioId: String(bioId), campus: campus, creditName: selectedClaims, dutyDate: choosedDate)
+        if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus, let dutyId = claimsData?.claimsData.first?.dutyID {
+            claimsPresenter?.applyClaims(bioId: String(bioId), campus: campus, creditName: selectedClaims, dutyDate: choosedDate, dutyId: String(dutyId))
         }
         
     }
@@ -149,8 +149,8 @@ class ClaimsViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if dateTF.isFirstResponder {
-            dateTF.text = claimsData?.claimsData[row].startdate
-            return claimsData?.claimsData[row].startdate
+            dateTF.text = claimsData?.claimsData[row].startDate
+            return claimsData?.claimsData[row].startDate
         } else {
             return nil
         }
@@ -158,7 +158,7 @@ class ClaimsViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if dateTF.isFirstResponder {
-            dateTF.text = claimsData?.claimsData[row].startdate
+            dateTF.text = claimsData?.claimsData[row].startDate
         } else {
             dateTF.text = ""
         }

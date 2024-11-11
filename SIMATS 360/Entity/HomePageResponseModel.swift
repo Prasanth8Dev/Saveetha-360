@@ -35,8 +35,9 @@ struct Attendance: Codable {
 
 // MARK: - Summary
 struct Summary: Codable {
-    let totalWorkingDays, totalPresent, presentDays, totalHalfWorkingDays: Int
-    let absentDays, weekoffDays: Int
+    let totalWorkingDays: Int
+    let totalPresent: Double
+    let presentDays, totalHalfWorkingDays, absentDays, weekoffDays: Int
     let totalWorkingHours: Double
     let adjustedBuffTime: Int
     let attendancePercentage: Double

@@ -128,6 +128,12 @@
 		5DA9F10E2CC8B29700F97E25 /* LeaveApplyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA9F10D2CC8B29700F97E25 /* LeaveApplyInteractor.swift */; };
 		5DA9F1102CC8B49300F97E25 /* LeaveApplyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA9F10F2CC8B49300F97E25 /* LeaveApplyPresenter.swift */; };
 		5DA9F1122CC8B7E700F97E25 /* ApplyLeaveRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA9F1112CC8B7E700F97E25 /* ApplyLeaveRouter.swift */; };
+		5DDF3B532CD8CB83001B3303 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDF3B522CD8CB83001B3303 /* CoreDataManager.swift */; };
+		5DDFD69E2CE1FEF4002A01F2 /* GroupResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDFD69D2CE1FEF4002A01F2 /* GroupResponseModel.swift */; };
+		5DDFD6A02CE20C7A002A01F2 /* SwapDutyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDFD69F2CE20C7A002A01F2 /* SwapDutyInteractor.swift */; };
+		5DDFD6A42CE20D35002A01F2 /* DutySwapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDFD6A32CE20D35002A01F2 /* DutySwapModel.swift */; };
+		5DDFD6A62CE20DE0002A01F2 /* SwapDutyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDFD6A52CE20DE0002A01F2 /* SwapDutyPresenter.swift */; };
+		5DDFD6A82CE210E0002A01F2 /* SwapDutyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDFD6A72CE210E0002A01F2 /* SwapDutyRouter.swift */; };
 		5DEBFF792CCF67F300250FDA /* DutyCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEBFF782CCF67F300250FDA /* DutyCountModel.swift */; };
 		5DEBFF7B2CCF8F5400250FDA /* DutyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEBFF7A2CCF8F5400250FDA /* DutyInteractor.swift */; };
 		5DEBFF7D2CCF900900250FDA /* DutyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEBFF7C2CCF900900250FDA /* DutyDataModel.swift */; };
@@ -275,6 +281,12 @@
 		5DA9F10D2CC8B29700F97E25 /* LeaveApplyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplyInteractor.swift; sourceTree = "<group>"; };
 		5DA9F10F2CC8B49300F97E25 /* LeaveApplyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplyPresenter.swift; sourceTree = "<group>"; };
 		5DA9F1112CC8B7E700F97E25 /* ApplyLeaveRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyLeaveRouter.swift; sourceTree = "<group>"; };
+		5DDF3B522CD8CB83001B3303 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		5DDFD69D2CE1FEF4002A01F2 /* GroupResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResponseModel.swift; sourceTree = "<group>"; };
+		5DDFD69F2CE20C7A002A01F2 /* SwapDutyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapDutyInteractor.swift; sourceTree = "<group>"; };
+		5DDFD6A32CE20D35002A01F2 /* DutySwapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutySwapModel.swift; sourceTree = "<group>"; };
+		5DDFD6A52CE20DE0002A01F2 /* SwapDutyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapDutyPresenter.swift; sourceTree = "<group>"; };
+		5DDFD6A72CE210E0002A01F2 /* SwapDutyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapDutyRouter.swift; sourceTree = "<group>"; };
 		5DEBFF782CCF67F300250FDA /* DutyCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutyCountModel.swift; sourceTree = "<group>"; };
 		5DEBFF7A2CCF8F5400250FDA /* DutyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutyInteractor.swift; sourceTree = "<group>"; };
 		5DEBFF7C2CCF900900250FDA /* DutyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutyDataModel.swift; sourceTree = "<group>"; };
@@ -318,8 +330,10 @@
 			children = (
 				23283A912CBCD5DE00E9DB0F /* LoginResponseModel.swift */,
 				238D522F2CC10F8100927D4C /* ProfileDataModel.swift */,
+				5DDFD69D2CE1FEF4002A01F2 /* GroupResponseModel.swift */,
 				5D90F9DC2CCB921300ACF856 /* NotificationModel.swift */,
 				5D5E251E2CD0E8F200C6F4D2 /* ClaimsResponseModel.swift */,
+				5DDFD6A32CE20D35002A01F2 /* DutySwapModel.swift */,
 				5D92CE272CC6203C0098560F /* HomePageResponseModel.swift */,
 				5DEBFF7C2CCF900900250FDA /* DutyDataModel.swift */,
 				5D571A5A2CCF55B300D0067D /* ApprovalNotificationModel.swift */,
@@ -352,6 +366,7 @@
 				5D2C4E0E2CAFEBA80041E0FB /* LeaveApplicationViewController.swift */,
 				5D282BAD2CB65C7200597991 /* DutyViewController.swift */,
 				5D282BAF2CB6811D00597991 /* ClaimsViewController.swift */,
+				5D282BB12CB6816000597991 /* SwapDutyViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -362,6 +377,7 @@
 				23283A8F2CBCD4C100E9DB0F /* LoginInteractor.swift */,
 				5DEBFF7A2CCF8F5400250FDA /* DutyInteractor.swift */,
 				5D5E251C2CD0E84900C6F4D2 /* ClaimsInteractor.swift */,
+				5DDFD69F2CE20C7A002A01F2 /* SwapDutyInteractor.swift */,
 				23283AA62CBD0E5700E9DB0F /* ReportsInteractor.swift */,
 				5D90F9DE2CCB950A00ACF856 /* NotificationInteractor.swift */,
 				5DA9F10D2CC8B29700F97E25 /* LeaveApplyInteractor.swift */,
@@ -382,6 +398,7 @@
 				5DEBFF7E2CCF930200250FDA /* DutyPresenter.swift */,
 				5DA9F10F2CC8B49300F97E25 /* LeaveApplyPresenter.swift */,
 				5D5E25202CD0E9B400C6F4D2 /* ClaimsPresenter.swift */,
+				5DDFD6A52CE20DE0002A01F2 /* SwapDutyPresenter.swift */,
 				5D90F9E02CCB9D2200ACF856 /* NotificationPresenter.swift */,
 				5D3CE9CD2CC761E600F22BE0 /* LeaveDetailPresenter.swift */,
 				5D92CE342CC654230098560F /* BufferTimePresenter.swift */,
@@ -401,6 +418,7 @@
 				5D5E25222CD0EB2C00C6F4D2 /* ClaimsRouter.swift */,
 				5DA9F1112CC8B7E700F97E25 /* ApplyLeaveRouter.swift */,
 				5D90F9E22CCBA66300ACF856 /* NotificationRouter.swift */,
+				5DDFD6A72CE210E0002A01F2 /* SwapDutyRouter.swift */,
 				5D3CE9CF2CC762C100F22BE0 /* LeaveBalanceRouter.swift */,
 				5D92CE2B2CC6263E0098560F /* HomeRouter.swift */,
 				5D92CE362CC655DA0098560F /* BufferTimeRouter.swift */,
@@ -456,9 +474,9 @@
 				5DA486A72CAE587B009E0A56 /* NotificationTableViewCell.swift */,
 				5D035A2D2CCCA2D00061D1B6 /* NotificationDetailViewController.swift */,
 				23283AAC2CBD21D100E9DB0F /* Utils.swift */,
-				5D282BB12CB6816000597991 /* SwapDutyViewController.swift */,
 				238D522D2CC1081A00927D4C /* Constants.swift */,
 				5DA486AB2CAE9306009E0A56 /* SalaryReportTableViewCell.swift */,
+				5DDF3B522CD8CB83001B3303 /* CoreDataManager.swift */,
 				5D02969D2CABC4770037427C /* Main.storyboard */,
 				5D0296CD2CABE80E0037427C /* UIColorExtension.swift */,
 				5D0296CF2CABE80E0037427C /* UIImageExtension.swift */,
@@ -729,6 +747,8 @@
 				5D282BAE2CB65C7200597991 /* DutyViewController.swift in Sources */,
 				5D2B58222CB3E8FB00976E7A /* BufferTimeViewController.swift in Sources */,
 				5D2C4E0F2CAFEBA80041E0FB /* LeaveApplicationViewController.swift in Sources */,
+				5DDFD6A82CE210E0002A01F2 /* SwapDutyRouter.swift in Sources */,
+				5DDFD6A62CE20DE0002A01F2 /* SwapDutyPresenter.swift in Sources */,
 				5D0296A22CABC4770037427C /* SIMATS_360.xcdatamodeld in Sources */,
 				5DA486A82CAE587B009E0A56 /* NotificationTableViewCell.swift in Sources */,
 				5D5E251F2CD0E8F200C6F4D2 /* ClaimsResponseModel.swift in Sources */,
@@ -752,9 +772,12 @@
 				5DEBFF7B2CCF8F5400250FDA /* DutyInteractor.swift in Sources */,
 				5D92CE2E2CC62F850098560F /* AvailableLeaveModel.swift in Sources */,
 				5D90F9DF2CCB950A00ACF856 /* NotificationInteractor.swift in Sources */,
+				5DDFD69E2CE1FEF4002A01F2 /* GroupResponseModel.swift in Sources */,
 				5D0296D32CABE80E0037427C /* UIImageExtension.swift in Sources */,
+				5DDFD6A42CE20D35002A01F2 /* DutySwapModel.swift in Sources */,
 				5D92CE352CC654230098560F /* BufferTimePresenter.swift in Sources */,
 				5D8E56752CAFB84600900A04 /* LeaveBalanceViewController.swift in Sources */,
+				5DDF3B532CD8CB83001B3303 /* CoreDataManager.swift in Sources */,
 				5D92CE332CC652EB0098560F /* BufferTimeInteractor.swift in Sources */,
 				5DF195E02CCA14DB00A9B9B0 /* DutyRosterViewController.swift in Sources */,
 				23283A8E2CBCD45900E9DB0F /* APIWrapper.swift in Sources */,
@@ -787,6 +810,7 @@
 				5D3CE9CA2CC75FDB00F22BE0 /* LeaveBalanceInteractor.swift in Sources */,
 				5DEBFF7D2CCF900900250FDA /* DutyDataModel.swift in Sources */,
 				5D0296D22CABE80E0037427C /* UIViewExtension.swift in Sources */,
+				5DDFD6A02CE20C7A002A01F2 /* SwapDutyInteractor.swift in Sources */,
 				23283AA72CBD0E5700E9DB0F /* ReportsInteractor.swift in Sources */,
 				5D3CE9D02CC762C100F22BE0 /* LeaveBalanceRouter.swift in Sources */,
 				5D92CE282CC6203C0098560F /* HomePageResponseModel.swift in Sources */,
