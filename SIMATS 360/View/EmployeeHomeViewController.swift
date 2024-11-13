@@ -113,6 +113,12 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
             if leaveData.academicLeave > 0 {
                 leaveTypes.append("Academic Leave - \(leaveData.academicLeave)")
             }
+            if leaveData.restrictedLeave > 0 {
+                leaveTypes.append("Restricted Leave - \(leaveData.restrictedLeave)")
+            }
+            if leaveData.vacationLeave > 0 {
+                leaveTypes.append("Vacation Leave - \(leaveData.vacationLeave)")
+            }
         }
         
         return leaveTypes

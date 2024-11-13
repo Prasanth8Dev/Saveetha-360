@@ -152,7 +152,7 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
         }
         
         dutyRosterView.addTap {
-            let dutyDetailVC: DutyRosterViewController = DutyRosterViewController.instantiate()
+            let dutyDetailVC = DutyRosterRouter.navigateToDutyRoster() as! DutyRosterViewController
             self.navigationController?.pushViewController(dutyDetailVC, animated: true)
         }
     }

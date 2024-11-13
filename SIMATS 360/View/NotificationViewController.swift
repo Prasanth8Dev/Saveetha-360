@@ -187,11 +187,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             }
         } else {
             if let approvalNotificationdata = self.approvalNotificationData {
-                let detailNotificationVC: NotificationDetailViewController = NotificationDetailViewController.instantiate()
+                let detailNotificationVC = NotificationDetailsRouter.createRouter() as! NotificationDetailViewController
                 detailNotificationVC.requestData = approvalNotificationdata[indexPath.row]
                 detailNotificationVC.isApproval = true
-                self.present(detailNotificationVC, animated: true)
-               // self.navigationController?.pushViewController(detailNotificationVC, animated: true)
+              //  self.present(detailNotificationVC, animated: true)
+               self.navigationController?.pushViewController(detailNotificationVC, animated: true)
             }
         }
     }

@@ -17,7 +17,7 @@ struct AvailableLeaveModel: Codable {
 
 // MARK: - Datum
 struct LeaveData: Codable {
-    let casualLeave: Int
+    let casualLeave: Double
     let sickLeave: Double
-    let earnedLeave, academicLeave: Int
+    let earnedLeave, academicLeave, vacationLeave, restrictedLeave: Double
 }

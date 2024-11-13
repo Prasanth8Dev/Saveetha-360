@@ -6,8 +6,11 @@
 //
 
 import UIKit
+protocol NotificationDetailViewControllerProtocol {
+    func showMessage(message: String)
+}
 
-class NotificationDetailViewController: UIViewController {
+class NotificationDetailViewController: UIViewController, NotificationDetailViewControllerProtocol {
 
     @IBOutlet weak var notificationMessageLabel: UILabel!
     @IBOutlet weak var notificationTitleLabel: UILabel!
@@ -21,7 +24,7 @@ class NotificationDetailViewController: UIViewController {
     
     
     @IBOutlet weak var approveButton: UIButton!
-    
+    var presenter: NotificationDetailPresenter?
     var reload: (()-> Void)?
     
     @IBOutlet weak var rejectButton: UIButton!
@@ -38,8 +41,6 @@ class NotificationDetailViewController: UIViewController {
 //            CoreDataManager.shared.saveOrUpdateGeneralNotifyInDB(notificationData)
         }
        
-//        approveButton.isHidden = true
-//        rejectButton.isHidden = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -48,13 +49,31 @@ class NotificationDetailViewController: UIViewController {
         
     }
     
+    func showMessage(message: String) {
+        self.showAlertWithCompletion(title: "", message: message) {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     @IBAction func approveTapped(_ sender: Any) {
         self.dismiss(animated: true)
+        if let data = requestData {
+            ConfirmLeaveRequest(leaveId: String(data.id), status: "Approved")
+        }
     }
     
     
     @IBAction func rejectTapped(_ sender: Any) {
         self.dismiss(animated: true)
+        if let data = requestData {
+            ConfirmLeaveRequest(leaveId: String(data.id), status: "Rejected")
+        }
+    }
+    
+    private func ConfirmLeaveRequest(leaveId: String, status: String) {
+    
+        presenter?.updateLeaveRequest(leaveId: leaveId, status: status)
+        
     }
     
     func loadNotificationData() {
