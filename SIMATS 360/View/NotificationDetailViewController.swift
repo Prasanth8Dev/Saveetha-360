@@ -40,7 +40,10 @@ class NotificationDetailViewController: UIViewController, NotificationDetailView
             CoreDataManager.shared.updateGeneralNotifyInDB(notificationData)
 //            CoreDataManager.shared.saveOrUpdateGeneralNotifyInDB(notificationData)
         }
-       
+        if let approvalNotificationData = self.requestData {
+            CoreDataManager.shared.updateApproveNotifyInDB(approvalNotificationData)
+        }
+        dateLabel.isHidden = self.isApproval
     }
     
     override func viewDidDisappear(_ animated: Bool) {

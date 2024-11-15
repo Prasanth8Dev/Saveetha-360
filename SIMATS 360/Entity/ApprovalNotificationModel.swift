@@ -23,6 +23,7 @@ struct RequestData: Codable {
     let startDate, reason: String
     let profileImg: String
     let leaveType: String
+    var isOpened: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case id, campus

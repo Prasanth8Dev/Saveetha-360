@@ -8,10 +8,13 @@
 import UIKit
 protocol SwapDutyViewControllerProtocol: AnyObject {
     func showMessage(message: String)
+    func showStatus(_ data: SwapDutyResponse)
 }
 
-class SwapDutyViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,SwapDutyViewControllerProtocol {
+class SwapDutyViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,SwapDutyViewControllerProtocol, UITableViewDelegate, UITableViewDataSource {
+    
 
+    @IBOutlet weak var swapStatusTableview: UITableView!
     @IBOutlet weak var bioIdLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     var groupResponse: GroupResponseModel?
@@ -23,6 +26,7 @@ class SwapDutyViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var dutyPendingTF: UITextField!
     let pickerView = UIPickerView()
     var swapPresenter: SwapDutyPresenterProtocol?
+    var swapDutystatus: SwapDutyResponse?
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
@@ -32,6 +36,8 @@ class SwapDutyViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         pickerView.dataSource = self
         employeeListTF.inputView = pickerView
         dutyPendingTF.inputView = pickerView
+        swapStatusTableview.delegate = self
+        swapStatusTableview.dataSource = self
         
         if let data = pendingDuty, data.isEmpty {
             dutyPendingTF.isUserInteractionEnabled = false
@@ -40,6 +46,17 @@ class SwapDutyViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             employeeListTF.isUserInteractionEnabled = false
         }
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let bioId = Constants.profileData.userData.first?.bioID {
+            swapPresenter?.fetchSwapStatus(bioId: String(bioId))
+        }
+    }
+    
+    func showStatus(_ data: SwapDutyResponse) {
+        self.swapDutystatus = data
+        swapStatusTableview.reloadData()
     }
     
     func createToolbar() {
@@ -157,5 +174,25 @@ class SwapDutyViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         } else {
             
         }
+    }
+ // MARK: - TableView Methods
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.swapDutystatus?.swapDutyData.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = swapStatusTableview.dequeueReusableCell(withIdentifier: "SwapStatusTableViewCell", for: indexPath) as! SwapStatusTableViewCell
+        if let statusData = self.swapDutystatus?.swapDutyData[indexPath.row] {
+            cell.nameLabel.text = statusData.empName
+            cell.dutyDateLabel.text = statusData.date
+            cell.dutyStatusLabel.text = statusData.dutyStatus
+            cell.dutyStatusImage.image = UIImage(named: statusData.dutyStatus.lowercased().contains("pending") ? "yellowDot" : "greenDot")
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }

@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="24B83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ApproveNotification" representedClassName="ApproveNotification" syncable="YES" codeGenerationType="class">
+        <attribute name="bioId" optional="YES" attributeType="String"/>
+        <attribute name="campus" optional="YES" attributeType="String"/>
+        <attribute name="designation" optional="YES" attributeType="String"/>
+        <attribute name="employeeName" optional="YES" attributeType="String"/>
+        <attribute name="isOpened" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="leaveCategory" optional="YES" attributeType="String"/>
+        <attribute name="leaveType" optional="YES" attributeType="String"/>
+        <attribute name="notificationId" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="profileImg" optional="YES" attributeType="String"/>
+        <attribute name="reason" optional="YES" attributeType="String"/>
+        <attribute name="startDate" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="GeneralNotification" representedClassName="GeneralNotification" syncable="YES" codeGenerationType="class">
         <attribute name="isOpened" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="notificationCategory" optional="YES" attributeType="String"/>

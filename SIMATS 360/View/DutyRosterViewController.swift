@@ -95,13 +95,29 @@ class DutyRosterViewController: UIViewController, DutyRosterViewControllerProtoc
     }
     
     @objc private func doneFromDate() {
+        fromDateTF.text = formatDate(fromDatePicker.date) // Fetch the current date from the picker
         fromDateTF.resignFirstResponder()
+        triggerAPICallIfNeeded()
     }
-    
+
     @objc private func doneToDate() {
+        toDateTF.text = formatDate(toDatePicker.date) // Fetch the current date from the picker
         toDateTF.resignFirstResponder()
+        triggerAPICallIfNeeded()
     }
     
+    private func triggerAPICallIfNeeded() {
+        guard let fromDateText = fromDateTF.text, !fromDateText.isEmpty,
+              let toDateText = toDateTF.text, !toDateText.isEmpty else {
+            return // Both dates must be selected to call the API
+        }
+
+        if let bioID = Constants.profileData.userData.first?.bioID,
+           let campus = Constants.profileData.userData.first?.campus {
+            presenter?.dutyRosterData(fromDate: fromDateText, toDate: toDateText, campus: campus, bioId: String(bioID))
+            print("API Called: From Date: \(fromDateText), To Date: \(toDateText)")
+        }
+    }
     private func createToolbar(for selector: Selector) -> UIToolbar {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -133,6 +149,9 @@ class DutyRosterViewController: UIViewController, DutyRosterViewControllerProtoc
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dutyRosterTableview.deselectRow(at: indexPath, animated: true)
     }
 }
 

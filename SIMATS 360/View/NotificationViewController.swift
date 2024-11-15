@@ -62,8 +62,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         
         dispatchgroup.notify(queue: DispatchQueue.main) {
             let unopenedCounts = self.genaralNotificationData?.filter({$0.isOpened == false})
+            let unReadApprovalCounts = self.approvalNotificationData?.filter({$0.isOpened == false})
             self.notificationSegment.setTitle("Announcement (\(unopenedCounts?.count ?? 0))", forSegmentAt: 0)
-            self.notificationSegment.setTitle("Approval (\(self.approvalNotificationData?.count ?? 0))", forSegmentAt: 1)
+            self.notificationSegment.setTitle("Approval (\(unReadApprovalCounts?.count ?? 0))", forSegmentAt: 1)
             self.tableViewReload()
         }
     }
@@ -108,8 +109,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func showApprovalNotification(data: ApprovalNotificationModel) {
-        self.approvalNotificationData = data.notificationData
-        
+        data.notificationData.forEach({ data in
+            CoreDataManager.shared.saveApproveNotifyInDB(data)
+        })
+        fetchApproveNotificationsFromDB()
+    }
+    
+    private func fetchApproveNotificationsFromDB() {
+        self.approvalNotificationData = CoreDataManager.shared.fetchAllApproveNotification()
+        tableViewReload()
     }
     
     private func tableViewReload() {
@@ -161,6 +169,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             if let notificationdata = self.approvalNotificationData {
                 cell.titleLabel.text = "Leave Request" /*notificationdata[indexPath.row].notificationTitle*/
                 cell.descriptionLabel.text = notificationdata[indexPath.row].reason
+                cell.iconImg.image = UIImage(named:  notificationdata[indexPath.row].isOpened ? "read" : "unread")
             }
             cell.imgView.makeCircular()
             DynamicCell = cell
@@ -190,6 +199,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 let detailNotificationVC = NotificationDetailsRouter.createRouter() as! NotificationDetailViewController
                 detailNotificationVC.requestData = approvalNotificationdata[indexPath.row]
                 detailNotificationVC.isApproval = true
+                
+                detailNotificationVC.reload = { [weak self] in
+                    self?.fetchApproveNotificationsFromDB()
+                }
               //  self.present(detailNotificationVC, animated: true)
                self.navigationController?.pushViewController(detailNotificationVC, animated: true)
             }
