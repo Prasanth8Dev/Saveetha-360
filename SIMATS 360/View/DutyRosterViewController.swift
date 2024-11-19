@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 protocol DutyRosterViewControllerProtocol{
     func showDutyData(_ data: DutyRosterModel)
     func showMessage(message: String)
@@ -139,6 +140,7 @@ class DutyRosterViewController: UIViewController, DutyRosterViewControllerProtoc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dutyRosterTableview.dequeueReusableCell(withIdentifier: "DutyRosterTableViewCell", for: indexPath) as! DutyRosterTableViewCell
+        cell.selectionStyle = .none
         if let data = self.rosterData?.data[indexPath.row] {
             cell.nameLabel.text = data.empName
             cell.dutyScheduleLabel.text = "Scheduled for \(data.shift)"

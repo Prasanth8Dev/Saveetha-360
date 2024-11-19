@@ -44,28 +44,31 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         initNavigationBar()
         fetchNotification()
         fetchGeneralNotificationFromDB()
+        fetchApproveNotificationsFromDB()
     }
     
     func fetchNotification() {
-        let dispatchgroup = DispatchGroup()
-
-        dispatchgroup.enter()
-        notificationPresenter?.fetchGeneralNotification(completionHandler: {
-            dispatchgroup.leave()
-        })
-        if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus {
+        if let campus = Constants.profileData.userData.first?.campus {
+            let dispatchgroup = DispatchGroup()
+            
             dispatchgroup.enter()
-            notificationPresenter?.fetchApprovalNotification(bioId: String(bioId), campus: campus, completionHandler: {
+            notificationPresenter?.fetchGeneralNotification(campus: campus, completionHandler: {
                 dispatchgroup.leave()
             })
-        }
-        
-        dispatchgroup.notify(queue: DispatchQueue.main) {
-            let unopenedCounts = self.genaralNotificationData?.filter({$0.isOpened == false})
-            let unReadApprovalCounts = self.approvalNotificationData?.filter({$0.isOpened == false})
-            self.notificationSegment.setTitle("Announcement (\(unopenedCounts?.count ?? 0))", forSegmentAt: 0)
-            self.notificationSegment.setTitle("Approval (\(unReadApprovalCounts?.count ?? 0))", forSegmentAt: 1)
-            self.tableViewReload()
+            if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus {
+                dispatchgroup.enter()
+                notificationPresenter?.fetchApprovalNotification(bioId: String(bioId), campus: campus, completionHandler: {
+                    dispatchgroup.leave()
+                })
+            }
+            
+            dispatchgroup.notify(queue: DispatchQueue.main) {
+                let unopenedCounts = self.genaralNotificationData?.filter({$0.isOpened == false})
+                let unReadApprovalCounts = self.approvalNotificationData?.filter({$0.isOpened == false})
+                self.notificationSegment.setTitle("Announcement (\(unopenedCounts?.count ?? 0))", forSegmentAt: 0)
+                self.notificationSegment.setTitle("Approval (\(unReadApprovalCounts?.count ?? 0))", forSegmentAt: 1)
+                self.tableViewReload()
+            }
         }
     }
     
@@ -102,17 +105,29 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     func showGeneralNotification(data: NotificationModel) {
        // self.genaralNotificationData = data.notificationData
-        data.notificationData.forEach({ data in
-            CoreDataManager.shared.saveGeneralNotifyInDB(data)
-        })
-        fetchGeneralNotificationFromDB()
+        if data.notificationData.count > 0 {
+            CoreDataManager.shared.saveGeneralNotifyInDB(data.notificationData)
+//            data.notificationData.forEach({ data in
+//                CoreDataManager.shared.saveGeneralNotifyInDB(data)
+//            })
+            fetchGeneralNotificationFromDB()
+        } else {
+            CoreDataManager.shared.deleteAllGeneralNotifications()
+        }
+        
     }
     
     func showApprovalNotification(data: ApprovalNotificationModel) {
-        data.notificationData.forEach({ data in
-            CoreDataManager.shared.saveApproveNotifyInDB(data)
-        })
-        fetchApproveNotificationsFromDB()
+        if data.notificationData.count > 0 {
+            CoreDataManager.shared.saveApproveNotifyInDB(data.notificationData)
+//            data.notificationData.forEach({ data in
+//                CoreDataManager.shared.saveApproveNotifyInDB(data)
+//            })
+            fetchApproveNotificationsFromDB()
+        } else {
+            CoreDataManager.shared.deleteAllApproveNotifications()
+        }
+        
     }
     
     private func fetchApproveNotificationsFromDB() {

@@ -11,75 +11,193 @@ import UIKit
 
 class CoreDataManager {
     static let shared = CoreDataManager()
-
-    func saveGeneralNotifyInDB(_ notificationData: NotificationData) {
+    
+    func saveGeneralNotifyInDB(_ notificationDataArray: [NotificationData]) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
         
         let fetchRequest: NSFetchRequest<GeneralNotification> = GeneralNotification.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "notificationId == %d", notificationData.notificationID)
         
         do {
-            let results = try managedContext.fetch(fetchRequest)
+            // Fetch all existing notifications
+            let existingNotifications = try managedContext.fetch(fetchRequest)
+            let existingNotificationIDs = Set(existingNotifications.map { $0.notificationId })
             
-            // Only add new notification if no existing entry is found
-            if results.isEmpty {
-                if let entity = NSEntityDescription.entity(forEntityName: "GeneralNotification", in: managedContext) {
-                    let details = GeneralNotification(entity: entity, insertInto: managedContext)
-                    details.notificationId = Int64(notificationData.notificationID)
-                    details.notificationTitle = notificationData.notificationTitle
-                    details.notificationMessage = notificationData.notificationMessage
-                    details.notificationCategory = notificationData.notificationCategory
-                    details.notificationSenderId = Int64(notificationData.notificationSenderID)
-                    details.notificationReceiverId = Int64(notificationData.notificationReceiverID)
-                    details.isOpened = false
-                }
+            // Track incoming notification IDs
+            var incomingNotificationIDs = Set<Int64>()
+            
+            // Add or update notifications from the incoming array
+            for notificationData in notificationDataArray {
+                incomingNotificationIDs.insert(Int64(notificationData.notificationID))
                 
-                appDelegate.saveContext()
-            } else {
-                print("Notification with ID \(notificationData.notificationID) already exists.")
+                // Check if the current notification already exists
+                if !existingNotificationIDs.contains(Int64(notificationData.notificationID)) {
+                    // Add new notification if it doesn't exist
+                    if let entity = NSEntityDescription.entity(forEntityName: "GeneralNotification", in: managedContext) {
+                        let details = GeneralNotification(entity: entity, insertInto: managedContext)
+                        details.notificationId = Int64(notificationData.notificationID)
+                        details.notificationTitle = notificationData.notificationTitle
+                        details.notificationMessage = notificationData.notificationMessage
+                        details.notificationCategory = notificationData.notificationCategory
+                        details.notificationSenderId = Int64(notificationData.notificationSenderID)
+                        details.notificationReceiverId = Int64(notificationData.notificationReceiverID)
+                        details.isOpened = false
+                    }
+                }
             }
+            
+            // Remove notifications not present in the incoming array
+            for notification in existingNotifications {
+                if !incomingNotificationIDs.contains(notification.notificationId) {
+                    managedContext.delete(notification)
+                }
+            }
+            
+            // Save changes to persist additions and deletions
+            try managedContext.save()
+            print("Notifications updated successfully.")
         } catch {
-            print("Failed to fetch notifications: \(error.localizedDescription)")
+            print("Failed to fetch or save notifications: \(error.localizedDescription)")
         }
     }
-    func saveApproveNotifyInDB(_ notificationData: RequestData) {
+
+
+//    func saveGeneralNotifyInDB(_ notificationData: NotificationData) {
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+//        let managedContext = appDelegate.persistentContainer.viewContext
+//        
+//        let fetchRequest: NSFetchRequest<GeneralNotification> = GeneralNotification.fetchRequest()
+//        
+//        do {
+//            // Fetch all existing notifications
+//            let results = try managedContext.fetch(fetchRequest)
+//            var existingNotificationIDs = results.map { $0.notificationId }
+//            
+//            // Check if the current notification already exists
+//            if !existingNotificationIDs.contains(Int64(notificationData.notificationID)) {
+//                // Add new notification if it doesn't exist
+//                if let entity = NSEntityDescription.entity(forEntityName: "GeneralNotification", in: managedContext) {
+//                    let details = GeneralNotification(entity: entity, insertInto: managedContext)
+//                    details.notificationId = Int64(notificationData.notificationID)
+//                    details.notificationTitle = notificationData.notificationTitle
+//                    details.notificationMessage = notificationData.notificationMessage
+//                    details.notificationCategory = notificationData.notificationCategory
+//                    details.notificationSenderId = Int64(notificationData.notificationSenderID)
+//                    details.notificationReceiverId = Int64(notificationData.notificationReceiverID)
+//                    details.isOpened = false
+//                }
+//                appDelegate.saveContext()
+//            } else {
+//                print("Notification with ID \(notificationData.notificationID) already exists.")
+//            }
+//            
+//            // Remove notifications not matching the current data
+////            for notification in results {
+////                if notification.notificationId != Int64(notificationData.notificationID) {
+////                    managedContext.delete(notification)
+////                }
+////            }
+////            
+//            // Save changes after deletion
+//            try managedContext.save()
+//        } catch {
+//            print("Failed to fetch or save notifications: \(error.localizedDescription)")
+//        }
+//    }
+
+    
+    func deleteAllGeneralNotifications() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = GeneralNotification.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            // Execute the batch delete request
+            try managedContext.execute(deleteRequest)
+            // Save changes to persist deletion
+            try managedContext.save()
+            print("All approve notifications have been deleted.")
+        } catch {
+            print("Failed to delete all approve notifications: \(error.localizedDescription)")
+        }
+    }
+    
+    func deleteAllApproveNotifications() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = ApproveNotification.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            // Execute the batch delete request
+            try managedContext.execute(deleteRequest)
+            // Save changes to persist deletion
+            try managedContext.save()
+            print("All approve notifications have been deleted.")
+        } catch {
+            print("Failed to delete all approve notifications: \(error.localizedDescription)")
+        }
+    }
+
+    func saveApproveNotifyInDB(_ notificationDataArray: [RequestData]) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
         
         let fetchRequest: NSFetchRequest<ApproveNotification> = ApproveNotification.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "notificationId == %d", notificationData.id)
         
         do {
-            let results = try managedContext.fetch(fetchRequest)
+            // Fetch all existing notifications
+            let existingNotifications = try managedContext.fetch(fetchRequest)
+            let existingNotificationIDs = Set(existingNotifications.compactMap { $0.notificationId })
             
-            // Only add new notification if no existing entry is found
-            if results.isEmpty {
-                if let entity = NSEntityDescription.entity(forEntityName: "ApproveNotification", in: managedContext) {
-                    let details = ApproveNotification(entity: entity, insertInto: managedContext)
-                    //let details = GeneralNotification(entity: entity, insertInto: managedContext)
-                    details.notificationId = String(notificationData.id)
-                    details.leaveCategory = notificationData.leaveCategory
-                    details.bioId = String(notificationData.bioID)
-                    details.campus = notificationData.campus
-                    details.employeeName = String(notificationData.employeeName)
-                    details.phone = (notificationData.phone)
-                    details.designation = notificationData.designation
-                    details.startDate = notificationData.startDate
-                    details.reason = notificationData.reason
-                    details.leaveType = notificationData.leaveType
-                    details.isOpened = false
-                    details.profileImg = notificationData.profileImg
-                }
+            // Track incoming notification IDs
+            var incomingNotificationIDs = Set<String>()
+            
+            // Add or update notifications from the incoming array
+            for notificationData in notificationDataArray {
+                let currentNotificationID = String(notificationData.id)
+                incomingNotificationIDs.insert(currentNotificationID)
                 
-                appDelegate.saveContext()
-            } else {
-                print("Notification with ID \(notificationData.id) already exists.")
+                // Check if the current notification already exists
+                if !existingNotificationIDs.contains(currentNotificationID) {
+                    // Add new notification if it doesn't exist
+                    if let entity = NSEntityDescription.entity(forEntityName: "ApproveNotification", in: managedContext) {
+                        let details = ApproveNotification(entity: entity, insertInto: managedContext)
+                        details.notificationId = currentNotificationID
+                        details.leaveCategory = notificationData.leaveCategory
+                        details.bioId = String(notificationData.bioID)
+                        details.campus = notificationData.campus
+                        details.employeeName = String(notificationData.employeeName)
+                        details.phone = notificationData.phone
+                        details.designation = notificationData.designation
+                        details.startDate = notificationData.startDate
+                        details.reason = notificationData.reason
+                        details.leaveType = notificationData.leaveType
+                        details.isOpened = false
+                        details.profileImg = notificationData.profileImg
+                    }
+                }
             }
+            
+            // Remove notifications not present in the incoming array
+            for notification in existingNotifications {
+                if !incomingNotificationIDs.contains(notification.notificationId ?? "") {
+                    managedContext.delete(notification)
+                }
+            }
+            
+            // Save changes to persist additions and deletions
+            try managedContext.save()
+            print("Approve notifications updated successfully.")
         } catch {
-            print("Failed to fetch notifications: \(error.localizedDescription)")
+            print("Failed to fetch or save approve notifications: \(error.localizedDescription)")
         }
     }
+
+
     
     func updateApproveNotifyInDB(_ notificationData: RequestData) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -106,6 +224,7 @@ class CoreDataManager {
                 
                 appDelegate.saveContext()
             }
+            
         } catch {
             print("Failed to fetch or update notification: \(error.localizedDescription)")
         }

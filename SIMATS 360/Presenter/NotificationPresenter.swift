@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol NotificationPresenterProtocol {
-    func fetchGeneralNotification(completionHandler: @escaping()->Void)
+    func fetchGeneralNotification(campus: String,completionHandler: @escaping()->Void)
     func fetchApprovalNotification(bioId: String, campus: String,completionHandler: @escaping()->Void)
 }
 
@@ -21,8 +21,8 @@ class NotificationPresenter: NotificationPresenterProtocol {
     private var cancalable = Set<AnyCancellable>()
     
     
-    func fetchGeneralNotification(completionHandler: @escaping () -> Void) {
-        notificationInteractor?.fetchGeneralNotification().sink(receiveCompletion: { completion in
+    func fetchGeneralNotification(campus: String,completionHandler: @escaping () -> Void) {
+        notificationInteractor?.fetchGeneralNotification(campus: campus).sink(receiveCompletion: { completion in
             switch completion {
             case .finished:
                 break

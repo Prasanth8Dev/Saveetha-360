@@ -13,20 +13,20 @@ protocol SwapDutyViewControllerProtocol: AnyObject {
 
 class SwapDutyViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,SwapDutyViewControllerProtocol, UITableViewDelegate, UITableViewDataSource {
     
-
     @IBOutlet weak var swapStatusTableview: UITableView!
     @IBOutlet weak var bioIdLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var employeeListTF: UITextField!
+    @IBOutlet weak var dutyPendingTF: UITextField!
+    
+    let pickerView = UIPickerView()
+    var swapPresenter: SwapDutyPresenterProtocol?
+    var swapDutystatus: SwapDutyResponse?
     var groupResponse: GroupResponseModel?
     var pendingDuty: [Result]?
     var selectedDutyId = ""
     var selectedBioId = ""
     
-    @IBOutlet weak var employeeListTF: UITextField!
-    @IBOutlet weak var dutyPendingTF: UITextField!
-    let pickerView = UIPickerView()
-    var swapPresenter: SwapDutyPresenterProtocol?
-    var swapDutystatus: SwapDutyResponse?
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
@@ -45,7 +45,6 @@ class SwapDutyViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         if let data = groupResponse?.data.employeeOptions, data.isEmpty {
             employeeListTF.isUserInteractionEnabled = false
         }
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {

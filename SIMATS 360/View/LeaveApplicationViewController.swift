@@ -84,8 +84,12 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
 
     
     private func applyLeave() {
-        guard let imageForm = selectedImage, !selectedDate.isEmpty, let leaveCat = leaveCategory.text, let leaveReason = reasonTextView.text, let leaveSession = leaveSessionTF.text, !leaveReason.isEmpty, !leaveSession.isEmpty, let bioId = Constants.profileData?.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus, let headId = Constants.profileData.userData.first?.headID,let leaveType = leaveTypeTextField.text, !leaveType.isEmpty else {
+        guard let imageForm = selectedImage, let leaveCat = leaveCategory.text, let leaveReason = reasonTextView.text, let leaveSession = leaveSessionTF.text, !leaveReason.isEmpty, !leaveSession.isEmpty, let bioId = Constants.profileData?.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus, let headId = Constants.profileData.userData.first?.headID,let leaveType = leaveTypeTextField.text, !leaveType.isEmpty else {
             self.showAlert(title: "", message: "Some fields are empty")
+            return
+        }
+        guard !selectedDate.isEmpty else {
+            self.showAlert(title: "", message: "Kindly Select the Date")
             return
         }
         let totaldays = leaveType.lowercased() == "full day" ? "1" : "0.5"
