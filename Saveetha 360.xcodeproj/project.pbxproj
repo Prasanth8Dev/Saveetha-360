@@ -86,6 +86,9 @@
 		5D0297232CABF21A0037427C /* InterDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D0296FE2CABF21A0037427C /* InterDisplay-Thin.ttf */; };
 		5D0297242CABF21A0037427C /* InterDisplay-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D0296FF2CABF21A0037427C /* InterDisplay-ThinItalic.ttf */; };
 		5D035A2E2CCCA2D00061D1B6 /* NotificationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D035A2D2CCCA2D00061D1B6 /* NotificationDetailViewController.swift */; };
+		5D149BCA2CEC535E00843B9D /* SwapDutyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D149BC92CEC535E00843B9D /* SwapDutyResponse.swift */; };
+		5D149BCC2CEC764200843B9D /* SwapDutyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D149BCB2CEC764200843B9D /* SwapDutyTableViewCell.swift */; };
+		5D149BCE2CEC8BBA00843B9D /* SwapDutyApprovalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D149BCD2CEC8BBA00843B9D /* SwapDutyApprovalModel.swift */; };
 		5D282BAE2CB65C7200597991 /* DutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D282BAD2CB65C7200597991 /* DutyViewController.swift */; };
 		5D282BB02CB6811D00597991 /* ClaimsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D282BAF2CB6811D00597991 /* ClaimsViewController.swift */; };
 		5D282BB22CB6816000597991 /* SwapDutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D282BB12CB6816000597991 /* SwapDutyViewController.swift */; };
@@ -251,6 +254,9 @@
 		5D0296FF2CABF21A0037427C /* InterDisplay-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "InterDisplay-ThinItalic.ttf"; sourceTree = "<group>"; };
 		5D0297252CABF6BD0037427C /* Inter-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.otf"; sourceTree = "<group>"; };
 		5D035A2D2CCCA2D00061D1B6 /* NotificationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailViewController.swift; sourceTree = "<group>"; };
+		5D149BC92CEC535E00843B9D /* SwapDutyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapDutyResponse.swift; sourceTree = "<group>"; };
+		5D149BCB2CEC764200843B9D /* SwapDutyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapDutyTableViewCell.swift; sourceTree = "<group>"; };
+		5D149BCD2CEC8BBA00843B9D /* SwapDutyApprovalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapDutyApprovalModel.swift; sourceTree = "<group>"; };
 		5D282BAD2CB65C7200597991 /* DutyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutyViewController.swift; sourceTree = "<group>"; };
 		5D282BAF2CB6811D00597991 /* ClaimsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsViewController.swift; sourceTree = "<group>"; };
 		5D282BB12CB6816000597991 /* SwapDutyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapDutyViewController.swift; sourceTree = "<group>"; };
@@ -360,10 +366,12 @@
 				5DA6C1542CE70BA200CCC6DF /* SwapDutyStatusModel.swift */,
 				5DEBFF7C2CCF900900250FDA /* DutyDataModel.swift */,
 				5DE9E43B2CE46A9400B6CA3E /* DutyRosterModel.swift */,
+				5D149BC92CEC535E00843B9D /* SwapDutyResponse.swift */,
 				5D571A5A2CCF55B300D0067D /* ApprovalNotificationModel.swift */,
 				5DE9E4312CE45D3400B6CA3E /* LeaveUpdateModel.swift */,
 				5D5E251A2CD0E0AA00C6F4D2 /* ClaimsDataModel.swift */,
 				5D3CE9CB2CC7613B00F22BE0 /* LeaveDetailModel.swift */,
+				5D149BCD2CEC8BBA00843B9D /* SwapDutyApprovalModel.swift */,
 				5DEBFF782CCF67F300250FDA /* DutyCountModel.swift */,
 				5DA9F10B2CC8B21500F97E25 /* ApplyLeaveModel.swift */,
 				23788DD72CC24B8D003CBEE1 /* SalaryReportResponse.swift */,
@@ -587,6 +595,7 @@
 			children = (
 				5D2B58232CB3E9A500976E7A /* BufferTimeTableViewCell.swift */,
 				5D3CE9C72CC75EB300F22BE0 /* LeaveDatailTableViewCell.swift */,
+				5D149BCB2CEC764200843B9D /* SwapDutyTableViewCell.swift */,
 				5DA6C1522CE70A9200CCC6DF /* SwapStatusTableViewCell.swift */,
 				5DE9E4432CE472C700B6CA3E /* DutyRosterTableViewCell.swift */,
 			);
@@ -786,12 +795,14 @@
 				5DA486A82CAE587B009E0A56 /* NotificationTableViewCell.swift in Sources */,
 				5D5E251F2CD0E8F200C6F4D2 /* ClaimsResponseModel.swift in Sources */,
 				5D0296D12CABE80E0037427C /* UIColorExtension.swift in Sources */,
+				5D149BCE2CEC8BBA00843B9D /* SwapDutyApprovalModel.swift in Sources */,
 				23283A982CBCD82100E9DB0F /* LoginRouter.swift in Sources */,
 				5DA6C1552CE70BA200CCC6DF /* SwapDutyStatusModel.swift in Sources */,
 				23283A922CBCD5DE00E9DB0F /* LoginResponseModel.swift in Sources */,
 				23283AAD2CBD21D100E9DB0F /* Utils.swift in Sources */,
 				5D0296CB2CABE77F0037427C /* EmployeeTabBarViewController.swift in Sources */,
 				5DA9F1102CC8B49300F97E25 /* LeaveApplyPresenter.swift in Sources */,
+				5D149BCA2CEC535E00843B9D /* SwapDutyResponse.swift in Sources */,
 				5DA486AC2CAE9306009E0A56 /* SalaryReportTableViewCell.swift in Sources */,
 				5D92CE2A2CC623050098560F /* HomePresenter.swift in Sources */,
 				5DA9F1122CC8B7E700F97E25 /* ApplyLeaveRouter.swift in Sources */,
@@ -807,6 +818,7 @@
 				5DE9E4322CE45D3400B6CA3E /* LeaveUpdateModel.swift in Sources */,
 				5DEBFF7B2CCF8F5400250FDA /* DutyInteractor.swift in Sources */,
 				5D92CE2E2CC62F850098560F /* AvailableLeaveModel.swift in Sources */,
+				5D149BCC2CEC764200843B9D /* SwapDutyTableViewCell.swift in Sources */,
 				5D90F9DF2CCB950A00ACF856 /* NotificationInteractor.swift in Sources */,
 				5DDFD69E2CE1FEF4002A01F2 /* GroupResponseModel.swift in Sources */,
 				5D0296D32CABE80E0037427C /* UIImageExtension.swift in Sources */,

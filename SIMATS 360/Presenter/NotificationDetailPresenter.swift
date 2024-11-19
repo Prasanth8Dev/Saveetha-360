@@ -10,9 +10,12 @@ import Combine
 
 protocol NotificationDetailPresenterProtocol {
     func updateLeaveRequest(leaveId: String, status: String)
+    func updateSwapRequest(swapId: String, status: String)
 }
 
 class NotificationDetailPresenter: NotificationDetailPresenterProtocol {
+   
+    
     var view: NotificationDetailViewControllerProtocol?
     var interactor: NotificationDetailsInteractor?
     private var cancellables = Set<AnyCancellable>()
@@ -21,6 +24,24 @@ class NotificationDetailPresenter: NotificationDetailPresenterProtocol {
         interactor?.updateLeaveRequest(leaveId: leaveId, status: status).sink(receiveCompletion: { completion in
             switch completion {
             case .finished:
+                break
+            case .failure(let err):
+                self.view?.showMessage(message: err.localizedDescription)
+            }
+        }, receiveValue: { response in
+            if response.status {
+                self.view?.showMessage(message: response.message)
+            } else {
+                self.view?.showMessage(message: response.message)
+            }
+        })
+        .store(in: &cancellables)
+    }
+    
+    func updateSwapRequest(swapId: String, status: String) {
+        interactor?.updateSwapRequest(swapId: swapId, status: status).sink(receiveCompletion: { completion in
+            switch completion {
+                case .finished:
                 break
             case .failure(let err):
                 self.view?.showMessage(message: err.localizedDescription)

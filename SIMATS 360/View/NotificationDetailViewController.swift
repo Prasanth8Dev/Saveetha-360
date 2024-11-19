@@ -10,7 +10,7 @@ protocol NotificationDetailViewControllerProtocol {
     func showMessage(message: String)
 }
 
-class NotificationDetailViewController: UIViewController, NotificationDetailViewControllerProtocol {
+class NotificationDetailViewController: UIViewController, NotificationDetailViewControllerProtocol, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var notificationMessageLabel: UILabel!
     @IBOutlet weak var notificationTitleLabel: UILabel!
@@ -23,6 +23,7 @@ class NotificationDetailViewController: UIViewController, NotificationDetailView
     @IBOutlet weak var namelabel: UILabel!
     
     
+    @IBOutlet weak var swapView: UIView!
     @IBOutlet weak var approveButton: UIButton!
     var presenter: NotificationDetailPresenter?
     var reload: (()-> Void)?
@@ -30,11 +31,19 @@ class NotificationDetailViewController: UIViewController, NotificationDetailView
     @IBOutlet weak var rejectButton: UIButton!
     var notificationData: NotificationData?
     var requestData: RequestData?
+    var swapNotificationData: SwapDutyNotification?
     var isGeneral: Bool = false
     var isApproval: Bool = false
     var isSwapDuty: Bool = false
+    
+    @IBOutlet weak var swapTimingTableView: UITableView!
+    
+    @IBOutlet weak var swapDutyTimeLabel: UILabel!
+    @IBOutlet weak var swapNameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        swapView.isHidden = !isSwapDuty
         loadNotificationData()
         if let notificationData = self.notificationData {
             CoreDataManager.shared.updateGeneralNotifyInDB(notificationData)
@@ -73,10 +82,22 @@ class NotificationDetailViewController: UIViewController, NotificationDetailView
         }
     }
     
-    private func ConfirmLeaveRequest(leaveId: String, status: String) {
-    
-        presenter?.updateLeaveRequest(leaveId: leaveId, status: status)
+    @IBAction func swapRejectTapped(_ sender: Any) {
+        if let swapId = self.swapNotificationData?.swapId {
+            presenter?.updateSwapRequest(swapId: String(swapId), status: "Rejected")
+        }
         
+    }
+    
+    @IBAction func swapApproveTapped(_ sender: Any) {
+        if let swapId = self.swapNotificationData?.swapId {
+            presenter?.updateSwapRequest(swapId: String(swapId), status: "Approved")
+        }
+    }
+
+    
+    private func ConfirmLeaveRequest(leaveId: String, status: String) {
+        presenter?.updateLeaveRequest(leaveId: leaveId, status: status)
     }
     
     func loadNotificationData() {
@@ -113,7 +134,38 @@ class NotificationDetailViewController: UIViewController, NotificationDetailView
                 rejectButton.isHidden = false
             }
         } else if isSwapDuty {
-            
+            if let swapData = self.swapNotificationData {
+               
+                swapNameLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Name: \(swapData.empName)", colorHex:  "#000000", font: UIFont.systemFont(ofSize: 8), length: 5)
+                swapDutyTimeLabel.attributedText = Utils.attributedStringWithColorAndFont(text:  "Shift: \(swapData.shift)", colorHex:  "#000000", font: UIFont.systemFont(ofSize: 8), length: 6)
+                swapTimingTableView.delegate = self
+                swapTimingTableView.dataSource = self
+                swapTimingTableView.rowHeight = UITableView.automaticDimension
+                swapTimingTableView.estimatedRowHeight = 60
+                swapTimingTableView.reloadData()
+            }
         }
+    }
+    
+  // MARK: - TableView
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.swapNotificationData?.swipesData.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = swapTimingTableView.dequeueReusableCell(withIdentifier: "SwapDutyTableViewCell", for: indexPath) as! SwapDutyTableViewCell
+        if let data = self.swapNotificationData?.swipesData, let swipesData = data.first?.swipes {
+            cell.dayLabel.text = data.first?.day
+            if !swipesData[0].swipeTime.isEmpty {
+                cell.day1Label.text = swipesData[0].swipeTime
+            }
+            if !swipesData[1].swipeTime.isEmpty {
+                cell.day2Label.text = swipesData[1].swipeTime
+            }
+            if !swipesData[2].swipeTime.isEmpty {
+                cell.day3Label.text = swipesData[2].swipeTime
+            }
+        }
+        return cell
     }
 }

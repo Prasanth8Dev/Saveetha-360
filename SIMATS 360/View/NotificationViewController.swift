@@ -10,11 +10,12 @@ import UIKit
 protocol NotificationViewControllerProtocol: AnyObject {
     func showGeneralNotification(data: NotificationModel)
     func showApprovalNotification(data: ApprovalNotificationModel)
+    func showSwapNotification(data: SwapDutyDataResponse)
     func showAlert(message: String)
 }
 
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NotificationViewControllerProtocol {
-
+   
     @IBOutlet weak var notificationSegment: UISegmentedControl!
     @IBOutlet weak var notificationTableView: UITableView! {
         didSet {
@@ -26,6 +27,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     var notificationPresenter: NotificationPresenterProtocol?
     var genaralNotificationData: [NotificationData]?
     var approvalNotificationData: [RequestData]?
+    var swapNotifications: SwapDutyDataResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +62,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 notificationPresenter?.fetchApprovalNotification(bioId: String(bioId), campus: campus, completionHandler: {
                     dispatchgroup.leave()
                 })
+                
+                dispatchgroup.enter()
+                notificationPresenter?.fetchSwapNotifications(bioId: String(bioId), campus: campus, completionHandler: {
+                    dispatchgroup.leave()
+                })
             }
             
             dispatchgroup.notify(queue: DispatchQueue.main) {
@@ -67,6 +74,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 let unReadApprovalCounts = self.approvalNotificationData?.filter({$0.isOpened == false})
                 self.notificationSegment.setTitle("Announcement (\(unopenedCounts?.count ?? 0))", forSegmentAt: 0)
                 self.notificationSegment.setTitle("Approval (\(unReadApprovalCounts?.count ?? 0))", forSegmentAt: 1)
+                self.notificationSegment.setTitle("Swap", forSegmentAt: 2)
                 self.tableViewReload()
             }
         }
@@ -117,6 +125,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         
     }
     
+    
+    func showSwapNotification(data: SwapDutyDataResponse) {
+        self.swapNotifications = data
+    }
+    
     func showApprovalNotification(data: ApprovalNotificationModel) {
         if data.notificationData.count > 0 {
             CoreDataManager.shared.saveApproveNotifyInDB(data.notificationData)
@@ -136,7 +149,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     private func tableViewReload() {
-        if self.approvalNotificationData?.count ?? 0 > 0 || self.genaralNotificationData?.count ?? 0 > 0 {
+        if self.approvalNotificationData?.count ?? 0 > 0 || self.genaralNotificationData?.count ?? 0 > 0 || self.swapNotifications?.swapDutyNotificationData.count ?? 0 > 0 {
             notificationTableView.reloadData()
         } else {
             // show the alert and hide the table view
@@ -156,13 +169,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             return self.genaralNotificationData?.count ?? 0
         } else if notificationSegment.selectedSegmentIndex == 1 {
             return self.approvalNotificationData?.count ?? 0
+        } else if notificationSegment.selectedSegmentIndex == 2 {
+            return self.swapNotifications?.swapDutyNotificationData .count ?? 0
         } else {
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var DynamicCell = UITableViewCell()
+        var dynamicCell = UITableViewCell()
         if notificationSegment.selectedSegmentIndex == 0 {
            let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
             cell.imgView.image = UIImage(named: "Frame")
@@ -175,7 +190,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             }
             
             cell.imgView.makeCircular()
-            DynamicCell = cell
+            dynamicCell = cell
         } else if notificationSegment.selectedSegmentIndex == 1 {
             let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
             cell.imgView.image = UIImage(named: "approvalImg")
@@ -187,10 +202,18 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 cell.iconImg.image = UIImage(named:  notificationdata[indexPath.row].isOpened ? "read" : "unread")
             }
             cell.imgView.makeCircular()
-            DynamicCell = cell
+            dynamicCell = cell
+        } else if notificationSegment.selectedSegmentIndex == 2 {
+            let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
+            if let swapNotificationData = self.swapNotifications?.swapDutyNotificationData[indexPath.row] {
+                cell.titleLabel.text = "Swap Request \n \(swapNotificationData.empName)"
+                cell.descriptionLabel.text = "\(swapNotificationData.shift)"
+            }
+            dynamicCell = cell
         }
-        DynamicCell.selectionStyle = .none
-        return DynamicCell
+        
+        dynamicCell.selectionStyle = .none
+        return dynamicCell
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -209,7 +232,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 }
                 self.present(detailNotificationVC, animated: true)
             }
-        } else {
+        } else if notificationSegment.selectedSegmentIndex == 1 {
             if let approvalNotificationdata = self.approvalNotificationData {
                 let detailNotificationVC = NotificationDetailsRouter.createRouter() as! NotificationDetailViewController
                 detailNotificationVC.requestData = approvalNotificationdata[indexPath.row]
@@ -220,6 +243,13 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 }
               //  self.present(detailNotificationVC, animated: true)
                self.navigationController?.pushViewController(detailNotificationVC, animated: true)
+            }
+        } else if notificationSegment.selectedSegmentIndex == 2 {
+            if let swapNotificationData = self.swapNotifications?.swapDutyNotificationData[indexPath.row] {
+                let detailNotificationVC = NotificationDetailsRouter.createRouter() as! NotificationDetailViewController
+                detailNotificationVC.swapNotificationData = swapNotificationData
+                detailNotificationVC.isSwapDuty = true
+                self.navigationController?.pushViewController(detailNotificationVC, animated: true)
             }
         }
     }

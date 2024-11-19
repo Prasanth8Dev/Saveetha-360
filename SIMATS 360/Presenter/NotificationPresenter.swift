@@ -11,10 +11,10 @@ import Combine
 protocol NotificationPresenterProtocol {
     func fetchGeneralNotification(campus: String,completionHandler: @escaping()->Void)
     func fetchApprovalNotification(bioId: String, campus: String,completionHandler: @escaping()->Void)
+    func fetchSwapNotifications(bioId: String, campus: String,completionHandler: @escaping()->Void)
 }
 
 class NotificationPresenter: NotificationPresenterProtocol {
-    
     weak var notificationView: NotificationViewController?
     
     var notificationInteractor: NotificationInteractorProtocol?
@@ -48,6 +48,26 @@ class NotificationPresenter: NotificationPresenterProtocol {
             }
         }, receiveValue: { response in
             self.notificationView?.showApprovalNotification(data: response)
+            completionHandler()
+        })
+        .store(in: &cancalable)
+    }
+    
+    func fetchSwapNotifications(bioId: String, campus: String, completionHandler: @escaping () -> Void) {
+        notificationInteractor?.fetchSwapNotifications(bioId: bioId, campus: campus).sink(receiveCompletion: { completion in
+            switch completion {
+            case .failure(let err):
+                self.notificationView?.showAlert(message: err.localizedDescription)
+                completionHandler()
+            case .finished:
+                break
+            }
+        }, receiveValue: { response in
+            if response.status {
+                self.notificationView?.showSwapNotification(data: response)
+            } else {
+                self.notificationView?.showAlert(message: response.message)
+            }
             completionHandler()
         })
         .store(in: &cancalable)
