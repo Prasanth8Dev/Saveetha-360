@@ -60,23 +60,23 @@ class SalaryDetailsViewController: UIViewController, SalaryDetailsProtocol {
                 taLabel.isHidden = true
                 taValue.isHidden = true
             }
-            basicSalaryValue.text = "\(salaryReportData.earningsBasicSalary)"
-            ccaValue.text = "\(salaryReportData.earningsCCA)"
-            hraValue.text = "\(salaryReportData.earningsHRA)"
-            daValue.text = "\(salaryReportData.earningsDA)"
-            othersValue.text = "\(salaryReportData.earningsOthers)"
-            deductionsValue.text = "-\(salaryReportData.deductionsDeductions)"
+            basicSalaryValue.text = "₹\(salaryReportData.earningsBasicSalary)"
+            ccaValue.text = "₹\(salaryReportData.earningsCCA)"
+            hraValue.text = "₹\(salaryReportData.earningsHRA)"
+            daValue.text = "₹\(salaryReportData.earningsDA)"
+            othersValue.text = "₹\(salaryReportData.earningsOthers)"
+            deductionsValue.text = "₹-\(salaryReportData.deductionsDeductions)"
             earnings -= salaryReportData.deductionsDeductions
-            totalValue.text = "\(earnings)"
+            totalValue.text = "₹\(earnings)"
             
             if let pf = salaryReportData.deductionsPF {
-                pfValue.text = "-\(pf)"
+                pfValue.text = "₹-\(pf)"
             } else {
                 pfLabel.isHidden = true
                 pfValue.isHidden = true
             }
             if let esi = salaryReportData.deductionsESI, !esi.isEmpty {
-                esiValue.text = "-\(esi)"
+                esiValue.text = "₹-\(esi)"
             } else {
                 esiValue.isHidden = true
                 esiLabel.isHidden = true
