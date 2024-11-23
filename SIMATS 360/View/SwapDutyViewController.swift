@@ -48,7 +48,7 @@ class SwapDutyViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let bioId = Constants.profileData.userData.first?.bioID {
+        if let bioId = Constants.profileData.userData?.first?.bioID {
             swapPresenter?.fetchSwapStatus(bioId: String(bioId))
         }
     }
@@ -90,14 +90,14 @@ class SwapDutyViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             self.showAlert(title: "", message: "Kindly choose all the fields")
             return
         }
-        if let bioId = Constants.profileData.userData.first?.bioID {
+        if let bioId = Constants.profileData.userData?.first?.bioID {
             swapPresenter?.swapDutyRequest(reqFromId: String(bioId), reqToId: selectedBioId, dutyId: selectedDutyId)
         }
         
     }
     
     private func loadUserData() {
-        if let name = Constants.profileData.userData.first?.userName, let bioId = Constants.profileData.userData.first?.bioID {
+        if let name = Constants.profileData.userData?.first?.userName, let bioId = Constants.profileData.userData?.first?.bioID {
             userNameLabel.text = name
             bioIdLabel.text = "Bio ID: \(bioId)"
         }

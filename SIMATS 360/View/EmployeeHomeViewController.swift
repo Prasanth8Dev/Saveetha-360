@@ -63,13 +63,35 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     }
     
     private func loadProfileData() {
-        if let userData = loginresponse?.userData.first {
-            bioIdLabel.text = "Bio Id:\(String(userData.bioID))"
-            userNameLabel.text = userData.userName
+        guard let userData = loginresponse?.userData?.first else {
+            print("No user data available")
+            return
+        }
+
+        setBioIDLabel(from: userData)
+        setUserNameLabel(from: userData)
+        loadProfileImage(from: userData)
+    }
+
+    private func setBioIDLabel(from userData: UserData) {
+        if let bioID = userData.bioID {
+            bioIdLabel.text = "Bio Id: \(bioID)"
+        } else {
+            bioIdLabel.text = "Bio Id: Not available"
+        }
+    }
+
+    private func setUserNameLabel(from userData: UserData) {
+        userNameLabel.text = userData.userName ?? "No username available"
+    }
+
+    private func loadProfileImage(from userData: UserData) {
+        if let profileImg = userData.profileImgURL {
             DispatchQueue.main.async {
-                //guard let `self` = self else {return}
-                self.profileImgView.loadImage(from: userData.profileImgURL)
+                self.profileImgView.loadImage(from: profileImg)
             }
+        } else {
+            print("Profile image URL not available")
         }
     }
     
@@ -172,7 +194,7 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     }
     
     private func fetchHomeData() {
-        if let userData = Constants.profileData.userData.first {
+        if let userData = Constants.profileData.userData?.first,  let bioID = userData.bioID , let campus = userData.campus, let category = userData.category {
             self.view.startLoader()
             let date = Utils.getCurrentDateInYearMonthFormat()
             //let yearMonth = date.split(separator: ":")
@@ -181,9 +203,9 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
             
             dispatchGroup.enter()
             homePresenter?.fetchHomeData(
-                bioId: String(userData.bioID),
-                campus: userData.campus,
-                category: userData.category
+                bioId: String(bioID),
+                campus: campus,
+                category: category
                ) {
                
                 dispatchGroup.leave()
@@ -191,14 +213,14 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
 
             dispatchGroup.enter()
             homePresenter?.fetchAvialableleave(
-                bioId: String(userData.bioID),
-                campus: userData.campus,
-                category: userData.category
+                bioId: String(bioID),
+                campus: campus,
+                category: category
             ) {
                 dispatchGroup.leave()
             }
             dispatchGroup.enter()
-            homePresenter?.fetchDutyCounts(bioId: String(userData.bioID), completionHandler: {
+            homePresenter?.fetchDutyCounts(bioId: String(bioID), completionHandler: {
                 dispatchGroup.leave()
             })
             

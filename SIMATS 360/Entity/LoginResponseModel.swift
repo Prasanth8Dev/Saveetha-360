@@ -9,19 +9,20 @@ import Foundation
 
 // MARK: - LoginResponse
 struct LoginResponse: Codable {
-    let status: Bool
-    let message: String
-    let userData: [UserData]
+    let status: Bool?
+    let message: String?
+    let userData: [UserData]?
 }
 
-// MARK: - UserDatum
+// MARK: - UserData
 struct UserData: Codable {
-    let campus, category: String
-    let bioID: Int
-    let profileImgURL: String
-    let userName: String
-    let headID: Int
-    let role: String
+    let campus: String?
+    let category: String?
+    let bioID: Int?
+    let profileImgURL: String?
+    let userName: String?
+    let headID: Int?
+    let role: String?
 
     enum CodingKeys: String, CodingKey {
         case campus, category

@@ -101,7 +101,7 @@ class NotificationDetailViewController: UIViewController, NotificationDetailView
     }
     
     func loadNotificationData() {
-        if let userName = Constants.profileData.userData.first?.userName, let bioId = Constants.profileData.userData.first?.bioID {
+        if let userName = Constants.profileData.userData?.first?.userName, let bioId = Constants.profileData.userData?.first?.bioID {
             userNameLabel.text = userName
             bioIdLabel.text = "Bio Id: \(bioId)"
         }

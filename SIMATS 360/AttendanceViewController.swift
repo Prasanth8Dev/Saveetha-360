@@ -107,7 +107,7 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
             //monthTF.text = Utils.getCurrentMonth()
             //monthTF.isUserInteractionEnabled = false
             DispatchQueue.main.async {
-                if let userImage = Constants.profileData.userData.first?.profileImgURL, let userName = Constants.profileData.userData.first?.userName, let bioId = Constants.profileData.userData.first?.bioID {
+                if let userImage = Constants.profileData.userData?.first?.profileImgURL, let userName = Constants.profileData.userData?.first?.userName, let bioId = Constants.profileData.userData?.first?.bioID {
                     self.userNameLabel.text = userName
                     self.bioIdLabel.text = "Bio Id: \(String(bioId))"
                     self.imgFour.loadImage(from: userImage)

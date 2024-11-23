@@ -30,31 +30,43 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
     @IBOutlet weak var outsideExpLabel: UILabel!
     
     func displayProfileData(_ data: ProfileDataModel) {
-        
-        if let data = data.data.first {
-            userNameLabel.text = data.employeeName
-            bioIdLabel.text = "Bio Id: \(data.bioID) \(data.campus)"
-            designationLabel.text = "\(data.category)  \(data.designationName)"
-            dojLabel.text = "DOJ: \(data.doj)"
-         
-            phoneLabel.text = data.phone
-            mailLabel.text = data.email
-            addressLabel.text = data.address
-            if let internalExperience = data.internalExperience {
-                internalExperienceLabel.text = "Saveetha Exp: \(internalExperience.cleanedValue())"
-            } else {
-                internalExperienceLabel.text = "Saveetha Exp: N/A"
-            }
-            if let externalExperience = data.externalExperience {
-                outsideExpLabel.text = "Outside Exp: \(externalExperience.cleanedValue())"
-            } else  {
-                outsideExpLabel.text = "Outside Exp: N/A"
-            }
-            
-            profileImg.loadImage(from: data.profileImageURL)
+        guard let userData = data.data.first else {
+            print("No profile data available")
+            setDefaultProfileData()
+            return
         }
         
+        userNameLabel.text = userData.employeeName ?? "Not Available"
+        bioIdLabel.text = "Bio Id: \(String(userData.bioID) ?? "N/A") \(userData.campus ?? "N/A")"
+        designationLabel.text = "\(userData.category ?? "N/A")  \(userData.designationName ?? "N/A")"
+        dojLabel.text = "DOJ: \(userData.doj ?? "N/A")"
+        phoneLabel.text = userData.phone ?? "Not Available"
+        mailLabel.text = userData.email ?? "Not Available"
+        addressLabel.text = userData.address ?? "Not Available"
+        
+        internalExperienceLabel.text = "Saveetha Exp: \(userData.internalExperience?.cleanedValue() ?? "N/A")"
+        outsideExpLabel.text = "Outside Exp: \(userData.externalExperience?.cleanedValue() ?? "N/A")"
+        
+        if !userData.profileImageURL.isEmpty {
+            profileImg.loadImage(from: userData.profileImageURL)
+        } else {
+            profileImg.image = UIImage(named: "defaultProfileImage") // Fallback to a default image
+        }
     }
+
+    private func setDefaultProfileData() {
+        userNameLabel.text = "Not Available"
+        bioIdLabel.text = "Bio Id: N/A"
+        designationLabel.text = "N/A"
+        dojLabel.text = "DOJ: N/A"
+        phoneLabel.text = "Not Available"
+        mailLabel.text = "Not Available"
+        addressLabel.text = "Not Available"
+        internalExperienceLabel.text = "Saveetha Exp: N/A"
+        outsideExpLabel.text = "Outside Exp: N/A"
+        profileImg.image = UIImage(named: "defaultProfileImage") // Default image
+    }
+
     
     func showError(_ message: String) {
         self.showAlert(title: "", message: "We are Facing some issue to Load the Profile. Please try again later.")
@@ -70,8 +82,8 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
     }
     
     private func fetchProfileData() {
-        if let userData = Constants.profileData.userData.first {
-            profilePresenter?.fetchProfile(bioId: String(userData.bioID), campus: userData.campus)
+        if let userData = Constants.profileData.userData?.first, let bioID = userData.bioID, let campus = userData.campus  {
+            profilePresenter?.fetchProfile(bioId: String(bioID), campus: campus)
         }
        
     }

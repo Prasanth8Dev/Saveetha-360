@@ -38,7 +38,7 @@ class DutyRosterViewController: UIViewController, DutyRosterViewControllerProtoc
             showMessage(message: "Please select both dates.")
             return
         }
-        if let bioID = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus {
+        if let bioID = Constants.profileData.userData?.first?.bioID, let campus = Constants.profileData.userData?.first?.campus {
             presenter?.dutyRosterData(fromDate: fromDateText, toDate: toDateText, campus: campus, bioId: String(bioID))
         }
         print("From Date: \(fromDateText), To Date: \(toDateText)")
@@ -113,8 +113,8 @@ class DutyRosterViewController: UIViewController, DutyRosterViewControllerProtoc
             return // Both dates must be selected to call the API
         }
 
-        if let bioID = Constants.profileData.userData.first?.bioID,
-           let campus = Constants.profileData.userData.first?.campus {
+        if let bioID = Constants.profileData.userData?.first?.bioID,
+           let campus = Constants.profileData.userData?.first?.campus {
             presenter?.dutyRosterData(fromDate: fromDateText, toDate: toDateText, campus: campus, bioId: String(bioID))
             print("API Called: From Date: \(fromDateText), To Date: \(toDateText)")
         }

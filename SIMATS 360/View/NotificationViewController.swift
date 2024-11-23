@@ -50,14 +50,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func fetchNotification() {
-        if let campus = Constants.profileData.userData.first?.campus {
+        if let campus = Constants.profileData.userData?.first?.campus {
             let dispatchgroup = DispatchGroup()
             
             dispatchgroup.enter()
             notificationPresenter?.fetchGeneralNotification(campus: campus, completionHandler: {
                 dispatchgroup.leave()
             })
-            if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus {
+            if let bioId = Constants.profileData.userData?.first?.bioID, let campus = Constants.profileData.userData?.first?.campus {
                 dispatchgroup.enter()
                 notificationPresenter?.fetchApprovalNotification(bioId: String(bioId), campus: campus, completionHandler: {
                     dispatchgroup.leave()

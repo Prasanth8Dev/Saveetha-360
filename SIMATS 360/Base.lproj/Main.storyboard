@@ -190,7 +190,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGi-al-whf">
                                         <rect key="frame" x="0.0" y="68" width="320" height="154"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bio Id: 23171" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8K-9r-VXo">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="n/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8K-9r-VXo">
                                                 <rect key="frame" x="96" y="126" width="128" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="AG5-W6-4bS"/>
@@ -199,7 +199,7 @@
                                                 <color key="textColor" systemColor="systemGray2Color"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Smith" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-YE-US7">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N/A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-YE-US7">
                                                 <rect key="frame" x="80" y="95" width="160" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="hmi-JT-EEc"/>
@@ -2703,10 +2703,10 @@ Balance  748</string>
             </objects>
             <point key="canvasLocation" x="9420" y="-9.5070422535211261"/>
         </scene>
-        <!--Buffer Time View Controller-->
+        <!--View Controller-->
         <scene sceneID="jcr-kl-dQD">
             <objects>
-                <viewController storyboardIdentifier="BufferTimeViewController" id="81k-Eb-z3j" customClass="BufferTimeViewController" customModule="Saveetha_360" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="81k-Eb-z3j" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pgg-gq-UxT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

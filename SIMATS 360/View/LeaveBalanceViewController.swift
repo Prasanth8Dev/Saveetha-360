@@ -41,7 +41,7 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
     
     override func viewWillAppear(_ animated: Bool) {
         loadLeaveData()
-        if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus, let name = Constants.profileData.userData.first?.userName {
+        if let bioId = Constants.profileData.userData?.first?.bioID, let campus = Constants.profileData.userData?.first?.campus, let name = Constants.profileData.userData?.first?.userName {
             leavePresenter?.fecthLeaveDetails(bioId: String(bioId), campus: campus)
             monthYearLabel.text = Utils.getCurrentYearWithMonth()
             userNameLabel.text = name

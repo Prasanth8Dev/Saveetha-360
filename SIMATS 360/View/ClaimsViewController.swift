@@ -64,7 +64,7 @@ class ClaimsViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             self.showAlert(title: "", message: "Kindly select date and claim type")
             return
         }
-        if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus, let dutyId = claimsData?.claimsData.first?.dutyID {
+        if let bioId = Constants.profileData.userData?.first?.bioID, let campus = Constants.profileData.userData?.first?.campus, let dutyId = claimsData?.claimsData.first?.dutyID {
             claimsPresenter?.applyClaims(bioId: String(bioId), campus: campus, creditName: selectedClaims, dutyDate: choosedDate, dutyId: String(dutyId))
         }
         
@@ -101,7 +101,7 @@ class ClaimsViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     private func loadUserData() {
-        if let name = Constants.profileData.userData.first?.userName, let bioId = Constants.profileData.userData.first?.bioID, let count = claimsData?.claimsData {
+        if let name = Constants.profileData.userData?.first?.userName, let bioId = Constants.profileData.userData?.first?.bioID, let count = claimsData?.claimsData {
             userNameLabel.text = name
             bioIdLabel.text = "Bio ID: \(bioId)"
             claimsCountLabel.text = "Duty Claims: \(count.count)"

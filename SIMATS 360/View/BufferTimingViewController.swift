@@ -37,7 +37,7 @@ class BufferTimingViewController: UIViewController, UITableViewDelegate, UITable
 
     
     override func viewWillAppear(_ animated: Bool) {
-        if let userData = Constants.profileData.userData.first, let summary = self.attendanceSummary?.first {
+        if let userData = Constants.profileData.userData?.first, let summary = self.attendanceSummary?.first {
             let date = Utils.getCurrentDateInYearMonthFormat()
             let yearMonth = date.split(separator: ":")
             

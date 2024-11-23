@@ -110,7 +110,7 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
     }
     
     private func fetchDutyData() {
-        if let bioId = Constants.profileData.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus {
+        if let bioId = Constants.profileData.userData?.first?.bioID, let campus = Constants.profileData.userData?.first?.campus {
             dutyPrsentor?.fetchPendingDuty(bioId: String(bioId))
             dutyPrsentor?.fetchClaims(bioId: String(bioId))
             dutyPrsentor?.fetchGroupOptions(bioId: String(bioId), campus: campus)

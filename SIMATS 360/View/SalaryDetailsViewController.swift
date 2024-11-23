@@ -43,9 +43,9 @@ class SalaryDetailsViewController: UIViewController, SalaryDetailsProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Salary Details"
-        if let userData = Constants.profileData.userData.first {
-            salaryDetailsPresenter?.fetchSalaryDetails(bioId: String(userData.bioID))
-            bioIdLabel.text = "Bio Id: \(String(userData.bioID))"
+        if let userData = Constants.profileData.userData?.first, let bioID = userData.bioID {
+            salaryDetailsPresenter?.fetchSalaryDetails(bioId: String(bioID))
+            bioIdLabel.text = "Bio Id: \(String(bioID))"
             userNameLabel.text = userData.userName
         }
     }

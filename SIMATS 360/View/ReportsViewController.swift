@@ -26,8 +26,8 @@ class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let userData = Constants.profileData.userData.first {
-            bioIdLabel.text = "Bio Id:\( String(userData.bioID))"
+        if let userData = Constants.profileData.userData?.first, let bioId = userData.bioID {
+            bioIdLabel.text = "Bio Id:\( String(bioId))"
             userNameLabel.text =  userData.userName
         }
         // Do any additional setup after loading the view.
@@ -36,7 +36,7 @@ class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         initNavigationBar()
-        if let bioId = (Constants.profileData.userData.first?.bioID) {
+        if let bioId = (Constants.profileData.userData?.first?.bioID) {
             reportsPresenter?.fetchSalaryReports(bioId: String(bioId))
         }
 

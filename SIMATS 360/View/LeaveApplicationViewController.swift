@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import Vision
 
 protocol LeaveApplicationViewControllerProtocol: AnyObject {
     func showResponse(message: String)
@@ -60,7 +61,7 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
     }
     
     private func loadUserData() {
-        if let userName = Constants.profileData.userData.first?.userName, let bioId = Constants.profileData.userData.first?.bioID {
+        if let userName = Constants.profileData.userData?.first?.userName, let bioId = Constants.profileData.userData?.first?.bioID {
             userNameLabel.text = userName
             bioIdLabel.text = "Bio Id: \(String(bioId))"
         }
@@ -84,7 +85,7 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
 
     
     private func applyLeave() {
-        guard let imageForm = selectedImage, let leaveCat = leaveCategory.text, let leaveReason = reasonTextView.text, let leaveSession = leaveSessionTF.text, !leaveReason.isEmpty, !leaveSession.isEmpty, let bioId = Constants.profileData?.userData.first?.bioID, let campus = Constants.profileData.userData.first?.campus, let headId = Constants.profileData.userData.first?.headID,let leaveType = leaveTypeTextField.text, !leaveType.isEmpty else {
+        guard let imageForm = selectedImage, let leaveCat = leaveCategory.text, let leaveReason = reasonTextView.text, let leaveSession = leaveSessionTF.text, !leaveReason.isEmpty, !leaveSession.isEmpty, let bioId = Constants.profileData?.userData?.first?.bioID, let campus = Constants.profileData.userData?.first?.campus, let headId = Constants.profileData.userData?.first?.headID,let leaveType = leaveTypeTextField.text, !leaveType.isEmpty else {
             self.showAlert(title: "", message: "Some fields are empty")
             return
         }
@@ -117,6 +118,7 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
             selectedImage = originalImage
             leaveFormLabel.text = "Image Added"
         }
+        extractText(from: selectedImage!)
         
         picker.dismiss(animated: true, completion: nil)
     }
@@ -260,4 +262,34 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print("Deselected date: \(date)")
     }
+
+    func extractText(from image: UIImage) {
+        guard let cgImage = image.cgImage else {
+            print("Invalid image")
+            return
+        }
+
+        let request = VNRecognizeTextRequest { (request, error) in
+            if let error = error {
+                print("Error recognizing text: \(error)")
+                return
+            }
+            guard let observations = request.results as? [VNRecognizedTextObservation] else {
+                return
+            }
+
+            let recognizedStrings = observations.compactMap { $0.topCandidates(1).first?.string }
+            print("Extracted Text: \(recognizedStrings.joined(separator: " "))")
+        }
+
+        request.recognitionLevel = .accurate
+
+        let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+        do {
+            try requestHandler.perform([request])
+        } catch {
+            print("Failed to perform request: \(error)")
+        }
+    }
+
 }

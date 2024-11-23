@@ -30,12 +30,12 @@ class LoginPresenter: LoginPresenterProtocol {
                     break
                 }
             }, receiveValue: { [weak self] response in
-                if response.status {
+                if response.status ?? false {
                     //self?.view?.displayLoginResult("Login Successful!")
                     Constants.profileData = response
                     self?.router?.navigateToHome(from: self?.view ?? LoginViewController(), successResponse: response)
-                } else  {
-                    self?.view?.displayLoginResult(response.message)
+                } else if let message = response.message  {
+                    self?.view?.displayLoginResult(message)
                 }
             })
             .store(in: &cancellables)
