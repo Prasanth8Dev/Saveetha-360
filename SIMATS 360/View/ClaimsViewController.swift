@@ -14,13 +14,10 @@ class ClaimsViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     @IBOutlet weak var bioIdLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
-    
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var claimsEncashmentsView: UIView!
-    
     @IBOutlet weak var claimsCountLabel: UILabel!
     @IBOutlet weak var claimsLeaveView: UIView!
-
     @IBOutlet weak var img3: UIImageView!
     @IBOutlet weak var img2: UIImageView!
     @IBOutlet weak var img1: UIImageView!

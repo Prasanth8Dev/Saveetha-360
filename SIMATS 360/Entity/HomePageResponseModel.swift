@@ -24,7 +24,7 @@ struct DataClass: Codable {
 struct Attendance: Codable {
     let date, duration, presence: String
     let exceed, early, remainingBufferTime: Int
-    let holidayCredits: String
+    let holidayCredits: Int
 
     enum CodingKeys: String, CodingKey {
         case date, duration, presence, exceed, early

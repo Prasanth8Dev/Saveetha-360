@@ -12,6 +12,7 @@ protocol EmployeeHomeViewProtocol: AnyObject {
     func showAvailableLeave(leaveData: AvailableLeaveModel)
     func showDutyCount(dutyData: DutyCountModel)
     func showError(error: String)
+    func showGeneralDutydata(dutyData: GeneralDutyModel)
 }
 
 class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
@@ -25,6 +26,10 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     @IBOutlet weak var leavebalanceView: UIView!
     @IBOutlet weak var bufferTimeView: UIView!
     @IBOutlet weak var attendanceView: UIView!
+    @IBOutlet weak var generalDutyView: UIView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var bioIdLabel: UILabel!
+    @IBOutlet weak var generalDutyCount: UILabel!
     
     var availableLeaveData: AvailableLeaveModel?
     var loginresponse: LoginResponse?
@@ -32,9 +37,6 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     var homePageResponse: HomePageResponse?
     var dutyCountResponse: DutyCountModel?
     
-    @IBOutlet weak var userNameLabel: UILabel!
-    
-    @IBOutlet weak var bioIdLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDefault()
@@ -42,13 +44,14 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
         addTapActionForViews()
         initNavigationBar()
         loadProfileData()
+        self.fetchHomeData()
       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.fetchHomeData()
+        
     }
     
     private func loadDefault() {
@@ -119,6 +122,11 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
         Constants.availableLeaveTypes = getLeaveTypes(leaveModel: leaveData)
     }
     
+    func showGeneralDutydata(dutyData: GeneralDutyModel) {
+        generalDutyCount.text = "\(dutyData.generalDuties.count) Duty"
+        Constants.generalDutyModel = dutyData
+    }
+    
     func getLeaveTypes(leaveModel: AvailableLeaveModel) -> [String] {
         var leaveTypes: [String] = []
         
@@ -153,9 +161,26 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
             attendancePercentage.text = "\(Int(userData.attendancePercentage))% for the current month"
             bufferTime.text = "\(Int(userData.adjustedBuffTime)) Minutes"
         }
+        homeData.data.attendance.forEach { attedanceData in
+            if attedanceData.holidayCredits == 2 {
+                Constants.claimsCounts += 1
+                Constants.claimsDate.append(attedanceData.date)
+            } else if attedanceData.holidayCredits == 4 {
+                Constants.claimsCounts += 0.5
+                Constants.claimsDate.append(attedanceData.date)
+            } else if attedanceData.holidayCredits == 7 {
+                Constants.requestCounts += 1
+                Constants.requestDate.append(attedanceData.date)
+            }
+        }
     }
     
     private func addTapActionForViews() {
+        generalDutyView.addTap {
+            let generalDutyVC: GeneralDutyViewController = GeneralDutyViewController.instantiate()
+            self.navigationController?.pushViewController(generalDutyVC, animated: true)
+        }
+        
         leavebalanceView.addTap {
             let leaveBalanceVC = LeaveBalanceRouter.createLeaveBalance() as! LeaveBalanceViewController
             leaveBalanceVC.leaveData = self.availableLeaveData
@@ -196,8 +221,6 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     private func fetchHomeData() {
         if let userData = Constants.profileData.userData?.first,  let bioID = userData.bioID , let campus = userData.campus, let category = userData.category {
             self.view.startLoader()
-            let date = Utils.getCurrentDateInYearMonthFormat()
-            //let yearMonth = date.split(separator: ":")
            
             let dispatchGroup = DispatchGroup()
             
@@ -221,6 +244,11 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
             }
             dispatchGroup.enter()
             homePresenter?.fetchDutyCounts(bioId: String(bioID), completionHandler: {
+                dispatchGroup.leave()
+            })
+            
+            dispatchGroup.enter()
+            homePresenter?.fetchGeneralDutyCounts(bioId: String(bioID), campus: campus, completionHandler: {
                 dispatchGroup.leave()
             })
             

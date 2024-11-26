@@ -101,12 +101,22 @@
 		5D3CE9CC2CC7613B00F22BE0 /* LeaveDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9CB2CC7613B00F22BE0 /* LeaveDetailModel.swift */; };
 		5D3CE9CE2CC761E600F22BE0 /* LeaveDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9CD2CC761E600F22BE0 /* LeaveDetailPresenter.swift */; };
 		5D3CE9D02CC762C100F22BE0 /* LeaveBalanceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE9CF2CC762C100F22BE0 /* LeaveBalanceRouter.swift */; };
+		5D4F7EDC2CF197F000BE4A62 /* GeneralDutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F7EDB2CF197F000BE4A62 /* GeneralDutyViewController.swift */; };
+		5D4F7EDE2CF1AC7400BE4A62 /* GeneralDutyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F7EDD2CF1AC7400BE4A62 /* GeneralDutyModel.swift */; };
+		5D4F7EE02CF1C7ED00BE4A62 /* GeneralSwapDutyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F7EDF2CF1C7ED00BE4A62 /* GeneralSwapDutyViewController.swift */; };
+		5D4F7EE22CF1C92500BE4A62 /* GeneralSwapDutyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F7EE12CF1C92500BE4A62 /* GeneralSwapDutyPresenter.swift */; };
+		5D4F7EE42CF1C9AA00BE4A62 /* GeneralSwapDutyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F7EE32CF1C9AA00BE4A62 /* GeneralSwapDutyInteractor.swift */; };
+		5D4F7EE62CF1CA7500BE4A62 /* GeneralSwapDutyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F7EE52CF1CA7500BE4A62 /* GeneralSwapDutyRouter.swift */; };
 		5D571A5B2CCF55B300D0067D /* ApprovalNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D571A5A2CCF55B300D0067D /* ApprovalNotificationModel.swift */; };
 		5D5E251B2CD0E0AA00C6F4D2 /* ClaimsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5E251A2CD0E0AA00C6F4D2 /* ClaimsDataModel.swift */; };
 		5D5E251D2CD0E84900C6F4D2 /* ClaimsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5E251C2CD0E84900C6F4D2 /* ClaimsInteractor.swift */; };
 		5D5E251F2CD0E8F200C6F4D2 /* ClaimsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5E251E2CD0E8F200C6F4D2 /* ClaimsResponseModel.swift */; };
 		5D5E25212CD0E9B400C6F4D2 /* ClaimsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5E25202CD0E9B400C6F4D2 /* ClaimsPresenter.swift */; };
 		5D5E25232CD0EB2C00C6F4D2 /* ClaimsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5E25222CD0EB2C00C6F4D2 /* ClaimsRouter.swift */; };
+		5D6FBE112CF43FA4009C9D78 /* HolidayDutyClaimsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6FBE102CF43FA4009C9D78 /* HolidayDutyClaimsViewController.swift */; };
+		5D6FBE132CF443A3009C9D78 /* HolidayDutyClaimsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6FBE122CF443A3009C9D78 /* HolidayDutyClaimsInteractor.swift */; };
+		5D6FBE152CF4443C009C9D78 /* HolidayDutyClaimsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6FBE142CF4443C009C9D78 /* HolidayDutyClaimsPresenter.swift */; };
+		5D6FBE172CF44C12009C9D78 /* HolidayDutyClaimsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6FBE162CF44C12009C9D78 /* HolidayDutyClaimsRouter.swift */; };
 		5D8E56752CAFB84600900A04 /* LeaveBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */; };
 		5D8E56782CAFE57100900A04 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 5D8E56772CAFE57100900A04 /* FSCalendar */; };
 		5D90F9DD2CCB921300ACF856 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D90F9DC2CCB921300ACF856 /* NotificationModel.swift */; };
@@ -269,12 +279,22 @@
 		5D3CE9CB2CC7613B00F22BE0 /* LeaveDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveDetailModel.swift; sourceTree = "<group>"; };
 		5D3CE9CD2CC761E600F22BE0 /* LeaveDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveDetailPresenter.swift; sourceTree = "<group>"; };
 		5D3CE9CF2CC762C100F22BE0 /* LeaveBalanceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveBalanceRouter.swift; sourceTree = "<group>"; };
+		5D4F7EDB2CF197F000BE4A62 /* GeneralDutyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDutyViewController.swift; sourceTree = "<group>"; };
+		5D4F7EDD2CF1AC7400BE4A62 /* GeneralDutyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDutyModel.swift; sourceTree = "<group>"; };
+		5D4F7EDF2CF1C7ED00BE4A62 /* GeneralSwapDutyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSwapDutyViewController.swift; sourceTree = "<group>"; };
+		5D4F7EE12CF1C92500BE4A62 /* GeneralSwapDutyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSwapDutyPresenter.swift; sourceTree = "<group>"; };
+		5D4F7EE32CF1C9AA00BE4A62 /* GeneralSwapDutyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSwapDutyInteractor.swift; sourceTree = "<group>"; };
+		5D4F7EE52CF1CA7500BE4A62 /* GeneralSwapDutyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSwapDutyRouter.swift; sourceTree = "<group>"; };
 		5D571A5A2CCF55B300D0067D /* ApprovalNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovalNotificationModel.swift; sourceTree = "<group>"; };
 		5D5E251A2CD0E0AA00C6F4D2 /* ClaimsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsDataModel.swift; sourceTree = "<group>"; };
 		5D5E251C2CD0E84900C6F4D2 /* ClaimsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsInteractor.swift; sourceTree = "<group>"; };
 		5D5E251E2CD0E8F200C6F4D2 /* ClaimsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsResponseModel.swift; sourceTree = "<group>"; };
 		5D5E25202CD0E9B400C6F4D2 /* ClaimsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsPresenter.swift; sourceTree = "<group>"; };
 		5D5E25222CD0EB2C00C6F4D2 /* ClaimsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsRouter.swift; sourceTree = "<group>"; };
+		5D6FBE102CF43FA4009C9D78 /* HolidayDutyClaimsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayDutyClaimsViewController.swift; sourceTree = "<group>"; };
+		5D6FBE122CF443A3009C9D78 /* HolidayDutyClaimsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayDutyClaimsInteractor.swift; sourceTree = "<group>"; };
+		5D6FBE142CF4443C009C9D78 /* HolidayDutyClaimsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayDutyClaimsPresenter.swift; sourceTree = "<group>"; };
+		5D6FBE162CF44C12009C9D78 /* HolidayDutyClaimsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayDutyClaimsRouter.swift; sourceTree = "<group>"; };
 		5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveBalanceViewController.swift; sourceTree = "<group>"; };
 		5D90F9DC2CCB921300ACF856 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		5D90F9DE2CCB950A00ACF856 /* NotificationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInteractor.swift; sourceTree = "<group>"; };
@@ -375,6 +395,7 @@
 				5DEBFF782CCF67F300250FDA /* DutyCountModel.swift */,
 				5DA9F10B2CC8B21500F97E25 /* ApplyLeaveModel.swift */,
 				23788DD72CC24B8D003CBEE1 /* SalaryReportResponse.swift */,
+				5D4F7EDD2CF1AC7400BE4A62 /* GeneralDutyModel.swift */,
 				5D92CE302CC652890098560F /* BufferTimeModel.swift */,
 				5D92CE2D2CC62F850098560F /* AvailableLeaveModel.swift */,
 				23283AA42CBD0DA100E9DB0F /* SalaryReportModel.swift */,
@@ -392,11 +413,14 @@
 				5D0296D62CABE8E60037427C /* NotificationViewController.swift */,
 				5D92CE382CC65F1E0098560F /* BufferTimingViewController.swift */,
 				5D2B58212CB3E8FB00976E7A /* BufferTimeViewController.swift */,
+				5D6FBE102CF43FA4009C9D78 /* HolidayDutyClaimsViewController.swift */,
 				5D0296DA2CABE95F0037427C /* ProfileViewController.swift */,
 				5D9600CF2CAE9EBA00FA6981 /* SalaryDetailsViewController.swift */,
 				5D8E56742CAFB84600900A04 /* LeaveBalanceViewController.swift */,
 				5DF195DF2CCA14DA00A9B9B0 /* DutyRosterViewController.swift */,
+				5D4F7EDF2CF1C7ED00BE4A62 /* GeneralSwapDutyViewController.swift */,
 				5D2C4E0E2CAFEBA80041E0FB /* LeaveApplicationViewController.swift */,
+				5D4F7EDB2CF197F000BE4A62 /* GeneralDutyViewController.swift */,
 				5D282BAD2CB65C7200597991 /* DutyViewController.swift */,
 				5D282BAF2CB6811D00597991 /* ClaimsViewController.swift */,
 				5D035A2D2CCCA2D00061D1B6 /* NotificationDetailViewController.swift */,
@@ -412,7 +436,9 @@
 				5DEBFF7A2CCF8F5400250FDA /* DutyInteractor.swift */,
 				5DE9E4332CE45DAA00B6CA3E /* NotificationDetailsInteractor.swift */,
 				5DE9E43D2CE46B4F00B6CA3E /* DutyRosterInteractor.swift */,
+				5D4F7EE32CF1C9AA00BE4A62 /* GeneralSwapDutyInteractor.swift */,
 				5D5E251C2CD0E84900C6F4D2 /* ClaimsInteractor.swift */,
+				5D6FBE122CF443A3009C9D78 /* HolidayDutyClaimsInteractor.swift */,
 				5DDFD69F2CE20C7A002A01F2 /* SwapDutyInteractor.swift */,
 				23283AA62CBD0E5700E9DB0F /* ReportsInteractor.swift */,
 				5D90F9DE2CCB950A00ACF856 /* NotificationInteractor.swift */,
@@ -429,8 +455,10 @@
 		23283A862CBCD33800E9DB0F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				5D4F7EE12CF1C92500BE4A62 /* GeneralSwapDutyPresenter.swift */,
 				23283A952CBCD7A700E9DB0F /* LoginPresenter.swift */,
 				5D92CE292CC623050098560F /* HomePresenter.swift */,
+				5D6FBE142CF4443C009C9D78 /* HolidayDutyClaimsPresenter.swift */,
 				5DEBFF7E2CCF930200250FDA /* DutyPresenter.swift */,
 				5DE9E43F2CE46C4B00B6CA3E /* DutyRosterPresenter.swift */,
 				5DA9F10F2CC8B49300F97E25 /* LeaveApplyPresenter.swift */,
@@ -455,8 +483,10 @@
 				5DEBFF802CCF969000250FDA /* DutyRouter.swift */,
 				5DE9E4372CE460B800B6CA3E /* NotificationDetailsRouter.swift */,
 				5D5E25222CD0EB2C00C6F4D2 /* ClaimsRouter.swift */,
+				5D4F7EE52CF1CA7500BE4A62 /* GeneralSwapDutyRouter.swift */,
 				5DA9F1112CC8B7E700F97E25 /* ApplyLeaveRouter.swift */,
 				5D90F9E22CCBA66300ACF856 /* NotificationRouter.swift */,
+				5D6FBE162CF44C12009C9D78 /* HolidayDutyClaimsRouter.swift */,
 				5DE9E4412CE46D8B00B6CA3E /* DutyRosterRouter.swift */,
 				5DDFD6A72CE210E0002A01F2 /* SwapDutyRouter.swift */,
 				5D3CE9CF2CC762C100F22BE0 /* LeaveBalanceRouter.swift */,
@@ -782,6 +812,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D6FBE132CF443A3009C9D78 /* HolidayDutyClaimsInteractor.swift in Sources */,
 				5D5E251B2CD0E0AA00C6F4D2 /* ClaimsDataModel.swift in Sources */,
 				5D2B58242CB3E9A500976E7A /* BufferTimeTableViewCell.swift in Sources */,
 				238D52302CC10F8100927D4C /* ProfileDataModel.swift in Sources */,
@@ -797,10 +828,13 @@
 				5D0296D12CABE80E0037427C /* UIColorExtension.swift in Sources */,
 				5D149BCE2CEC8BBA00843B9D /* SwapDutyApprovalModel.swift in Sources */,
 				23283A982CBCD82100E9DB0F /* LoginRouter.swift in Sources */,
+				5D6FBE172CF44C12009C9D78 /* HolidayDutyClaimsRouter.swift in Sources */,
 				5DA6C1552CE70BA200CCC6DF /* SwapDutyStatusModel.swift in Sources */,
 				23283A922CBCD5DE00E9DB0F /* LoginResponseModel.swift in Sources */,
 				23283AAD2CBD21D100E9DB0F /* Utils.swift in Sources */,
 				5D0296CB2CABE77F0037427C /* EmployeeTabBarViewController.swift in Sources */,
+				5D4F7EDC2CF197F000BE4A62 /* GeneralDutyViewController.swift in Sources */,
+				5D4F7EE62CF1CA7500BE4A62 /* GeneralSwapDutyRouter.swift in Sources */,
 				5DA9F1102CC8B49300F97E25 /* LeaveApplyPresenter.swift in Sources */,
 				5D149BCA2CEC535E00843B9D /* SwapDutyResponse.swift in Sources */,
 				5DA486AC2CAE9306009E0A56 /* SalaryReportTableViewCell.swift in Sources */,
@@ -828,7 +862,9 @@
 				5DDF3B532CD8CB83001B3303 /* CoreDataManager.swift in Sources */,
 				5D92CE332CC652EB0098560F /* BufferTimeInteractor.swift in Sources */,
 				5DF195E02CCA14DB00A9B9B0 /* DutyRosterViewController.swift in Sources */,
+				5D4F7EE42CF1C9AA00BE4A62 /* GeneralSwapDutyInteractor.swift in Sources */,
 				23283A8E2CBCD45900E9DB0F /* APIWrapper.swift in Sources */,
+				5D4F7EE22CF1C92500BE4A62 /* GeneralSwapDutyPresenter.swift in Sources */,
 				5D3CE9C82CC75EB300F22BE0 /* LeaveDatailTableViewCell.swift in Sources */,
 				23283A962CBCD7A700E9DB0F /* LoginPresenter.swift in Sources */,
 				23283AA52CBD0DA100E9DB0F /* SalaryReportModel.swift in Sources */,
@@ -852,8 +888,10 @@
 				23788DD82CC24B8D003CBEE1 /* SalaryReportResponse.swift in Sources */,
 				5D571A5B2CCF55B300D0067D /* ApprovalNotificationModel.swift in Sources */,
 				5DE9E4422CE46D8B00B6CA3E /* DutyRosterRouter.swift in Sources */,
+				5D6FBE152CF4443C009C9D78 /* HolidayDutyClaimsPresenter.swift in Sources */,
 				238D52322CC10FC400927D4C /* ProfileInteractor.swift in Sources */,
 				5D5E25232CD0EB2C00C6F4D2 /* ClaimsRouter.swift in Sources */,
+				5D6FBE112CF43FA4009C9D78 /* HolidayDutyClaimsViewController.swift in Sources */,
 				5D0296D92CABE91E0037427C /* ReportsViewController.swift in Sources */,
 				5D92CE262CC61FC50098560F /* HomeInteractor.swift in Sources */,
 				5D90F9DD2CCB921300ACF856 /* NotificationModel.swift in Sources */,
@@ -867,6 +905,7 @@
 				23283AA72CBD0E5700E9DB0F /* ReportsInteractor.swift in Sources */,
 				5D3CE9D02CC762C100F22BE0 /* LeaveBalanceRouter.swift in Sources */,
 				5D92CE282CC6203C0098560F /* HomePageResponseModel.swift in Sources */,
+				5D4F7EDE2CF1AC7400BE4A62 /* GeneralDutyModel.swift in Sources */,
 				23788DDE2CC24D24003CBEE1 /* SalaryDetailsPresenter.swift in Sources */,
 				5D90F9E12CCB9D2200ACF856 /* NotificationPresenter.swift in Sources */,
 				5D0296D52CABE8410037427C /* EmployeeHomeViewController.swift in Sources */,
@@ -882,6 +921,7 @@
 				5DE9E43E2CE46B4F00B6CA3E /* DutyRosterInteractor.swift in Sources */,
 				5DE9E4342CE45DAA00B6CA3E /* NotificationDetailsInteractor.swift in Sources */,
 				5D035A2E2CCCA2D00061D1B6 /* NotificationDetailViewController.swift in Sources */,
+				5D4F7EE02CF1C7ED00BE4A62 /* GeneralSwapDutyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

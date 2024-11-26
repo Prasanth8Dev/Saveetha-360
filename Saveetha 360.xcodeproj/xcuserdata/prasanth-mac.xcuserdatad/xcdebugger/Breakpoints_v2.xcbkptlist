@@ -7,93 +7,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5FFE55F9-638A-4EA9-9A50-7E7169FB9350"
+            uuid = "DA73EE2C-94EC-443E-868F-DFF2EAB66AD8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SIMATS 360/View/LeaveApplicationViewController.swift"
+            filePath = "SIMATS 360/View/GeneralDutyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
-            landmarkName = "extractText(from:)"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "calendar(_:appearance:fillDefaultColorFor:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5FFE55F9-638A-4EA9-9A50-7E7169FB9350 - 72817c6cf756b607"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Saveetha_360.LeaveApplicationViewController.extractText(from: __C.UIImage) -&gt; ()"
-                  moduleName = "Saveetha 360.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prasanth-mac/Documents/GitHub/Saveetha-360/SIMATS%20360/View/LeaveApplicationViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "272"
-                  endingLineNumber = "272">
-               </Location>
-               <Location
-                  uuid = "5FFE55F9-638A-4EA9-9A50-7E7169FB9350 - 98b6622d01d5dfd3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.VNRequest, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Saveetha_360.LeaveApplicationViewController.extractText(from: __C.UIImage) -&gt; ()"
-                  moduleName = "Saveetha 360.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prasanth-mac/Documents/GitHub/Saveetha-360/SIMATS%20360/View/LeaveApplicationViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "272"
-                  endingLineNumber = "272">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1EF45AE4-9C58-4E70-A56A-925A46768076"
+            uuid = "FB08D320-6C36-4417-BED9-032B512925AE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SIMATS 360/View/LeaveApplicationViewController.swift"
+            filePath = "SIMATS 360/View/GeneralDutyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
-            landmarkName = "extractText(from:)"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "setClaimsCounts()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1EF45AE4-9C58-4E70-A56A-925A46768076 - 98b6622d01d5dff2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.VNRequest, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Saveetha_360.LeaveApplicationViewController.extractText(from: __C.UIImage) -&gt; ()"
-                  moduleName = "Saveetha 360.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prasanth-mac/Documents/GitHub/Saveetha-360/SIMATS%20360/View/LeaveApplicationViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "273"
-                  endingLineNumber = "273">
-               </Location>
-               <Location
-                  uuid = "1EF45AE4-9C58-4E70-A56A-925A46768076 - 98b6622d01d5dff2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.VNRequest, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Saveetha_360.LeaveApplicationViewController.extractText(from: __C.UIImage) -&gt; ()"
-                  moduleName = "Saveetha 360.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prasanth-mac/Documents/GitHub/Saveetha-360/SIMATS%20360/View/LeaveApplicationViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "273"
-                  endingLineNumber = "273">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "89FC9006-B32C-44C2-BAA5-F55F790486BD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMATS 360/View/HolidayDutyClaimsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "showHomePageData(homeData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7EE6409B-4536-4FD6-857D-37B7AE30CCE3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMATS 360/View/HolidayDutyClaimsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "showHomePageData(homeData:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

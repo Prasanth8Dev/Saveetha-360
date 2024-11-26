@@ -8,21 +8,24 @@
 import Foundation
 import Combine
 
-
-//
-//"bioId" : 3737,
-//"campus" : "Saveetha Medical College",
-//"category" : "teaching",
-//"year" : 2024,
-//"month" : 9
-
 protocol HomePageInteractorProtocol: AnyObject {
     func fetchHomePageData(bioId: String, campus: String, category: String) -> AnyPublisher<HomePageResponse, Error>
     func fetchAvailableLeave(bioId: String, campus: String, category: String) -> AnyPublisher<AvailableLeaveModel, Error>
     func fetchDutyCount(bioId: String) -> AnyPublisher<DutyCountModel, Error>
+    func fetchGeneralDuties(bioId: String, campus: String) -> AnyPublisher<GeneralDutyModel, Error>
 }
 
 class HomeInteractor: HomePageInteractorProtocol {
+    func fetchGeneralDuties(bioId: String, campus: String) -> AnyPublisher<GeneralDutyModel, any Error> {
+        guard let url = URL(string: "http://localhost:1312/employee/generalDuty") else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        let param = ["bioId": bioId,
+                     "campus": campus
+                     ]
+        return APIWrapper.shared.postRequestMethod(url: url, body: param, responseType: GeneralDutyModel.self)
+    }
+    
     
     func fetchAvailableLeave(bioId: String, campus: String, category: String) -> AnyPublisher<AvailableLeaveModel, any Error> {
         guard let url = URL(string: "http://localhost:1312/employee/getAvailableLeave") else {

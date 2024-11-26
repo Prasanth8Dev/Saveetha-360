@@ -10,4 +10,9 @@ import Foundation
 class Constants {
     static var profileData: LoginResponse!
     static var availableLeaveTypes: [String] = []
+    static var generalDutyModel: GeneralDutyModel!
+    static var claimsCounts: Double = 0.0
+    static var requestCounts: Double = 0.0
+    static var claimsDate = [""]
+    static var requestDate = [""]
 }
