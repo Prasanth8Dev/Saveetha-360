@@ -149,7 +149,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     private func tableViewReload() {
-        if self.approvalNotificationData?.count ?? 0 > 0 || self.genaralNotificationData?.count ?? 0 > 0 || self.swapNotifications?.swapDutyNotificationData.count ?? 0 > 0 {
+        if self.approvalNotificationData?.count ?? 0 > 0 || self.genaralNotificationData?.count ?? 0 > 0 || self.swapNotifications?.swapDutyNotificationData?.count ?? 0 > 0 {
             notificationTableView.reloadData()
         } else {
             // show the alert and hide the table view
@@ -170,7 +170,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         } else if notificationSegment.selectedSegmentIndex == 1 {
             return self.approvalNotificationData?.count ?? 0
         } else if notificationSegment.selectedSegmentIndex == 2 {
-            return self.swapNotifications?.swapDutyNotificationData .count ?? 0
+            return self.swapNotifications?.swapDutyNotificationData? .count ?? 0
         } else {
             return 0
         }
@@ -205,9 +205,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             dynamicCell = cell
         } else if notificationSegment.selectedSegmentIndex == 2 {
             let cell = notificationTableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
-            if let swapNotificationData = self.swapNotifications?.swapDutyNotificationData[indexPath.row] {
-                cell.titleLabel.text = "Swap Request \n \(swapNotificationData.empName)"
-                cell.descriptionLabel.text = "\(swapNotificationData.shift)"
+            if let swapNotification = self.swapNotifications?.swapDutyNotificationData, swapNotification.count > 0 {
+                cell.titleLabel.text = "Swap Request \n \(swapNotification[indexPath.row].empName)"
+                cell.descriptionLabel.text = "\(swapNotification[indexPath.row].shift)"
             }
             dynamicCell = cell
         }
@@ -245,7 +245,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                self.navigationController?.pushViewController(detailNotificationVC, animated: true)
             }
         } else if notificationSegment.selectedSegmentIndex == 2 {
-            if let swapNotificationData = self.swapNotifications?.swapDutyNotificationData[indexPath.row] {
+            if let swapNotificationData = self.swapNotifications?.swapDutyNotificationData?[indexPath.row] {
                 let detailNotificationVC = NotificationDetailsRouter.createRouter() as! NotificationDetailViewController
                 detailNotificationVC.swapNotificationData = swapNotificationData
                 detailNotificationVC.isSwapDuty = true

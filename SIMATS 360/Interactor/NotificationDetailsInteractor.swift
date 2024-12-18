@@ -15,7 +15,7 @@ protocol NotificationDetailsInteractorProtocol {
 
 class NotificationDetailsInteractor: NotificationDetailsInteractorProtocol {
     func updateSwapRequest(swapId: String, status: String) -> AnyPublisher<SwapDutyApprovalModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/swapApproval") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/swapApproval") else {
             return Fail(error: APIError.invalidResponse).eraseToAnyPublisher()
         }
         let param = ["swapId": swapId, "status": status]
@@ -23,7 +23,7 @@ class NotificationDetailsInteractor: NotificationDetailsInteractorProtocol {
     }
     
     func updateLeaveRequest(leaveId: String, status: String) -> AnyPublisher<LeaveUpdateModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/leaveApproval") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/leaveApproval") else {
             return Fail(error: APIError.invalidResponse).eraseToAnyPublisher()
         }
         let param = ["leaveId": leaveId, "status": status]

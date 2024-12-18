@@ -15,7 +15,7 @@ protocol LoginInteractorProtocol {
 
 class LoginInteractor: LoginInteractorProtocol {
     func login(email: String, password: String) -> AnyPublisher<LoginResponse, Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/login") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/login") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
 

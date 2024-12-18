@@ -13,7 +13,7 @@ protocol ProfileInteractorProtocol {
 }
 class ProfileInteractor: ProfileInteractorProtocol {
     func fetchProfile(bioId: String, campus: String) -> AnyPublisher<ProfileDataModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/userInfo") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/userInfo") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bio_id" : bioId,

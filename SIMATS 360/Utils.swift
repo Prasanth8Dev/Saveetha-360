@@ -129,5 +129,12 @@ class Utils {
         return input.trimmingCharacters(in: .whitespaces) 
     }
     
+    static func formatAmountWithComma(_ amount: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 2  // For two decimal places
+        numberFormatter.minimumFractionDigits = 2  // Ensures consistent formatting like 1,000.00
+        return numberFormatter.string(from: NSNumber(value: amount)) ?? "0.00"
+    }
 }
 

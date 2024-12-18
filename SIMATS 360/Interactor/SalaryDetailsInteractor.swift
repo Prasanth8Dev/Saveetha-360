@@ -17,7 +17,7 @@ class SalaryDetailsInteractor: SalaryDetailsInteractorProtocol {
     
     
     func fetchSalaryDetails(bioId: String) -> AnyPublisher<SalaryReportResponse, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/monthlySalaryReport") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/monthlySalaryReport") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId" : bioId]

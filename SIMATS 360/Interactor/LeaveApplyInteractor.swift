@@ -14,7 +14,7 @@ protocol LeaveApplyInteractorProtocol: AnyObject {
 
 class LeaveApplyInteractor: LeaveApplyInteractorProtocol {
     func applyLeave(param:[String:Any]) -> AnyPublisher<ApplyLeaveModel, Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/applyLeave") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/applyLeave") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         return  APIWrapper.shared.postMultipartFormData(url: url, parameters: param, responseType: ApplyLeaveModel.self)

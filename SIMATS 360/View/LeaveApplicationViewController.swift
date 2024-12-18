@@ -52,11 +52,15 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
         //
         calendarView.delegate = self
         calendarView.dataSource = self
+        if !Constants.availableLeaveTypes.contains("OD") {
+            Constants.availableLeaveTypes.append("OD")
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         formUploadView.addTap {
-            self.openGallery()
+            self.showImagePickerOptions()
         }
     }
     
@@ -68,17 +72,38 @@ class LeaveApplicationViewController: UIViewController,LeaveApplicationViewContr
     }
     
     @IBAction func imageUpload(_ sender: Any) {
-        self.openGallery()
+        self.showImagePickerOptions()
     }
-    
-    private func openGallery() {
+
+    private func showImagePickerOptions() {
+        let alertController = UIAlertController(title: "Select Image Source", message: nil, preferredStyle: .actionSheet)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
+                self.openGalleryOrCamera(sourceType: .camera)
+            }
+            alertController.addAction(cameraAction)
+        }
+        
+        let galleryAction = UIAlertAction(title: "Gallery", style: .default) { _ in
+            self.openGalleryOrCamera(sourceType: .photoLibrary)
+        }
+        alertController.addAction(galleryAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
+    private func openGalleryOrCamera(sourceType: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary // Use .camera for camera access
-        imagePicker.allowsEditing = true // Allow editing of selected images
+        imagePicker.sourceType = sourceType
+        imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
     }
-    
+
     @IBAction func submitTapped(_ sender: Any) {
         self.applyLeave()
     }

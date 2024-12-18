@@ -98,11 +98,14 @@ class ClaimsViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     private func loadUserData() {
-        if let name = Constants.profileData.userData?.first?.userName, let bioId = Constants.profileData.userData?.first?.bioID, let count = claimsData?.claimsData {
+        if let name = Constants.profileData.userData?.first?.userName, let bioId = Constants.profileData.userData?.first?.bioID {
             userNameLabel.text = name
             bioIdLabel.text = "Bio ID: \(bioId)"
+        }
+        if let count = claimsData?.claimsData  {
             claimsCountLabel.text = "Duty Claims: \(count.count)"
         }
+        
     }
     
     func initNavigationBar() {

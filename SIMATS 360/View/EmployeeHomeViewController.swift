@@ -17,6 +17,7 @@ protocol EmployeeHomeViewProtocol: AnyObject {
 
 class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dutyLabel: UILabel!
     @IBOutlet weak var leaveBalance: UILabel!
     @IBOutlet weak var bufferTime: UILabel!
@@ -36,6 +37,7 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     var homePresenter: HomePresenterProtocol?
     var homePageResponse: HomePageResponse?
     var dutyCountResponse: DutyCountModel?
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +47,18 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
         initNavigationBar()
         loadProfileData()
         self.fetchHomeData()
-      
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        scrollView.refreshControl = refreshControl
     }
-    
+            
+    @objc func refreshData() {
+        fetchHomeData()
+    }
+ 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
     }
     
     private func loadDefault() {
@@ -90,7 +97,8 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
 
     private func loadProfileImage(from userData: UserData) {
         if let profileImg = userData.profileImgURL {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {return}
                 self.profileImgView.loadImage(from: profileImg)
             }
         } else {
@@ -176,31 +184,36 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     }
     
     private func addTapActionForViews() {
-        generalDutyView.addTap {
+        generalDutyView.addTap { [weak self] in
+            guard let `self` = self else {return}
             let generalDutyVC: GeneralDutyViewController = GeneralDutyViewController.instantiate()
             self.navigationController?.pushViewController(generalDutyVC, animated: true)
         }
         
-        leavebalanceView.addTap {
+        leavebalanceView.addTap { [weak self] in
+                guard let `self` = self else {return}
             let leaveBalanceVC = LeaveBalanceRouter.createLeaveBalance() as! LeaveBalanceViewController
             leaveBalanceVC.leaveData = self.availableLeaveData
             self.navigationController?.pushViewController(leaveBalanceVC, animated: true)
         }
         
-        attendanceView.addTap {
+        attendanceView.addTap { [weak self] in
+            guard let `self` = self else {return}
             let attendanceVC: AttendanceViewController = AttendanceViewController.instantiate()
             attendanceVC.attendanceResponse = self.homePageResponse
             self.navigationController?.pushViewController(attendanceVC, animated: true)
         }
         
-        bufferTimeView.addTap {
+        bufferTimeView.addTap { [weak self] in
+            guard let `self` = self else {return}
             let bufferTimeVc = BufferTimeRouter.createBufferTime() as! BufferTimingViewController
             bufferTimeVc.attendanceData = self.homePageResponse?.data.attendance
             bufferTimeVc.attendanceSummary = self.homePageResponse?.data.summary
             self.navigationController?.pushViewController(bufferTimeVc, animated: true)
         }
         
-        dutyView.addTap {
+        dutyView.addTap {[weak self] in
+            guard let `self` = self else {return}
             let dutyVC = DutyRouter.navigateToDuty()
             self.navigationController?.pushViewController(dutyVC, animated: true)
         }
@@ -219,18 +232,21 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
     }
     
     private func fetchHomeData() {
-        if let userData = Constants.profileData.userData?.first,  let bioID = userData.bioID , let campus = userData.campus, let category = userData.category {
+        if let userData = Constants.profileData.userData?.first,
+           let bioID = userData.bioID,
+           let campus = userData.campus,
+           let category = userData.category {
+
             self.view.startLoader()
-           
             let dispatchGroup = DispatchGroup()
-            
+
             dispatchGroup.enter()
             homePresenter?.fetchHomeData(
                 bioId: String(bioID),
                 campus: campus,
                 category: category
-               ) {
-               
+            ) {
+                print("========1")
                 dispatchGroup.leave()
             }
 
@@ -240,24 +256,33 @@ class EmployeeHomeViewController: UIViewController, EmployeeHomeViewProtocol {
                 campus: campus,
                 category: category
             ) {
+                print("========2")
                 dispatchGroup.leave()
             }
+
             dispatchGroup.enter()
-            homePresenter?.fetchDutyCounts(bioId: String(bioID), completionHandler: {
+            homePresenter?.fetchDutyCounts(bioId: String(bioID)) {
+                print("========3")
                 dispatchGroup.leave()
-            })
-            
+            }
+
             dispatchGroup.enter()
-            homePresenter?.fetchGeneralDutyCounts(bioId: String(bioID), campus: campus, completionHandler: {
+            homePresenter?.fetchGeneralDutyCounts(
+                bioId: String(bioID),
+                campus: campus
+            ) {
+                print("========4")
                 dispatchGroup.leave()
-            })
-            
-            dispatchGroup.notify(queue: .main) {
-      
-                print("Both API calls are completed.")
+            }
+
+            dispatchGroup.notify(queue: .main) { [weak self] in
+                guard let self = self else { return }
+                self.refreshControl.endRefreshing()
+                print("All API calls completed")
             }
         }
     }
+
 
 
     override func viewWillDisappear(_ animated: Bool) {

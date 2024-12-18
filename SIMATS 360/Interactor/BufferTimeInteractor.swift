@@ -14,7 +14,7 @@ protocol BufferTimeInteractorProtocol: AnyObject {
 
 class BufferTimeInteractor: BufferTimeInteractorProtocol {
     func fetchBufferTime(bioId: String, campus: String, category: String, year: String, month: String) -> AnyPublisher<BufferTimeModel, Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/monthlyBufferDetails") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/monthlyBufferDetails") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId": bioId,

@@ -19,7 +19,7 @@ class NotificationInteractor: NotificationInteractorProtocol {
     
     
     func fetchGeneralNotification(campus: String)  -> AnyPublisher<NotificationModel, Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/generalNotification") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/generalNotification") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["campus": campus]
@@ -27,7 +27,7 @@ class NotificationInteractor: NotificationInteractorProtocol {
     }
     
     func fetchApprovalNotification(bioId: String,campus: String)  -> AnyPublisher<ApprovalNotificationModel, Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/approvalNotification") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/approvalNotification") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId" : bioId,
@@ -36,7 +36,7 @@ class NotificationInteractor: NotificationInteractorProtocol {
     }
     
     func fetchSwapNotifications(bioId: String, campus: String) -> AnyPublisher<SwapDutyDataResponse, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/swapDutyNotification") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/swapDutyNotification") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId" : bioId,

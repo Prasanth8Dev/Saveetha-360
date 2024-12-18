@@ -24,8 +24,7 @@ struct DutyData: Codable {
     let swipeData: [SwipeDatum]
     let contact: String
     let designation: Designation
-    let department: Department
-    let group: Group
+    let department, group: Department
     let date: String
 
     enum CodingKeys: String, CodingKey {
@@ -36,16 +35,13 @@ struct DutyData: Codable {
 }
 
 enum Department: String, Codable {
-    case generalMedicine = "General Medicine"
+    case anaesthesia = "Anaesthesia"
+    case icu = "ICU"
 }
 
 enum Designation: String, Codable {
     case assistantProfessor = "Assistant Professor"
     case seniorResident = "Senior Resident"
-}
-
-enum Group: String, Codable {
-    case erGeneralMedicine = "ER General Medicine"
 }
 
 enum Shift: String, Codable {

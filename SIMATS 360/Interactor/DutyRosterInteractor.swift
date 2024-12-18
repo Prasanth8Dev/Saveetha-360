@@ -14,7 +14,7 @@ protocol DutyRosterInteractorProtocol {
 
 class DutyRosterInteractor: DutyRosterInteractorProtocol {
     func fetchDutyRoster(fromDate: String, toDate: String, campus: String, bioId: String) -> AnyPublisher<DutyRosterModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/dutyRoster") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/dutyRoster") else {
             return Fail(error: APIError.invalidResponse).eraseToAnyPublisher()
         }
         let param = ["requestFrom": fromDate, "requestTo": toDate, "bioId":bioId, "campus":campus]

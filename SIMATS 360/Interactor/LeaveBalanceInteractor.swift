@@ -14,7 +14,7 @@ protocol LeaveBalanceInteractorProtocol {
 
 class LeaveBalanceInteractor: LeaveBalanceInteractorProtocol {
     func fetchLeaveBalance(bioId: String, campus: String) -> AnyPublisher<LeaveDetailModel, Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/getLeaveRecords") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/getLeaveRecords") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
 

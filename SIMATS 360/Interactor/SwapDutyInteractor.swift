@@ -15,7 +15,7 @@ protocol SwapDutyInteractorProtocol {
 
 class SwapDutyInteractor: SwapDutyInteractorProtocol {
     func fetchSwapStatus(bioId: String) -> AnyPublisher<SwapDutyResponse, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/swapStatus") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/swapStatus") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
     
@@ -24,7 +24,7 @@ class SwapDutyInteractor: SwapDutyInteractorProtocol {
     }
     
     func requestSwapDuty(reqFromId: String, reqToId: String, dutyId: String) -> AnyPublisher<DutySwapModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/swapDuty") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/swapDuty") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
     

@@ -22,6 +22,8 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
     @IBOutlet weak var sickLeave: UILabel!
     @IBOutlet weak var casualLeave: UILabel!
     
+    @IBOutlet weak var restrictedLeave: UILabel!
+    @IBOutlet weak var vacationLeave: UILabel!
     @IBOutlet weak var leaveDetailTableView: UITableView! {
         didSet {
             leaveDetailTableView.delegate = self
@@ -56,6 +58,8 @@ class LeaveBalanceViewController: UIViewController, LeaveBalanceViewControllerPr
             academicLeave.text = "Available Leaves: \(leaves.academicLeave)"
             sickLeave.text = "Available Leaves: \(leaves.sickLeave)"
             casualLeave.text = "Available Leaves: \(leaves.casualLeave)"
+            vacationLeave.text = "Available Leaves: \(leaves.vacationLeave)"
+            restrictedLeave.text = "Available Leaves: \(leaves.restrictedLeave)"
         }
     }
     

@@ -21,6 +21,8 @@ class SalaryDetailsViewController: UIViewController, SalaryDetailsProtocol {
     
     @IBOutlet weak var basicSalaryLabel: UILabel!
     
+    @IBOutlet weak var EPAValueLabel: UILabel!
+    @IBOutlet weak var EPALabel: UILabel!
     @IBOutlet weak var basicSalaryValue: UILabel!
     @IBOutlet weak var hraLabel: UILabel!
     @IBOutlet weak var daLabel: UILabel!
@@ -52,22 +54,42 @@ class SalaryDetailsViewController: UIViewController, SalaryDetailsProtocol {
     
     func displaySalaryReports(_ reports: SalaryReportResponse) {
         if let salaryReportData = reports.salaryReportData.first {
-            var earnings = salaryReportData.earningsBasicSalary + salaryReportData.earningsCCA + salaryReportData.earningsDA + salaryReportData.earningsHRA + salaryReportData.earningsOthers
+            var earnings = salaryReportData.earningsBasicSalary + salaryReportData.earningsCCA + salaryReportData.earningsDA + salaryReportData.earningsHRA + (salaryReportData.earningsOthers ?? 0)
             
-            if let ta = salaryReportData.earningsTA {
+            if let ta = salaryReportData.earningsTA, ta > 0 {
                 earnings += ta
             } else  {
                 taLabel.isHidden = true
                 taValue.isHidden = true
             }
+            
+            if let EPA = salaryReportData.earningsProvisionalAllowance {
+                EPALabel.text = "Earnings Provisional Allowance(EPA)"
+                EPAValueLabel.text = "₹\(EPA)"
+                earnings += EPA
+            } else {
+                EPALabel.isHidden = true
+                EPAValueLabel.isHidden = true
+            }
             basicSalaryValue.text = "₹\(salaryReportData.earningsBasicSalary)"
             ccaValue.text = "₹\(salaryReportData.earningsCCA)"
             hraValue.text = "₹\(salaryReportData.earningsHRA)"
             daValue.text = "₹\(salaryReportData.earningsDA)"
-            othersValue.text = "₹\(salaryReportData.earningsOthers)"
-            deductionsValue.text = "₹-\(salaryReportData.deductionsDeductions)"
-            earnings -= salaryReportData.deductionsDeductions
-            totalValue.text = "₹\(earnings)"
+            if let otherEarnings = salaryReportData.earningsOthers, otherEarnings > 0 {
+                othersValue.text = "₹\(otherEarnings)"
+            } else {
+                othersLabel.isHidden = true
+                othersValue.isHidden = true
+            }
+            if let deductions = salaryReportData.deductionsDeductions, deductions > 0 {
+                deductionsValue.text = "₹-\(deductions)"
+                earnings -= deductions
+            } else {
+                deductionsLabel.isHidden = true
+                deductionsValue.isHidden = true
+            }
+     
+            totalValue.text = "₹\(Utils.formatAmountWithComma(Double(earnings)))"
             
             if let pf = salaryReportData.deductionsPF {
                 pfValue.text = "₹-\(pf)"

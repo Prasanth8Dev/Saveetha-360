@@ -15,4 +15,5 @@ class Constants {
     static var requestCounts: Double = 0.0
     static var claimsDate = [""]
     static var requestDate = [""]
+    static var Base_URL: String = "http://180.235.121.247:1312/"
 }

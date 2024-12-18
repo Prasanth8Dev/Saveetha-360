@@ -71,7 +71,7 @@ class ReportsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = salaryReportTableView.dequeueReusableCell(withIdentifier: "SalaryReportTableViewCell", for: indexPath) as! SalaryReportTableViewCell
         if let date = self.salaryResponse?.salaryReportData[indexPath.row].period, let formattedDate = Utils.convertDateFormat(inputDate:date ), let salary = self.salaryResponse?.salaryReportData[indexPath.row].grossSalaryWithDeduction {
             cell.monthLabel.text = formattedDate
-            cell.salaryLabel.text = "₹ \(salary)"
+            cell.salaryLabel.text = "₹ \(Utils.formatAmountWithComma(Double(salary)))"
         }
        
       

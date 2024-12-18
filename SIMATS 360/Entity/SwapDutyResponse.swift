@@ -12,7 +12,7 @@ import Foundation
 struct SwapDutyDataResponse: Codable {
     let status: Bool
     let message: String
-    let swapDutyNotificationData: [SwapDutyNotification]
+    let swapDutyNotificationData: [SwapDutyNotification]?
 }
 
 // SwapDutyNotification model

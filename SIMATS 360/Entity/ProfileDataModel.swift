@@ -9,17 +9,18 @@
 // MARK: - ProfileDataModel
 import Foundation
 
+// MARK: - ProfileDataModel
 struct ProfileDataModel: Codable {
     let status: Int
     let message: String
-    let data: [Datum]
+    let data: ProfileData?
 }
 
-// MARK: - Datum
-struct Datum: Codable {
-    let internalExperience, externalExperience: ExperienceType? // Use the new enum type
-    let campus, employeeName, category, dob: String
-    let doj, phone, email, address: String
+// MARK: - DataClass
+struct ProfileData: Codable {
+    let internalExperience, externalExperience, campus, employeeName: String
+    let category, dob, doj, phone: String
+    let email, address: String
     let profileImageURL: String
     let bioID: Int
     let staffID: String
@@ -38,6 +39,7 @@ struct Datum: Codable {
         case designationName = "designation_name"
     }
 }
+
 
 // MARK: - ExperienceType Enum to Handle Cleaned String, Int, or Nil
 enum ExperienceType: Codable {

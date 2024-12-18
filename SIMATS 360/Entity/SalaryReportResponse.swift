@@ -23,13 +23,14 @@ struct SalaryReport: Codable {
     let earningsDA: Int
     let earningsHRA: Int
     let earningsCCA: Int
-    let earningsOthers: Int
-    let deductionsDeductions: Int
+    let earningsOthers: Int?
+    let deductionsDeductions: Int?
     let earningsTA: Int?
     let deductionsPF: Int?
     let deductionsESI: String?
     let earningsPA: Int?
-
+    let earningsProvisionalAllowance: Int?
+    
     enum CodingKeys: String, CodingKey {
         case id, campus
         case bioID = "bio_id"
@@ -45,6 +46,7 @@ struct SalaryReport: Codable {
         case deductionsPF = "deductions_pf"
         case deductionsESI = "deductions_esi"
         case earningsPA = "earnings_pa"
+        case earningsProvisionalAllowance = "earnings_provisional_allowance" 
     }
 
     // Custom initializer to handle conversion from String to Int
@@ -70,6 +72,7 @@ struct SalaryReport: Codable {
         deductionsPF = Int(try container.decodeIfPresent(String.self, forKey: .deductionsPF) ?? "")
         deductionsESI = try container.decodeIfPresent(String.self, forKey: .deductionsESI)
         earningsPA = Int(try container.decodeIfPresent(String.self, forKey: .earningsPA) ?? "")
+        earningsProvisionalAllowance = Int(try container.decodeIfPresent(String.self, forKey: .earningsProvisionalAllowance) ?? "") ?? 0
     }
 }
 

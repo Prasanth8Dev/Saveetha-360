@@ -154,16 +154,23 @@ class NotificationDetailViewController: UIViewController, NotificationDetailView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = swapTimingTableView.dequeueReusableCell(withIdentifier: "SwapDutyTableViewCell", for: indexPath) as! SwapDutyTableViewCell
-        if let data = self.swapNotificationData?.swipesData, let swipesData = data.first?.swipes {
-            cell.dayLabel.text = data.first?.day
-            if !swipesData[0].swipeTime.isEmpty {
+        if let data = self.swapNotificationData?.swipesData {
+            let swipesData = data[indexPath.row].swipes
+            cell.dayLabel.text = data[indexPath.row].day
+            if swipesData.count > 0 && !swipesData[0].swipeTime.isEmpty {
                 cell.day1Label.text = swipesData[0].swipeTime
+            } else {
+                cell.day1Label.isHidden = true
             }
-            if !swipesData[1].swipeTime.isEmpty {
+            if swipesData.count > 1 && !swipesData[1].swipeTime.isEmpty {
                 cell.day2Label.text = swipesData[1].swipeTime
+            } else {
+                cell.day2Label.isHidden = true
             }
-            if !swipesData[2].swipeTime.isEmpty {
+            if swipesData.count > 2 && !swipesData[2].swipeTime.isEmpty {
                 cell.day3Label.text = swipesData[2].swipeTime
+            } else {
+                cell.day3Label.isHidden = true
             }
         }
         return cell

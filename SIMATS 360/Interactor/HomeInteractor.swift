@@ -17,7 +17,7 @@ protocol HomePageInteractorProtocol: AnyObject {
 
 class HomeInteractor: HomePageInteractorProtocol {
     func fetchGeneralDuties(bioId: String, campus: String) -> AnyPublisher<GeneralDutyModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/generalDuty") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/generalDuty") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId": bioId,
@@ -28,7 +28,7 @@ class HomeInteractor: HomePageInteractorProtocol {
     
     
     func fetchAvailableLeave(bioId: String, campus: String, category: String) -> AnyPublisher<AvailableLeaveModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/getAvailableLeave") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/getAvailableLeave") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bio_id": bioId,
@@ -39,7 +39,7 @@ class HomeInteractor: HomePageInteractorProtocol {
     }
     
     func fetchHomePageData(bioId: String, campus: String, category: String) -> AnyPublisher<HomePageResponse, Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/homeInfo") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/homeInfo") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId": bioId,
@@ -49,7 +49,7 @@ class HomeInteractor: HomePageInteractorProtocol {
     }
     
     func fetchDutyCount(bioId: String) -> AnyPublisher<DutyCountModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/pendingDutyCount") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/pendingDutyCount") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId": bioId]

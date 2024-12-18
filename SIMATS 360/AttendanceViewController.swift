@@ -23,6 +23,7 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
     var attendanceResponse: HomePageResponse?
     var presentDates: [String] = []
     var absentDates: [String] = []
+    var halfDayDates: [String] = []
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"
@@ -94,6 +95,7 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
         if let attedanceResponse = self.attendanceResponse?.data.attendance {
             presentDates = attedanceResponse.filter {$0.presence.lowercased() == "present"}.map({ $0.date })
             absentDates = attedanceResponse.filter {$0.presence.lowercased() == "absent"}.map({ $0.date })
+            halfDayDates = attedanceResponse.filter{$0.presence.lowercased() == "half day"}.map({ $0.date })
             attendanceCalendar.reloadData()
         }
     }
@@ -156,6 +158,10 @@ class AttendanceViewController: UIViewController, FSCalendarDelegate, FSCalendar
         
         if absentDates.contains(dateString) {
             return UIColor.init(hex: "#EE4B2B") // Mark absent dates in red
+        }
+        
+        if halfDayDates.contains(dateString) {
+            return UIColor.init(hex: "#f8da8f") // Mark absent dates in Yellow
         }
         
         if Calendar.current.isDateInToday(date) {

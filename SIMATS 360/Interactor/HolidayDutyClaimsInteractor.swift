@@ -16,7 +16,7 @@ protocol HolidayDutyClaimsInteractorProtocol {
 
 class HolidayDutyClaimsInteractor: HolidayDutyClaimsInteractorProtocol {
     func claimHoliday(bioId: String, campus: String, dutyDate: String,credits: String) -> AnyPublisher<ClaimsResponseModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/claimHolidayCredits") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/claimHolidayCredits") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId": bioId,
@@ -27,7 +27,7 @@ class HolidayDutyClaimsInteractor: HolidayDutyClaimsInteractorProtocol {
     }
     
     func claimRequest(bioId: String, campus: String, dutyDate: String,credits: String) -> AnyPublisher<ClaimsResponseModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/requestClaimHoliday") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/requestClaimHoliday") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId": bioId,
@@ -38,7 +38,7 @@ class HolidayDutyClaimsInteractor: HolidayDutyClaimsInteractorProtocol {
     }
     
     func fetchHomePageData(bioId: String, campus: String, category: String) -> AnyPublisher<HomePageResponse, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/homeInfo") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/homeInfo") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         let param = ["bioId": bioId,

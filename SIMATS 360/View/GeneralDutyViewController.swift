@@ -18,7 +18,7 @@ class GeneralDutyViewController: UIViewController,FSCalendarDelegate, FSCalendar
         formatter.dateFormat = "yyy-MM-dd"
         return formatter
     }()
-    var generalDutyDates = [""]
+    var generalDutyDates = [String]()
     
     @IBOutlet weak var claimsCountLabel: UILabel!
     override func viewDidLoad() {
@@ -51,15 +51,18 @@ class GeneralDutyViewController: UIViewController,FSCalendarDelegate, FSCalendar
     
     private func addTapAction() {
         generalDutyView.addTap {
+            guard self.generalDutyDates.count > 0 else {
+                return self.showAlert(title: "", message: "There is no General Duties")
+            }
             let vc = GeneralSwapDutyRouter.navigateToGeneralSwapDuty()
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
         holidayClaimsView.addTap {
-//            guard Constants.claimsCounts > 0.0 || Constants.requestCounts > 0.0 else {
-//                self.showAlert(title: "", message: "There is no Claims")
-//            return
-//            }
+            guard Constants.claimsCounts > 0.0 || Constants.requestCounts > 0.0 else {
+                self.showAlert(title: "", message: "There is no Claims")
+                return
+            }
             let holidayClaimsVC = HolidayDutyClaimsRouter.createHolidayDutyClaimsViewController()
             self.navigationController?.pushViewController(holidayClaimsVC, animated: true)
         }

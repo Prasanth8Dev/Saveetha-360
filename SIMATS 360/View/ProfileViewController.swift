@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
     @IBOutlet weak var outsideExpLabel: UILabel!
     
     func displayProfileData(_ data: ProfileDataModel) {
-        guard let userData = data.data.first else {
+        guard let userData = data.data else {
             print("No profile data available")
             setDefaultProfileData()
             return
@@ -44,8 +44,8 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
         mailLabel.text = userData.email ?? "Not Available"
         addressLabel.text = userData.address ?? "Not Available"
         
-        internalExperienceLabel.text = "Saveetha Exp: \(userData.internalExperience?.cleanedValue() ?? "N/A")"
-        outsideExpLabel.text = "Outside Exp: \(userData.externalExperience?.cleanedValue() ?? "N/A")"
+        internalExperienceLabel.text = "Saveetha Exp: \(userData.internalExperience ?? "N/A")"
+        outsideExpLabel.text = "Outside Exp: \(userData.externalExperience ?? "N/A")"
         
         if !userData.profileImageURL.isEmpty {
             profileImg.loadImage(from: userData.profileImageURL)

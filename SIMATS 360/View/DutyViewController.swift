@@ -17,6 +17,8 @@ protocol DutyViewControllerProtocol: AnyObject {
 
 class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance  {
     
+    @IBOutlet weak var bioIdLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var frontView: UIView!
     @IBOutlet weak var calendarView: FSCalendar!
@@ -57,7 +59,15 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
         setupYearNavigationButtons()
         setupBlurView()
         dutyDetailsView.backgroundColor = .clear
+        loadUserData()
         // Do any additional setup after loading the view.
+    }
+    
+    private func loadUserData() {
+        if let name = Constants.profileData.userData?.first?.userName, let bioId = Constants.profileData.userData?.first?.bioID {
+            userNameLabel.text = name
+            bioIdLabel.text = "Bio ID: \(bioId)"
+        }
     }
     
     func setupYearNavigationButtons() {
@@ -158,7 +168,7 @@ class DutyViewController: UIViewController, DutyViewControllerProtocol, FSCalend
     }
     
     func showMessage(Str: String) {
-        self.showAlert(title: "", message: Str)
+        //self.showAlert(title: "", message: Str)
     }
     
     func getGropuData(_ data: GroupResponseModel) {

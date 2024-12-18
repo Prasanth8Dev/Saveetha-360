@@ -17,7 +17,7 @@ protocol DutyInteractorProtocol {
 class DutyInteractor: DutyInteractorProtocol {
     
     func fetchGroupData(bioId: String, campus: String) -> AnyPublisher<GroupResponseModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/groupOptions") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/groupOptions") else {
             return Fail(error: APIError.invalidResponse).eraseToAnyPublisher()
         }
         let param = ["bioId": bioId, "campus": campus]
@@ -25,7 +25,7 @@ class DutyInteractor: DutyInteractorProtocol {
     }
     
     func fetchClaims(bioId: String) -> AnyPublisher<ClaimsDataModel, any Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/pendingDutyClaimsCount") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/pendingDutyClaimsCount") else {
             return Fail(error: APIError.invalidResponse).eraseToAnyPublisher()
         }
         let param = ["bioId" : bioId]
@@ -33,7 +33,7 @@ class DutyInteractor: DutyInteractorProtocol {
     }
     
     func fetchDutyData(bioId: String) -> AnyPublisher<DutyDataModel,Error> {
-        guard let url = URL(string: "http://localhost:1312/employee/pendingDuty") else {
+        guard let url = URL(string: "\(Constants.Base_URL)employee/pendingDuty") else {
             return Fail(error: APIError.invalidResponse).eraseToAnyPublisher()
         }
         let param = ["bioId" : bioId]
